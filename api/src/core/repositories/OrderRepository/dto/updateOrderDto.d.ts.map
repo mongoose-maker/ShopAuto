@@ -1,0 +1,1 @@
+{"version":3,"file":"updateOrderDto.d.ts","sourceRoot":"","sources":["updateOrderDto.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,2BAA2B,CAAC;AACjD,OAAO,EAAE,OAAO,EAAE,MAAM,iCAAiC,CAAC;AAE1D,qBAAa,cAAc;IACb,QAAQ,CAAC,YAAY,EAAE,IAAI;IAAE,QAAQ,CAAC,cAAc,EAAE,OAAO;gBAApD,YAAY,EAAE,IAAI,EAAW,cAAc,EAAE,OAAO;CAC1E"}
