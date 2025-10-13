@@ -1,6 +1,5 @@
-import { Address } from "../../../../core/models/Address/Address.js";
 import sequelize from "../../db.js";
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 
 export interface SeqUserAttributes {
   id: undefined;

@@ -1,4 +1,4 @@
-import { Product } from "../Product/Product";
+import { Product } from "../Product/Product.js";
 export class Manufacturer {
   constructor(
     readonly id: string,

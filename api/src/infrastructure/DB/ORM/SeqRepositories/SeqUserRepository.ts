@@ -1,8 +1,8 @@
-import { UserRepository } from "../../../../core/repositories/UserRepository/UserRepository";
-import SeqUser from "../SeqModel/SeqUserModel";
-import { UserMapper } from "../../Mapper/MapperUser";
-import { User } from "../../../../core/models/User/User";
-import { UpdateUserDto } from "../../../../core/repositories/UserRepository/dto/updateUserDto";
+import type { UserRepository } from "../../../../core/repositories/UserRepository/UserRepository.js";
+import SeqUser from "../SeqModel/SeqUserModel.js";
+import { UserMapper } from "../../Mapper/MapperUser.js";
+import { User } from "../../../../core/models/User/User.js";
+import { UpdateUserDto } from "../../../../core/repositories/UserRepository/dto/updateUserDto.js"; //
 
 export class SeqUserRepository implements UserRepository {
   async createUser(user: User): Promise<User | null> {

@@ -1,6 +1,6 @@
-import { Manufacturer } from "../../models/Manufacturer/Manufacturer";
-import { AddManufacturerDto } from "./dto/addManufacturerDto";
-import { updateManufacturerDto } from "./dto/updateManufacturerDto";
+import { Manufacturer } from "../../models/Manufacturer/Manufacturer.js";
+import { AddManufacturerDto } from "./dto/addManufacturerDto.js";
+import { updateManufacturerDto } from "./dto/updateManufacturerDto.js";
 
 export interface ManufacturerRepository {
   addManuf(dto: AddManufacturerDto): Manufacturer;

@@ -1,7 +1,7 @@
-import { Cart } from "../../models/Cart/Cart";
-import { AddCartDto } from "./dto/addCartDto";
-import { ReadCartDto } from "./dto/readCartDto";
-import { UpdateCartDto } from "./dto/updateCartDto";
+import { Cart } from "../../models/Cart/Cart.js";
+import { AddCartDto } from "./dto/addCartDto.js";
+import { ReadCartDto } from "./dto/readCartDto.js";
+import { UpdateCartDto } from "./dto/updateCartDto.js";
 
 export interface CartRepository {
   addCart(dto: AddCartDto): Cart;

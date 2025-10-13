@@ -1,6 +1,6 @@
-import { Category } from "../../models/Category/Category";
-import { AddCategoryDto } from "./dto/addCategoryDto";
-import { UpdateCategoryDto } from "./dto/updateCategoryDto";
+import { Category } from "../../models/Category/Category.js";
+import { AddCategoryDto } from "./dto/addCategoryDto.js";
+import { UpdateCategoryDto } from "./dto/updateCategoryDto.js";
 
 export interface CategoryRepository {
   addCategory(dto: AddCategoryDto): Category;

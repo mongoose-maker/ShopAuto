@@ -1,5 +1,5 @@
-import { User } from "../../../core/models/User/User";
-import { SeqUserAttributes } from "../ORM/SeqModel/SeqUserModel";
+import { User } from "../../../core/models/User/User.js";
+import type { SeqUserAttributes } from "../ORM/SeqModel/SeqUserModel.js";
 
 export class UserMapper {
   static toDOmain(raw: SeqUserAttributes): User {

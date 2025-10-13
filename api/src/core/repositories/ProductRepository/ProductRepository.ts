@@ -1,6 +1,6 @@
-import { Product } from "../../models/Product/Product";
-import { AddProductDto } from "./dto/addProductDto";
-import { UpdateProductDto } from "./dto/updateProductDto";
+import { Product } from "../../models/Product/Product.js";
+import { AddProductDto } from "./dto/addProductDto.js";
+import { UpdateProductDto } from "./dto/updateProductDto.js";
 
 export interface ProductRepository {
   addProduct(dto: AddProductDto): Product;

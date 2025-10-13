@@ -1,6 +1,6 @@
-import { Address } from "../../models/Address/Address";
-import { AddAddressDto } from "./dto/addAddressDto";
-import { UpdateAddressDto } from "./dto/updateAddressDto";
+import { Address } from "../../models/Address/Address.js";
+import { AddAddressDto } from "./dto/addAddressDto.js";
+import { UpdateAddressDto } from "./dto/updateAddressDto.js";
 
 export interface AddressRepository {
   addAddress(dto: AddAddressDto): Address;

@@ -1,4 +1,4 @@
-import { User } from "../../../models/User/User";
+import { User } from "../../../models/User/User.js";
 
 export class AddAddressDto {
   constructor(

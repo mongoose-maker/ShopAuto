@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import sequelize from "./infrastructure/DB/db.js";
+import "express-async-errors";
 
 dotenv.config();
 

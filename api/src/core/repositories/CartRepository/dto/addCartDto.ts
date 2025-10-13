@@ -1,5 +1,5 @@
-import { Cart } from "../../../models/Cart/Cart";
-import { User } from "../../../models/User/User";
+import { Cart } from "../../../models/Cart/Cart.js";
+import { User } from "../../../models/User/User.js";
 
 export class AddCartDto {
   constructor(

@@ -1,6 +1,6 @@
-import { Cart } from "../Cart/Cart";
-import { CartItem } from "../CartItem/CartItem";
-import { User } from "../User/User";
+import { Cart } from "../Cart/Cart.js";
+import { CartItem } from "../CartItem/CartItem.js";
+import { User } from "../User/User.js";
 
 export class Order {
   constructor(

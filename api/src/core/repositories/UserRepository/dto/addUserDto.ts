@@ -6,5 +6,3 @@ export class AddUserDto {
     readonly password: string
   ) {}
 }
-
-// ??? Есть ли смысл от дублирования того что уже есть в доменной сущности?

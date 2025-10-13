@@ -1,4 +1,4 @@
-import { Product } from "../../../models/Product/Product";
+import { Product } from "../../../models/Product/Product.js";
 
 export class AddManufacturerDto {
   constructor(
