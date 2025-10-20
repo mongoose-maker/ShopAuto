@@ -1,12 +1,13 @@
 import { Category } from "../Category/Category.js";
+import type { Manufacturer } from "../Manufacturer/Manufacturer.js";
 
 export class Product {
   constructor(
-    readonly id: string,
-    readonly idProduct: string,
+    readonly id: undefined | string,
+    readonly idProduct: undefined | string,
     readonly name: string,
-    readonly manufacturer: string,
-    readonly category: Category,
+    readonly manufacturerId: Manufacturer, //?
+    readonly categoryId: Category,
     readonly description: string, // Text ?
     readonly price: number,
     readonly availability: boolean,

@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(express.json()); // для преображенияобъектов в JSON req.body
 
 try {
   await sequelize.authenticate();

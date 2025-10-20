@@ -3,11 +3,11 @@ import { AddProductDto } from "./dto/addProductDto.js";
 import { UpdateProductDto } from "./dto/updateProductDto.js";
 
 export interface ProductRepository {
-  addProduct(dto: AddProductDto): Product;
-  getAllProduct(): Product;
-  GetByArticle(idProduct: string): Product;
-  GetByName(name: string): Product;
-  updateProduct(dto: UpdateProductDto): Product;
-  statusAvailability(dto: UpdateProductDto): Product;
-  deleteProduct(idProduct: string): Product;
+  addProduct(product: Product): Promise<Product>;
+  getAllProduct(): Promise<Product>;
+  GetByArticle(idProduct: string): Promise<Product>;
+  GetByName(name: string): Promise<Product>;
+  updateProduct(dto: UpdateProductDto): Promise<Product>;
+  statusAvailability(dto: UpdateProductDto): Promise<Product>;
+  deleteProduct(idProduct: string): Promise<Product>;
 }

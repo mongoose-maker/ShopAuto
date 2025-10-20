@@ -11,7 +11,7 @@ export class UserController {
     res.status(201).json(newUser);
   }
   async getUserById(req: Request, res: Response): Promise<void> {
-    const { id } = req.params;
+    const { id } = req.params; // ?
     if (!id) {
       res.status(400).json({ message: "User not found" });
       return;
