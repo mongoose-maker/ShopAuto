@@ -1,13 +1,12 @@
 import { Product } from "../../models/Product/Product.js";
-import { AddProductDto } from "./dto/addProductDto.js";
 import { UpdateProductDto } from "./dto/updateProductDto.js";
 
 export interface ProductRepository {
   addProduct(product: Product): Promise<Product>;
-  getAllProduct(): Promise<Product>;
-  GetByArticle(idProduct: string): Promise<Product>;
-  GetByName(name: string): Promise<Product>;
-  updateProduct(dto: UpdateProductDto): Promise<Product>;
-  statusAvailability(dto: UpdateProductDto): Promise<Product>;
-  deleteProduct(idProduct: string): Promise<Product>;
+  getAllProduct(): Promise<Product[]>;
+  getProductById(id: string): Promise<Product | null>;
+  getProductByArticle(idProduct: string): Promise<Product | null>;
+  updateProduct(id: string, dto: UpdateProductDto): Promise<Product | null>;
+  statusAvailability(id: string, isAvailable: boolean): Promise<Product | null>; // ?
+  deleteProduct(id: string): Promise<boolean>;
 }
