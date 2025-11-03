@@ -1,15 +1,17 @@
 import { Manufacturer } from "../../../../core/models/Manufacturer/Manufacturer.js";
-import type { updateInfoManufacturerDto } from "../../../../core/repositories/ManufacturerRepository/dto/updateInfoManufRepo.js";
 
-import { updateManufacturerDto } from "../../../../core/repositories/ManufacturerRepository/dto/updateManufacturerDto.js";
 import type { ManufacturerRepository } from "../../../../core/repositories/ManufacturerRepository/ManufacturerRepository.js";
+import { sanitizeDto } from "../../../Middleware/sanitizeDto.js";
 
 import {
   ManufacturerMapper,
   type SeqManufacturerWithProducts,
 } from "../../Mapper/MapperManufacturer.js";
 
-import SeqManufacturer from "../SeqModel/SeqManufacturerModel.js";
+import {
+  SeqProduct,
+  SeqManufacturer,
+} from "../../Associations/associations.js";
 
 export class SeqManufacturerRepository implements ManufacturerRepository {
   async addManuf(manufacturer: Manufacturer): Promise<Manufacturer> {
@@ -30,6 +32,7 @@ export class SeqManufacturerRepository implements ManufacturerRepository {
       }) as SeqManufacturerWithProducts
     );
   }
+
   async getManufById(id: string): Promise<Manufacturer | null> {
     const foundManufacturer = await SeqManufacturer.findByPk(id, { raw: true });
     if (!foundManufacturer) {
@@ -37,6 +40,7 @@ export class SeqManufacturerRepository implements ManufacturerRepository {
     }
     return ManufacturerMapper.toDomain(foundManufacturer.get({ plain: true }));
   }
+
   async getAllManuf(): Promise<Manufacturer[]> {
     const manufacturers = await SeqManufacturer.findAll({
       include: ["products"],
@@ -47,41 +51,56 @@ export class SeqManufacturerRepository implements ManufacturerRepository {
       )
     );
   }
+
   async updateManufInfo(
     id: string,
-    dto: updateInfoManufacturerDto ///
+    updates: {
+      name?: string;
+      descriptionManufacturer?: string;
+    }
   ): Promise<Manufacturer | null> {
-    const foundManufacturer = await SeqManufacturer.findByPk(id);
-    if (!foundManufacturer) {
+    const manufacturer = await SeqManufacturer.findByPk(id);
+    if (!manufacturer) {
       return null;
     }
-    await foundManufacturer.update({
-      name: dto.name ?? foundManufacturer.name,
-      descriptionManufacturer:
-        dto.descriptionManufacturer ??
-        foundManufacturer.descriptionManufacturer,
-    });
-
-    const updateInfoManuf = await foundManufacturer.update(dto);
-    return updateInfoManuf
-      ? ManufacturerMapper.toDomain(updateInfoManuf.get({ plain: true }))
-      : null;
+    const dataToUpdate: Partial<{
+      name: string;
+      descriptionManufacturer: string;
+    }> = {};
+    if (updates.name !== undefined) dataToUpdate.name = updates.name;
+    if (updates.descriptionManufacturer !== undefined)
+      dataToUpdate.descriptionManufacturer = updates.descriptionManufacturer;
+    if (Object.keys(dataToUpdate).length === 0) {
+      return ManufacturerMapper.toDomain(manufacturer.get({ plain: true }));
+    }
+    await manufacturer.update(dataToUpdate);
+    return ManufacturerMapper.toDomain(manufacturer.get({ plain: true }));
   }
+
   async updateListProductByManuf(
-    id: string,
-    dto: updateManufacturerDto
+    manufacturerId: string,
+    productIds: string[]
   ): Promise<Manufacturer | null> {
-    const foundManufacturer = await SeqManufacturer.findByPk(id, {
+    const foundManufacturer = await SeqManufacturer.findByPk(manufacturerId, {
       include: ["products"],
     });
     if (!foundManufacturer) {
-      return null;
+      throw new Error(`Manufacturer with id ${manufacturerId} not found`);
     }
-    const updatedManufacturer = await foundManufacturer.update(dto);
-    return ManufacturerMapper.toDomain(
-      updatedManufacturer.get({ plain: true })
-    );
+    if (productIds && productIds.length > 0) {
+      const products = await SeqProduct.findAll({
+        where: { id: productIds },
+      });
+      await foundManufacturer.setProducts(products);
+    }
+    const updatedManufacturer = await SeqManufacturer.findByPk(manufacturerId, {
+      include: ["products"],
+    });
+    return updatedManufacturer
+      ? ManufacturerMapper.toDomain(updatedManufacturer.get({ plain: true }))
+      : null;
   }
+
   async deleteManuf(id: string): Promise<boolean> {
     const foundManufacturer = await SeqManufacturer.destroy({ where: { id } });
     return foundManufacturer > 0;

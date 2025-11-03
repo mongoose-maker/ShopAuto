@@ -1,10 +1,9 @@
-import { Category } from "../../../models/Category/Category.js";
+import { IsNotEmpty, IsString, MinLength } from "class-validator";
 import { Product } from "../../../models/Product/Product.js";
 
 export class AddCategoryDto {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-    readonly products: Product[] = []
-  ) {}
+  @IsString({ message: "название должно быть строкой" })
+  @IsNotEmpty({ message: "название не должно быть пустой строкой" })
+  @MinLength(2, { message: "Минимальное кол-во символов: 2 " })
+  readonly name!: string;
 }

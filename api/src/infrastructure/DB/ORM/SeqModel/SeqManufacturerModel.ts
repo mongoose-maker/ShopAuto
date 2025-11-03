@@ -1,5 +1,11 @@
 import sequelize from "../../db.js";
-import { DataTypes, Model } from "sequelize";
+import {
+  DataTypes,
+  Model,
+  type HasManyAddAssociationMixin,
+  type HasManyGetAssociationsMixin,
+  type HasManySetAssociationsMixin,
+} from "sequelize";
 import SeqProduct from "./SeqProductModel.js";
 
 export interface SeqManufacturerAttributes {
@@ -15,6 +21,10 @@ class SeqManufacturer
   public id!: undefined | string;
   public name!: string;
   public descriptionManufacturer!: string;
+
+  public getProducts!: HasManyGetAssociationsMixin<SeqProduct>;
+  public setProducts!: HasManySetAssociationsMixin<SeqProduct, number>;
+  public addProduct!: HasManyAddAssociationMixin<SeqProduct, number>;
 }
 
 SeqManufacturer.init(
@@ -41,9 +51,5 @@ SeqManufacturer.init(
     timestamps: true,
   }
 );
-SeqManufacturer.hasMany(SeqProduct, {
-  //?
-  as: "products",
-  foreignKey: "manufacturerId",
-});
+
 export default SeqManufacturer;

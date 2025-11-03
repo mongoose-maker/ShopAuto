@@ -1,6 +1,6 @@
 import { Manufacturer } from "../../models/Manufacturer/Manufacturer.js";
-import { updateManufacturerDto } from "./dto/updateManufacturerDto.js";
-import { updateInfoManufacturerDto } from "./dto/updateInfoManufRepo.js";
+import { UpdateManufacturerDto } from "./dto/updateManufacturerDto.js";
+import { UpdateInfoManufacturerDto } from "./dto/updateInfoManufRepo.js";
 
 export interface ManufacturerRepository {
   addManuf(manufacturer: Manufacturer): Promise<Manufacturer>;
@@ -9,11 +9,14 @@ export interface ManufacturerRepository {
   getAllManuf(): Promise<Manufacturer[]>;
   updateManufInfo(
     id: string,
-    dto: updateInfoManufacturerDto
+    updates: {
+      name?: string;
+      descriptionManufacturer?: string;
+    }
   ): Promise<Manufacturer | null>;
   updateListProductByManuf(
-    id: string,
-    dto: updateManufacturerDto
+    manufacturerId: string, // id: string
+    productIds: string[] // UpdateManufacturerDto
   ): Promise<Manufacturer | null>;
   deleteManuf(id: string): Promise<boolean>;
 }

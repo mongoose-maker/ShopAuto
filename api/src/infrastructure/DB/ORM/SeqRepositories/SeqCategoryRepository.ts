@@ -1,6 +1,5 @@
 import { Category } from "../../../../core/models/Category/Category.js";
 
-import type { UpdateCategoryDto } from "../../../../core/repositories/CategoryRepository/dto/updateCategoryDto.js";
 import type { CategoryRepository } from "../../../../core/repositories/CategoryRepository/CategoryRepository.js";
 
 import {
@@ -8,7 +7,7 @@ import {
   type SeqCategoryWithProducts,
 } from "../../Mapper/MapperCategory.js";
 
-import SeqCategory from "../SeqModel/SeqCategoryModel.js";
+import { SeqProduct, SeqCategory } from "../../Associations/associations.js";
 
 export class SeqCategoryRepository implements CategoryRepository {
   async addCategory(category: Category): Promise<Category> {
@@ -27,7 +26,8 @@ export class SeqCategoryRepository implements CategoryRepository {
       categoryWithProducts.get({ plain: true }) as SeqCategoryWithProducts
     );
   }
-  async getAllCategory(): Promise<Category[]> {
+
+  async getAllCategories(): Promise<Category[]> {
     const categories = await SeqCategory.findAll({
       include: ["products"],
     });
@@ -37,6 +37,7 @@ export class SeqCategoryRepository implements CategoryRepository {
       )
     );
   }
+
   async getCategoryById(id: string): Promise<Category | null> {
     const category = await SeqCategory.findByPk(id, {
       include: ["products"],
@@ -46,18 +47,52 @@ export class SeqCategoryRepository implements CategoryRepository {
     }
     return CategoryMapper.toDomain(category.get({ plain: true }));
   }
+
   async updateCategory(
     id: string,
-    dto: UpdateCategoryDto
+    category: Category
   ): Promise<Category | null> {
-    const foundCategory = await SeqCategory.findByPk(id, {
-      include: ["products"],
-    });
+    const foundCategory = await SeqCategory.findByPk(id);
     if (!foundCategory) {
       return null;
     }
-    const updatedCategory = await foundCategory.update(dto);
-    return CategoryMapper.toDomain(updatedCategory.get({ plain: true }));
+
+    await foundCategory.update({
+      name: category.name,
+    });
+
+    const updatedCategory = await SeqCategory.findByPk(id);
+    return updatedCategory
+      ? CategoryMapper.toDomain(updatedCategory.get({ plain: true }))
+      : null;
+  }
+
+  async updateCategoryProducts(
+    categoryId: string,
+    productIds: string[]
+  ): Promise<Category | null> {
+    const foundCategory = await SeqCategory.findByPk(categoryId, {
+      include: ["products"],
+    });
+
+    if (!foundCategory) {
+      throw new Error(`Category with id ${categoryId} not found`);
+    }
+
+    if (productIds && productIds.length > 0) {
+      const products = await SeqProduct.findAll({
+        where: { id: productIds },
+      });
+      await foundCategory.setProducts(products);
+    }
+
+    const updatedCategory = await SeqCategory.findByPk(categoryId, {
+      include: ["products"],
+    });
+
+    return updatedCategory
+      ? CategoryMapper.toDomain(updatedCategory.get({ plain: true }))
+      : null;
   }
   async deleteCategory(id: string): Promise<boolean> {
     const category = await SeqCategory.destroy({ where: { id } });

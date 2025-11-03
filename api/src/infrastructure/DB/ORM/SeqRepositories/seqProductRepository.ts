@@ -5,27 +5,31 @@ import {
   type SeqProductWithRelations,
 } from "../../Mapper/MapperProduct.js";
 import { Product } from "../../../../core/models/Product/Product.js";
-import type { UpdateProductDto } from "../../../../core/repositories/ProductRepository/dto/updateProductDto.js";
 
 export class SeqProductRepository implements ProductRepository {
   async addProduct(product: Product): Promise<Product> {
     const productData = ProductMapper.toPersistence(product);
     const createdProduct = await SeqProduct.create(productData);
+
     const productWithRelations = await SeqProduct.findByPk(createdProduct.id, {
-      include: ["manufacturer", "category"],
+      include: ["manufacturer", "category"], // ✅ "manufacturer", "category" (единственное число)
     });
+
     if (!productWithRelations) {
       throw new Error("Product not found after creation");
     }
+
     return ProductMapper.toDomain(
-      productWithRelations!.get({ plain: true }) as SeqProductWithRelations
+      productWithRelations.get({ plain: true }) as SeqProductWithRelations
     );
   }
 
-  async getAllProduct(): Promise<Product[]> {
+  async getAllProducts(): Promise<Product[]> {
+    // ✅ Исправил название на getAllProducts
     const foundProducts = await SeqProduct.findAll({
-      include: ["manufacturers", "categories"],
+      include: ["manufacturer", "category"], // ✅ "manufacturer", "category"
     });
+
     return foundProducts.map((prod) =>
       ProductMapper.toDomain(
         prod.get({ plain: true }) as SeqProductWithRelations
@@ -35,24 +39,29 @@ export class SeqProductRepository implements ProductRepository {
 
   async getProductById(id: string): Promise<Product | null> {
     const foundProduct = await SeqProduct.findByPk(id, {
-      include: ["manufacturers", "categories"],
+      include: ["manufacturer", "category"], // ✅ "manufacturer", "category"
     });
+
     if (!foundProduct) {
       return null;
     }
+
     return ProductMapper.toDomain(
       foundProduct.get({ plain: true }) as SeqProductWithRelations
     );
   }
 
-  async getProductByArticle(idProduct: string): Promise<Product | null> {
+  async getProductByArticle(article: string): Promise<Product | null> {
+    // ✅ article вместо idProduct
     const foundProduct = await SeqProduct.findOne({
-      where: { idProduct },
-      include: ["manufacturers", "categories"],
+      where: { idProduct: article }, // ✅ ищем по полю idProduct
+      include: ["manufacturer", "category"], // ✅ "manufacturer", "category"
     });
+
     if (!foundProduct) {
       return null;
     }
+
     return ProductMapper.toDomain(
       foundProduct.get({ plain: true }) as SeqProductWithRelations
     );
@@ -60,38 +69,63 @@ export class SeqProductRepository implements ProductRepository {
 
   async updateProduct(
     id: string,
-    dto: UpdateProductDto
+    updates: Partial<Product>
   ): Promise<Product | null> {
-    const existingProduct = await SeqProduct.findByPk(id, {
-      include: ["manufacturers", "categories"],
-    });
+    const existingProduct = await SeqProduct.findByPk(id);
+
     if (!existingProduct) {
       return null;
     }
-    const updatedProduct = await existingProduct.update(dto);
+
+    // ✅ Фильтруем undefined значения
+    const dataToUpdate = Object.fromEntries(
+      Object.entries(updates).filter(([_, value]) => value !== undefined)
+    );
+
+    await existingProduct.update(dataToUpdate);
+
+    // ✅ Загружаем с отношениями после обновления
+    const updatedProduct = await SeqProduct.findByPk(id, {
+      include: ["manufacturer", "category"],
+    });
+
+    if (!updatedProduct) {
+      return null;
+    }
+
     return ProductMapper.toDomain(
       updatedProduct.get({ plain: true }) as SeqProductWithRelations
     );
   }
 
-  async statusAvailability(
+  async updateAvailability(
     id: string,
     isAvailable: boolean
   ): Promise<Product | null> {
-    const existingProduct = await SeqProduct.findByPk(id, {
-      include: ["manufacturers", "categories"],
-    });
+    // ✅ Исправил название
+    const existingProduct = await SeqProduct.findByPk(id);
+
     if (!existingProduct) {
       return null;
     }
-    const status = await existingProduct.update({ availability: isAvailable });
+
+    await existingProduct.update({ availability: isAvailable });
+
+    const updatedProduct = await SeqProduct.findByPk(id, {
+      include: ["manufacturer", "category"],
+    });
+
+    if (!updatedProduct) {
+      return null;
+    }
+
     return ProductMapper.toDomain(
-      status.get({ plain: true }) as SeqProductWithRelations
+      updatedProduct.get({ plain: true }) as SeqProductWithRelations
     );
   }
 
   async deleteProduct(id: string): Promise<boolean> {
-    const existingProduct = await SeqProduct.destroy({ where: { id } });
-    return existingProduct > 0;
+    const result = await SeqProduct.destroy({ where: { id } });
+    return result > 0;
   }
 }

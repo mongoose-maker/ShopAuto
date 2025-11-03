@@ -1,5 +1,11 @@
 import sequelize from "../../db.js";
-import { DataTypes, Model } from "sequelize";
+import {
+  DataTypes,
+  Model,
+  type HasManyAddAssociationMixin,
+  type HasManyGetAssociationsMixin,
+  type HasManySetAssociationsMixin,
+} from "sequelize";
 import SeqProduct from "./SeqProductModel.js";
 
 export interface SeqCategoryAttributes {
@@ -13,6 +19,10 @@ class SeqCategory
 {
   public id!: undefined | string;
   public name!: string;
+
+  public getProducts!: HasManyGetAssociationsMixin<SeqProduct>;
+  public setProducts!: HasManySetAssociationsMixin<SeqProduct, number>;
+  public addProducts!: HasManyAddAssociationMixin<SeqProduct, number>;
 }
 
 SeqCategory.init(

@@ -1,9 +1,7 @@
-import { Product } from "../../../models/Product/Product.js";
+import { IsString, IsArray } from "class-validator";
 
-export class updateManufacturerDto {
-  constructor(
-    readonly name: string,
-    readonly descriptionManufacturer: string,
-    readonly products: Product[]
-  ) {}
+export class UpdateManufacturerDto {
+  @IsArray()
+  @IsString({ each: true, message: "Каждый ID продукта должен быть строкой" })
+  readonly productsIds?: string[] | undefined;
 }

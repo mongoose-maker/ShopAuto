@@ -17,12 +17,15 @@
 
     // Other Outputs
     "sourceMap": true,
-    "declaration": true,
+    "declaration": true, // мб переставить на false
     "declarationMap": true,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
 
     // Style Options
     // "noImplicitReturns": true,
