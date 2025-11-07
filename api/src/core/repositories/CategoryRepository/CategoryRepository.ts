@@ -1,6 +1,4 @@
 import { Category } from "../../models/Category/Category.js";
-import { UpdateCategoryDto } from "./dto/updateCategoryDto.js";
-
 export interface CategoryRepository {
   addCategory(category: Category): Promise<Category>;
   getCategoryById(id: string): Promise<Category | null>;

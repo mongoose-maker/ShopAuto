@@ -3,7 +3,6 @@ import { DataTypes, Model, type Optional } from "sequelize";
 import SeqManufacturer from "./SeqManufacturerModel.js";
 import SeqCategory from "./SeqCategoryModel.js";
 
-// ✅ Правильные типы
 export interface SeqProductAttributes {
   id?: number; // ✅ AUTOINCREMENT = number
   idProduct: string; // ✅ Артикул - строка

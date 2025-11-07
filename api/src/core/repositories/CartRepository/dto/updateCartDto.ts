@@ -1,6 +1,11 @@
-import { CartItem } from "../../../models/CartItem/CartItem.js";
-import { Product } from "../../../models/Product/Product.js";
+import { IsUUID, IsArray, ValidateNested, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
+import { UpdateItemDto } from "../../CartItem/dto/updateItemDto.js";
 
 export class UpdateCartDto {
-  constructor(readonly quantity: CartItem, readonly idProduct: Product) {} // ?  или cart
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => UpdateItemDto)
+  readonly items?: UpdateItemDto[]; // ✅ Массив {productId, quantity}
 }

@@ -15,7 +15,7 @@ export class ManufacturerMapper {
       ? raw.products.map(ProductMapper.toDomain)
       : [];
     return new Manufacturer(
-      raw.id,
+      raw.id?.toString(),
       raw.name,
       raw.descriptionManufacturer,
       products

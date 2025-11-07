@@ -14,7 +14,7 @@ export class CategoryMapper {
     const products = raw.products
       ? raw.products.map(ProductMapper.toDomain)
       : [];
-    return new Category(raw.id, raw.name, products);
+    return new Category(raw.id?.toString(), raw.name, products);
   }
   static toPersistence(category: Category): any {
     return {

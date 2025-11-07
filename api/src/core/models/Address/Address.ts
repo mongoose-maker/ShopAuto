@@ -1,11 +1,13 @@
 export class Address {
   constructor(
-    readonly id: string,
+    readonly id: string | undefined,
+    readonly userId: string,
     readonly country: string,
     readonly city: string,
     readonly street: string,
-    readonly houseNumber: string,
-    readonly numberOfApartment: number | null,
+    readonly houseNumber: number,
+    readonly numberOfApartment: number,
     readonly postcode: number
-  ) {}
+  ) //isDefault: boolean
+  {}
 }

@@ -1,11 +1,9 @@
 import { Address } from "../../models/Address/Address.js";
-import { AddAddressDto } from "./dto/addAddressDto.js";
-import { UpdateAddressDto } from "./dto/updateAddressDto.js";
 
 export interface AddressRepository {
-  addAddress(dto: AddAddressDto): Address;
-  updateAddress(dto: UpdateAddressDto): Address;
-  getAllAddress(dto: AddAddressDto): Address;
-  getAddressById(dto: AddAddressDto): Address;
-  deleteAddress(id: string): Address;
+  addAddress(address: Address): Promise<Address>;
+  getUserAddress(userId: string): Promise<Address | null>;
+  getAddressById(id: string): Promise<Address | null>;
+  updateAddress(id: string, updates: Partial<Address>): Promise<Address | null>;
+  deleteAddress(id: string): Promise<boolean>;
 }

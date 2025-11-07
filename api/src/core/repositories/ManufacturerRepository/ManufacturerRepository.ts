@@ -1,7 +1,4 @@
 import { Manufacturer } from "../../models/Manufacturer/Manufacturer.js";
-import { UpdateManufacturerDto } from "./dto/updateManufacturerDto.js";
-import { UpdateInfoManufacturerDto } from "./dto/updateInfoManufRepo.js";
-
 export interface ManufacturerRepository {
   addManuf(manufacturer: Manufacturer): Promise<Manufacturer>;
   // нужно ли сюда добавлять метод addProductByManufacturer ?

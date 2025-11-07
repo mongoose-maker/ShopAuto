@@ -9,7 +9,7 @@ import {
 import SeqProduct from "./SeqProductModel.js";
 
 export interface SeqManufacturerAttributes {
-  id: undefined | string;
+  id: undefined | number;
   name: string;
   descriptionManufacturer: string;
 }
@@ -18,7 +18,7 @@ class SeqManufacturer
   extends Model<SeqManufacturerAttributes>
   implements SeqManufacturerAttributes
 {
-  public id!: undefined | string;
+  public id!: undefined | number;
   public name!: string;
   public descriptionManufacturer!: string;
 

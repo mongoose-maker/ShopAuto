@@ -2,14 +2,14 @@ import sequelize from "../../db.js";
 import { DataTypes, Model } from "sequelize";
 
 export interface SeqUserAttributes {
-  id: undefined; // | string
+  id: number | undefined; // | string
   name: string;
   email: string;
   password: string;
 }
 
 class SeqUser extends Model<SeqUserAttributes> implements SeqUserAttributes {
-  public id!: undefined; // string
+  public id!: number | undefined; // string
   public name!: string;
   public email!: string;
   public password!: string;

@@ -1,9 +1,7 @@
-import { Cart } from "../../../models/Cart/Cart.js";
-import { User } from "../../../models/User/User.js";
+import { IsUUID, IsNotEmpty } from "class-validator";
 
 export class AddCartDto {
-  constructor(
-    readonly userId: User,
-    readonly itemId: Cart // ?
-  ) {}
+  @IsUUID("4", { message: "User ID must be a valid UUID" })
+  @IsNotEmpty({ message: "User ID is required" })
+  readonly userId!: string;
 }

@@ -9,7 +9,7 @@ import {
 import SeqProduct from "./SeqProductModel.js";
 
 export interface SeqCategoryAttributes {
-  id: undefined | string;
+  id?: undefined | number;
   name: string;
 }
 
@@ -17,7 +17,7 @@ class SeqCategory
   extends Model<SeqCategoryAttributes>
   implements SeqCategoryAttributes
 {
-  public id!: undefined | string;
+  public id?: undefined | number;
   public name!: string;
 
   public getProducts!: HasManyGetAssociationsMixin<SeqProduct>;
