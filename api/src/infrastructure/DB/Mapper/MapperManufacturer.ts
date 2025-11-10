@@ -17,8 +17,7 @@ export class ManufacturerMapper {
     return new Manufacturer(
       raw.id?.toString(),
       raw.name,
-      raw.descriptionManufacturer,
-      products
+      raw.descriptionManufacturer
     );
   }
   static toPersistence(manufacturer: Manufacturer): any {

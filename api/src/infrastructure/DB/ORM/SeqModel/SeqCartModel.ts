@@ -1,7 +1,5 @@
 import sequelize from "../../db.js";
 import { DataTypes, Model, type Optional } from "sequelize";
-import SeqItem from "./SeqItemRepository.js";
-import SeqUser from "./SeqUserModel.js";
 
 export interface SeqCartAttributes {
   id: string;
@@ -36,9 +34,5 @@ SeqCart.init(
     timestamps: true,
   }
 );
-
-// Associations
-SeqCart.belongsTo(SeqUser, { foreignKey: "userId", as: "user" });
-SeqCart.hasMany(SeqItem, { foreignKey: "cartId", as: "items" });
 
 export default SeqCart;

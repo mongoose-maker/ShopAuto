@@ -1,4 +1,4 @@
-import { CartItem } from "../../../core/models/CartItem/CartItem.js";
+import { CartItem } from "../../../core/models/Cart/CartItem.js";
 import type { SeqItemAttributes } from "../ORM/SeqModel/SeqItemRepository.js";
 import { ProductMapper } from "./MapperProduct.js";
 import type { SeqProductWithRelations } from "./MapperProduct.js";

@@ -1,7 +1,5 @@
 import sequelize from "../../db.js";
 import { DataTypes, Model } from "sequelize";
-import SeqProduct from "./SeqProductModel.js";
-import SeqCart from "./SeqCartModel.js";
 
 export interface SeqItemAttributes {
   id: undefined | number;
@@ -50,6 +48,4 @@ SeqItem.init(
   }
 );
 
-SeqItem.belongsTo(SeqCart, { foreignKey: "cartId", as: "cart" });
-SeqItem.belongsTo(SeqProduct, { foreignKey: "productId", as: "product" });
 export default SeqItem;

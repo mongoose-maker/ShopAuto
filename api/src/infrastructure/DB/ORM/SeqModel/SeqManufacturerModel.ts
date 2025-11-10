@@ -21,6 +21,7 @@ class SeqManufacturer
   public id!: undefined | number;
   public name!: string;
   public descriptionManufacturer!: string;
+  public readonly products?: InstanceType<typeof SeqProduct>;
 
   public getProducts!: HasManyGetAssociationsMixin<SeqProduct>;
   public setProducts!: HasManySetAssociationsMixin<SeqProduct, number>;

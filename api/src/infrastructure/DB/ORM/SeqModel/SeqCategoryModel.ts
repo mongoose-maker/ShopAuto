@@ -19,6 +19,7 @@ class SeqCategory
 {
   public id?: undefined | number;
   public name!: string;
+  public readonly products?: InstanceType<typeof SeqProduct>;
 
   public getProducts!: HasManyGetAssociationsMixin<SeqProduct>;
   public setProducts!: HasManySetAssociationsMixin<SeqProduct, number>;
@@ -43,10 +44,5 @@ SeqCategory.init(
     timestamps: true,
   }
 );
-
-SeqCategory.hasMany(SeqProduct, {
-  as: "products",
-  foreignKey: "categoryId",
-});
 
 export default SeqCategory;

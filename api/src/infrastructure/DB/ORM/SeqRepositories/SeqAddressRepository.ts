@@ -23,7 +23,9 @@ export class SeqAddressRepository implements AddressRepository {
   }
 
   async getUserAddress(userId: string): Promise<Address | null> {
-    const address = await SeqAddress.findByPk(userId);
+    const address = await SeqAddress.findOne({
+      where: { userId },
+    });
 
     if (!address) {
       return null;

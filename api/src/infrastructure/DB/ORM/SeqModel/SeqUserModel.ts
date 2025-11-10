@@ -2,14 +2,14 @@ import sequelize from "../../db.js";
 import { DataTypes, Model } from "sequelize";
 
 export interface SeqUserAttributes {
-  id: number | undefined; // | string
+  id: string | undefined; // | string
   name: string;
   email: string;
   password: string;
 }
 
 class SeqUser extends Model<SeqUserAttributes> implements SeqUserAttributes {
-  public id!: number | undefined; // string
+  public id!: string | undefined; // string
   public name!: string;
   public email!: string;
   public password!: string;
@@ -18,7 +18,7 @@ class SeqUser extends Model<SeqUserAttributes> implements SeqUserAttributes {
 SeqUser.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
       autoIncrement: true, // unique ???
     },

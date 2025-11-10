@@ -6,18 +6,19 @@ import SeqItem from "./SeqItemRepository.js";
 import SeqAddress from "./SeqAddressModel.js";
 import { ORDER_STATUSES } from "../../../../core/models/Order/Order.js";
 
+
 export interface SeqOrderAttributes {
   id: string;
   userId: string;
   status: (typeof ORDER_STATUSES)[number];
   totalAmount: number;
-  addressId?: string | null;
+  shippingAddressId?: string | null;
   cartId?: string | null;
 }
 
 type SeqOrderCreationAttributes = Optional<
   SeqOrderAttributes,
-  "id" | "addressId" | "cartId"
+  "id" | "shippingAddressId" | "cartId"
 >;
 
 class SeqOrder
@@ -28,7 +29,7 @@ class SeqOrder
   public userId!: string;
   public status!: (typeof ORDER_STATUSES)[number];
   public totalAmount!: number;
-  public addressId?: string | null;
+  public shippingAddressId?: string | null;
   public cartId?: string | null;
 
   public readonly user?: InstanceType<typeof SeqUser>;
@@ -60,7 +61,7 @@ SeqOrder.init(
         min: 0,
       },
     },
-    addressId: {
+    shippingAddressId: {
       type: DataTypes.UUID,
       allowNull: true,
     },
@@ -83,15 +84,5 @@ SeqOrder.init(
     ],
   }
 );
-
-SeqOrder.belongsTo(SeqUser, { foreignKey: "userId", as: "user" });
-SeqOrder.belongsTo(SeqAddress, { foreignKey: "addressId", as: "address" });
-SeqOrder.belongsTo(SeqCart, { foreignKey: "cartId", as: "cart" });
-SeqOrder.hasMany(SeqItem, {
-  foreignKey: "cartId",
-  sourceKey: "cartId",
-  as: "cartItems",
-  constraints: false,
-});
 
 export default SeqOrder;

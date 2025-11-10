@@ -1,3 +1,5 @@
+import { OrderItem } from "./OrderItem.js";
+
 export const ORDER_STATUSES = [
   "created",
   "paid",
@@ -6,26 +8,20 @@ export const ORDER_STATUSES = [
   "delivered",
 ] as const;
 
-export type OrderStatus = (typeof ORDER_STATUSES)[number];
-
-export interface OrderItem {
-  productId: string;
-  quantity: number;
-  unitPrice: number;
-}
-
+export type OrderStatus = (typeof ORDER_STATUSES)[number]; // ?
 export class Order {
   constructor(
-    readonly id: string,
+    readonly id: string | undefined,
     readonly userId: string,
     readonly items: OrderItem[],
     readonly status: OrderStatus,
     readonly totalAmount: number,
-    readonly addressId?: string,
+    readonly shippingAddressId?: string,
     readonly cartId?: string
   ) {}
-
-  static calculateTotal(items: OrderItem[]): number {
-    return items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
-  }
 } // ?
+
+//   static calculateTotal(items: OrderItem[]): number {
+//     return items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
+//   }
+// } // ?

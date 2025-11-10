@@ -1,4 +1,4 @@
-import { CartItem } from "../../models/CartItem/CartItem.js";
+import { CartItem } from "../../models/Cart/CartItem.js";
 
 export interface CartItemRepository {
   addItem(item: CartItem): Promise<CartItem>;

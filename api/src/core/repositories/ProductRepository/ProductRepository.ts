@@ -9,13 +9,3 @@ export interface ProductRepository {
   updateAvailability(id: string, isAvailable: boolean): Promise<Product | null>; // ✅ Исправил название
   deleteProduct(id: string): Promise<boolean>; // ✅ Раскомментировал
 }
-
-// export interface ProductRepository {
-//   addProduct(product: Product): Promise<Product>;
-//   getAllProduct(): Promise<Product[]>;
-//   getProductById(id: string): Promise<Product | null>;
-//   getProductByArticle(idProduct: string): Promise<Product | null>;
-//   updateProduct(id: string, dto: UpdateProductDto): Promise<Product | null>;
-//   statusAvailability(id: string, isAvailable: boolean): Promise<Product | null>; // ?
-//   deleteProduct(id: string): Promise<boolean>;
-// }
