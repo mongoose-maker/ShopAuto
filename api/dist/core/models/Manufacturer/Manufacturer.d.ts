@@ -1,8 +1,7 @@
-import { Product } from "../Product/Product";
 export declare class Manufacturer {
-    readonly id: string;
+    readonly id: undefined | string;
     readonly name: string;
-    readonly productByManufacturer: Product[];
-    constructor(id: string, name: string, productByManufacturer?: Product[]);
+    readonly descriptionManufacturer?: string | undefined;
+    constructor(id: undefined | string, name: string, descriptionManufacturer?: string | undefined);
 }
 //# sourceMappingURL=Manufacturer.d.ts.map

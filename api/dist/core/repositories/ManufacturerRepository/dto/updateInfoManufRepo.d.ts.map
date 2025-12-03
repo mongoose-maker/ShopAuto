@@ -1,0 +1,1 @@
+{"version":3,"file":"updateInfoManufRepo.d.ts","sourceRoot":"","sources":["../../../../../src/core/repositories/ManufacturerRepository/dto/updateInfoManufRepo.ts"],"names":[],"mappings":"AAEA,qBAAa,yBAAyB;IAKpC,QAAQ,CAAC,IAAI,CAAC,EAAE,MAAM,GAAG,SAAS,CAAC;IAInC,QAAQ,CAAC,uBAAuB,CAAC,EAAE,MAAM,GAAG,SAAS,CAAC;CACvD"}

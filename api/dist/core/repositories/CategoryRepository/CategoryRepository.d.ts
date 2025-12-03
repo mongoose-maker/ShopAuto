@@ -1,12 +1,10 @@
-import { Category } from "../../models/Category/Category";
-import { AddCategoryDto } from "./dto/addCategoryDto";
-import { UpdateCategoryDto } from "./dto/updateCategoryDto";
+import { Category } from "../../models/Category/Category.js";
 export interface CategoryRepository {
-    addCategory(dto: AddCategoryDto): Category;
-    addSubCategory(dto: AddCategoryDto): Category;
-    getAllCategory(): Category;
-    getCategoryById(id: string): Category;
-    updateCategory(dto: UpdateCategoryDto): Category;
-    deleteCategory(id: string): Category;
+    addCategory(category: Category): Promise<Category>;
+    getCategoryById(id: string): Promise<Category | null>;
+    getAllCategories(): Promise<Category[]>;
+    updateCategory(id: string, category: Category): Promise<Category | null>;
+    updateCategoryProducts(id: string, productIds: string[]): Promise<Category | null>;
+    deleteCategory(id: string): Promise<boolean>;
 }
 //# sourceMappingURL=CategoryRepository.d.ts.map

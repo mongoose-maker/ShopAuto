@@ -9,7 +9,7 @@ import {
 import SeqProduct from "./SeqProductModel.js";
 
 export interface SeqManufacturerAttributes {
-  id: undefined | number;
+  id: undefined | string;
   name: string;
   descriptionManufacturer: string;
 }
@@ -18,23 +18,22 @@ class SeqManufacturer
   extends Model<SeqManufacturerAttributes>
   implements SeqManufacturerAttributes
 {
-  public id!: undefined | number;
+  public id!: undefined | string;
   public name!: string;
   public descriptionManufacturer!: string;
   public readonly products?: InstanceType<typeof SeqProduct>;
 
   public getProducts!: HasManyGetAssociationsMixin<SeqProduct>;
-  public setProducts!: HasManySetAssociationsMixin<SeqProduct, number>;
-  public addProduct!: HasManyAddAssociationMixin<SeqProduct, number>;
+  public setProducts!: HasManySetAssociationsMixin<SeqProduct, string>;
+  public addProduct!: HasManyAddAssociationMixin<SeqProduct, string>;
 }
 
 SeqManufacturer.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true,
-      unique: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,

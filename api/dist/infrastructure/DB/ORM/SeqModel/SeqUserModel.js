@@ -1,26 +1,24 @@
-import { Address } from "../../../../core/models/Address/Address.js";
 import sequelize from "../../db.js";
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 class SeqUser extends Model {
-    id;
-    name;
-    email;
-    password;
 }
 SeqUser.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true, // unique ???
+        defaultValue: DataTypes.UUIDV4,
     },
     name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
     email: {
-        type: DataTypes.JSON,
-        allowNull: true,
+        type: DataTypes.STRING,
+        allowNull: false,
         unique: true,
+        validate: {
+            isEmail: true,
+        },
     },
     password: {
         type: DataTypes.STRING, // char ?

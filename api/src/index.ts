@@ -1,6 +1,6 @@
+import "reflect-metadata";
 import express from "express";
 import dotenv from "dotenv";
-import "express-async-errors";
 
 import sequelize from "./infrastructure/DB/db.js";
 
@@ -51,7 +51,7 @@ app.use(express.json()); // для преобразования объектов
 try {
   await sequelize.authenticate();
   if (process.env.DB_SYNC === "true") {
-    await sequelize.sync();
+    await sequelize.sync({ force: true, alter: true, logging: console.log });
   }
   console.log("Соединение с БД установлено");
 } catch (err) {

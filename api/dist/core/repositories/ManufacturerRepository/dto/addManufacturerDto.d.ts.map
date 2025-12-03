@@ -1,0 +1,1 @@
+{"version":3,"file":"addManufacturerDto.d.ts","sourceRoot":"","sources":["../../../../../src/core/repositories/ManufacturerRepository/dto/addManufacturerDto.ts"],"names":[],"mappings":"AAEA,qBAAa,kBAAkB;IAI7B,QAAQ,CAAC,IAAI,EAAG,MAAM,CAAC;IAIvB,QAAQ,CAAC,uBAAuB,CAAC,EAAE,MAAM,GAAG,SAAS,CAAC;CACvD"}

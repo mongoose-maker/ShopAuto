@@ -1,4 +1,2 @@
-import { Address } from "../../models/Address/Address";
-import { AddAddressDto } from "./dto/addAddressDto";
-import { UpdateAddressDto } from "./dto/updateAddressDto";
+import { Address } from "../../models/Address/Address.js";
 //# sourceMappingURL=AddressRepository.js.map

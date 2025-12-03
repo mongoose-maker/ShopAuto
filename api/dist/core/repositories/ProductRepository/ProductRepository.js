@@ -1,4 +1,2 @@
-import { Product } from "../../models/Product/Product";
-import { AddProductDto } from "./dto/addProductDto";
-import { UpdateProductDto } from "./dto/updateProductDto";
+import { Product } from "../../models/Product/Product.js";
 //# sourceMappingURL=ProductRepository.js.map

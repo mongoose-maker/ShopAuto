@@ -4,7 +4,7 @@ import SeqManufacturer from "./SeqManufacturerModel.js";
 import SeqCategory from "./SeqCategoryModel.js";
 
 export interface SeqProductAttributes {
-  id?: number;
+  id?: string;
   idProduct: string;
   name: string;
   manufacturerId?: string;
@@ -22,7 +22,7 @@ class SeqProduct
   extends Model<SeqProductAttributes, SeqProductCreationAttributes>
   implements SeqProductAttributes
 {
-  public id!: number;
+  public id!: string;
   public idProduct!: string;
   public name!: string;
   public manufacturerId!: string;
@@ -39,9 +39,9 @@ class SeqProduct
 SeqProduct.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     idProduct: {
       type: DataTypes.STRING,

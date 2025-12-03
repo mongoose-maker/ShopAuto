@@ -1,10 +1,13 @@
-import { Cart } from "../../../models/Cart/Cart";
-import { Product } from "../../../models/Product/Product";
-import { User } from "../../../models/User/User";
+export declare class AddOrderItemDto {
+    readonly productId: string;
+    readonly quantity: number;
+    readonly unitPrice: number;
+}
 export declare class AddOrderDto {
-    readonly quantityItem: Cart;
-    readonly priceItemOrder: Product;
-    readonly dataBayer: User;
-    constructor(quantityItem: Cart, priceItemOrder: Product, dataBayer: User);
+    readonly userId: string;
+    readonly items: AddOrderItemDto[];
+    readonly totalAmount: number;
+    readonly addressId?: string;
+    readonly cartId?: string;
 }
 //# sourceMappingURL=addOrderDto.d.ts.map

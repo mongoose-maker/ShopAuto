@@ -1,8 +1,10 @@
 export declare class UpdateProductDto {
-    readonly price: number;
-    readonly description: string;
-    readonly availability: boolean;
-    readonly rating: number;
-    constructor(price: number, description: string, availability: boolean, rating: number);
+    readonly name?: string;
+    readonly manufacturerId?: string;
+    readonly categoryId?: string;
+    readonly description?: string;
+    readonly price?: number;
+    readonly availability?: boolean;
+    readonly rating?: number;
 }
 //# sourceMappingURL=updateProductDto.d.ts.map

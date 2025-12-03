@@ -1,0 +1,1 @@
+{"version":3,"file":"updateOrderItemDto.d.ts","sourceRoot":"","sources":["../../../../../src/core/repositories/OrderItem/dto/updateOrderItemDto.ts"],"names":[],"mappings":"AAEA,qBAAa,kBAAkB;IAI7B,QAAQ,CAAC,QAAQ,CAAC,EAAE,MAAM,CAAC;IAK3B,QAAQ,CAAC,SAAS,CAAC,EAAE,MAAM,CAAC;CAC7B"}

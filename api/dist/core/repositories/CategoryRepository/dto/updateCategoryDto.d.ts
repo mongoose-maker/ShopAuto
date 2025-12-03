@@ -1,9 +1,5 @@
-import { Category } from "../../../models/Category/Category";
-import { Product } from "../../../models/Product/Product";
 export declare class UpdateCategoryDto {
-    readonly name: string;
-    readonly subCategory?: Category;
-    readonly listProducts: Product[];
-    constructor(name: string, subCategory?: Category, listProducts?: Product[]);
+    readonly name?: string | undefined;
+    readonly productsIds?: string[] | undefined;
 }
 //# sourceMappingURL=updateCategoryDto.d.ts.map

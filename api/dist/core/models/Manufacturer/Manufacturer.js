@@ -1,13 +1,8 @@
-import { Product } from "../Product/Product";
 export class Manufacturer {
-    id;
-    name;
-    productByManufacturer;
-    constructor(id, name, productByManufacturer = [] // надо ли ?
-    ) {
+    constructor(id, name, descriptionManufacturer) {
         this.id = id;
         this.name = name;
-        this.productByManufacturer = productByManufacturer;
-    } // ?
+        this.descriptionManufacturer = descriptionManufacturer;
+    }
 }
 //# sourceMappingURL=Manufacturer.js.map

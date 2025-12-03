@@ -20,16 +20,19 @@ SeqUser.init(
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true, // unique ???
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: DataTypes.JSON,
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING, // char ?

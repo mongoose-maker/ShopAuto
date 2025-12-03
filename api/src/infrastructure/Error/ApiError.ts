@@ -6,7 +6,7 @@ interface ApiErrorOptions {
 
 export default class ApiError extends Error {
   statusCode: number;
-  code?: string;
+  code?: string | undefined;
   details?: unknown;
 
   constructor(statusCode: number, message: string, options?: ApiErrorOptions) {

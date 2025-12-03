@@ -1,19 +1,24 @@
-import { Cart } from "../Cart/Cart";
-import { CartItem } from "../CartItem/CartItem";
-import { User } from "../User/User";
+import { OrderItem } from "./OrderItem.js";
+export const ORDER_STATUSES = [
+    "created",
+    "paid",
+    "processing",
+    "sent",
+    "delivered",
+];
 export class Order {
-    id;
-    userStatus;
-    cart;
-    listOrder;
-    orderStatus;
-    constructor(id, userStatus, // Нужен для проверки роли Админ видит все заказы, пользователь только свои
-    cart, listOrder, orderStatus) {
+    constructor(id, userId, items, status, totalAmount, shippingAddressId, cartId) {
         this.id = id;
-        this.userStatus = userStatus;
-        this.cart = cart;
-        this.listOrder = listOrder;
-        this.orderStatus = orderStatus;
+        this.userId = userId;
+        this.items = items;
+        this.status = status;
+        this.totalAmount = totalAmount;
+        this.shippingAddressId = shippingAddressId;
+        this.cartId = cartId;
     }
-}
+} // ?
+//   static calculateTotal(items: OrderItem[]): number {
+//     return items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
+//   }
+// } // ?
 //# sourceMappingURL=Order.js.map

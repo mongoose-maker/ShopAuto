@@ -1,12 +1,12 @@
 import { Model } from "sequelize";
 export interface SeqUserAttributes {
-    id: undefined;
+    id: string | undefined;
     name: string;
     email: string;
     password: string;
 }
 declare class SeqUser extends Model<SeqUserAttributes> implements SeqUserAttributes {
-    id: undefined;
+    id: string | undefined;
     name: string;
     email: string;
     password: string;

@@ -1,8 +1,5 @@
-import { CartItem } from "../../../models/CartItem/CartItem";
-import { Product } from "../../../models/Product/Product";
+import { UpdateItemDto } from "../../CartItem/dto/updateItemDto.js";
 export declare class UpdateCartDto {
-    readonly quantity: CartItem;
-    readonly idProduct: Product;
-    constructor(quantity: CartItem, idProduct: Product);
+    readonly items?: UpdateItemDto[];
 }
 //# sourceMappingURL=updateCartDto.d.ts.map

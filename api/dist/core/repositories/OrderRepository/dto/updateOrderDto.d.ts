@@ -1,8 +1,7 @@
-import { Cart } from "../../../models/Cart/Cart";
-import { Product } from "../../../models/Product/Product";
+import { ORDER_STATUSES } from "../../../models/Order/Order.js";
 export declare class UpdateOrderDto {
-    readonly quantityItem: Cart;
-    readonly priceItemOrder: Product;
-    constructor(quantityItem: Cart, priceItemOrder: Product);
+    readonly orderId: string;
+    readonly status: (typeof ORDER_STATUSES)[number];
+    readonly addressId?: string;
 }
 //# sourceMappingURL=updateOrderDto.d.ts.map

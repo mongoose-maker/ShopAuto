@@ -2,7 +2,7 @@ import sequelize from "../../db.js";
 import { DataTypes, Model } from "sequelize";
 
 export interface SeqItemAttributes {
-  id: undefined | number;
+  id: string | undefined;
   cartId: string;
   productId: string;
   quantity: number;
@@ -10,7 +10,7 @@ export interface SeqItemAttributes {
 }
 
 class SeqItem extends Model implements SeqItemAttributes {
-  public id!: undefined | number;
+  public id!: string | undefined;
   public cartId!: string;
   public productId!: string;
   public quantity!: number;
@@ -20,9 +20,9 @@ class SeqItem extends Model implements SeqItemAttributes {
 SeqItem.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     cartId: {
       type: DataTypes.UUID,

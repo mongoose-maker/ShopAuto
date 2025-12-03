@@ -2,7 +2,7 @@ import { Model, DataTypes, type Optional } from "sequelize";
 import sequelize from "../../db.js";
 
 export interface SeqAddressAttributes {
-  id: number | undefined;
+  id: string | undefined;
   userId: string;
   country: string;
   city: string;
@@ -19,7 +19,7 @@ class SeqAddress
   extends Model<SeqAddressAttributes, SeqAddressCreationAttributes>
   implements SeqAddressAttributes
 {
-  public id!: number | undefined;
+  public id!: string | undefined;
   public userId!: string;
   public country!: string;
   public city!: string;
@@ -32,9 +32,9 @@ class SeqAddress
 SeqAddress.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     userId: {
       type: DataTypes.UUID,

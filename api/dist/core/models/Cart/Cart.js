@@ -1,13 +1,9 @@
-import { CartItem } from "../CartItem/CartItem";
+import { CartItem } from "./CartItem.js";
 export class Cart {
-    id;
-    userId;
-    item;
-    constructor(id, userId, item = [] // ?
-    ) {
+    constructor(id, userId, items = []) {
         this.id = id;
         this.userId = userId;
-        this.item = item;
+        this.items = items;
     }
 }
 //# sourceMappingURL=Cart.js.map

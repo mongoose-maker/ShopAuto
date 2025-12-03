@@ -1,13 +1,11 @@
-import { Product } from "../../models/Product/Product";
-import { AddProductDto } from "./dto/addProductDto";
-import { UpdateProductDto } from "./dto/updateProductDto";
+import { Product } from "../../models/Product/Product.js";
 export interface ProductRepository {
-    addProduct(dto: AddProductDto): Product;
-    getAllProduct(): Product;
-    GetByArticle(idProduct: string): Product;
-    GetByName(name: string): Product;
-    updateProduct(dto: UpdateProductDto): Product;
-    statusAvailability(dto: UpdateProductDto): Product;
-    deleteProduct(idProduct: string): Product;
+    addProduct(product: Product): Promise<Product>;
+    getAllProducts(): Promise<Product[]>;
+    getProductById(id: string): Promise<Product | null>;
+    getProductByArticle(article: string): Promise<Product | null>;
+    updateProduct(id: string, updates: Partial<Product>): Promise<Product | null>;
+    updateAvailability(id: string, isAvailable: boolean): Promise<Product | null>;
+    deleteProduct(id: string): Promise<boolean>;
 }
 //# sourceMappingURL=ProductRepository.d.ts.map
