@@ -13,7 +13,10 @@ export class CategoryController {
     res.status(201).json(newCat);
   }
 
-  async getAllCategory() {} //// ????????????????????????????? !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  async getAllCategory(req: Request, res: Response): Promise<void> {
+    const allCategories = await this.categoryService.getAllCategories();
+    res.status(201).json(allCategories);
+  }
 
   async getCategoryById(req: Request, res: Response): Promise<void> {
     const { id } = req.params; // ?

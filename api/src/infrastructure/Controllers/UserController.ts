@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { UserService } from "../../../core/Service/UserService.js";
-import { AddUserDto } from "../../../core/repositories/UserRepository/dto/addUserDto.js";
-import { UpdateUserDto } from "../../../core/repositories/UserRepository/dto/updateUserDto.js";
+import { UserService } from "../../core/Service/UserService.js";
+import { AddUserDto } from "../../core/repositories/UserRepository/dto/addUserDto.js";
+import { UpdateUserDto } from "../../core/repositories/UserRepository/dto/updateUserDto.js";
 
 export class UserController {
   constructor(private readonly userService: UserService) {}
