@@ -1,5 +1,5 @@
-import { Manufacturer } from "../../../../core/models/Manufacturer/Manufacturer.js";
-import type { ManufacturerRepository } from "../../../../core/repositories/ManufacturerRepository/ManufacturerRepository.js";
+import { Manufacturer } from '../../../../core/models/Manufacturer/Manufacturer.js';
+import type { ManufacturerRepository } from '../../../../core/repositories/ManufacturerRepository/ManufacturerRepository.js';
 export declare class SeqManufacturerRepository implements ManufacturerRepository {
     addManuf(manufacturer: Manufacturer): Promise<Manufacturer>;
     getManufById(id: string): Promise<Manufacturer | null>;

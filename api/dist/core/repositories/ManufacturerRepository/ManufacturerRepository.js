@@ -1,2 +1,2 @@
-import { Manufacturer } from "../../models/Manufacturer/Manufacturer.js";
+import { Manufacturer } from '../../models/Manufacturer/Manufacturer.js';
 //# sourceMappingURL=ManufacturerRepository.js.map

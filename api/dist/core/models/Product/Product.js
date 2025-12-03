@@ -1,5 +1,5 @@
-import { Category } from "../Category/Category.js";
-import { Manufacturer } from "../Manufacturer/Manufacturer.js";
+import { Category } from '../Category/Category.js';
+import { Manufacturer } from '../Manufacturer/Manufacturer.js';
 export class Product {
     constructor(id, idProduct, name, manufacturer, category, description, price, availability, rating) {
         this.id = id;

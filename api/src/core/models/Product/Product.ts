@@ -1,5 +1,5 @@
-import { Category } from "../Category/Category.js";
-import { Manufacturer } from "../Manufacturer/Manufacturer.js";
+import { Category } from '../Category/Category.js';
+import { Manufacturer } from '../Manufacturer/Manufacturer.js';
 export class Product {
   constructor(
     readonly id: string | undefined,
@@ -10,7 +10,7 @@ export class Product {
     readonly description: string,
     readonly price: number,
     readonly availability: boolean,
-    readonly rating: number
+    readonly rating: number,
   ) {}
 }
 

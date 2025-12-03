@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
-import { AddressService } from "../../core/Service/AddressService.js";
+import type { Request, Response } from 'express';
+import { AddressService } from '../../core/Service/AddressService.js';
 export declare class AddressController {
     private readonly addressService;
     constructor(addressService: AddressService);

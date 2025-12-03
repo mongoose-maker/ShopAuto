@@ -1,4 +1,4 @@
-import { Product } from "../../models/Product/Product.js";
+import { Product } from '../../models/Product/Product.js';
 export interface ProductRepository {
     addProduct(product: Product): Promise<Product>;
     getAllProducts(): Promise<Product[]>;

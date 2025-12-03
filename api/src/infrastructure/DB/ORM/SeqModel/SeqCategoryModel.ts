@@ -1,22 +1,19 @@
-import sequelize from "../../db.js";
+import sequelize from '../../db.js';
 import {
   DataTypes,
   Model,
   type HasManyAddAssociationMixin,
   type HasManyGetAssociationsMixin,
   type HasManySetAssociationsMixin,
-} from "sequelize";
-import SeqProduct from "./SeqProductModel.js";
+} from 'sequelize';
+import SeqProduct from './SeqProductModel.js';
 
 export interface SeqCategoryAttributes {
   id?: string | undefined;
   name: string;
 }
 
-class SeqCategory
-  extends Model<SeqCategoryAttributes>
-  implements SeqCategoryAttributes
-{
+class SeqCategory extends Model<SeqCategoryAttributes> implements SeqCategoryAttributes {
   public id?: string | undefined;
   public name!: string;
   public readonly products?: InstanceType<typeof SeqProduct>;
@@ -40,9 +37,9 @@ SeqCategory.init(
   },
   {
     sequelize,
-    tableName: "categories",
+    tableName: 'categories',
     timestamps: true,
-  }
+  },
 );
 
 export default SeqCategory;

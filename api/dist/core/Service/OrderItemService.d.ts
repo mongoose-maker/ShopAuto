@@ -1,9 +1,9 @@
-import { OrderItem } from "../models/Order/OrderItem.js";
-import type { OrderItemRepository } from "../repositories/OrderItem/OrderItemRepository.js";
-import type { AddOrderItemDto } from "../repositories/OrderItem/dto/addOrderItemDto.js";
-import type { UpdateOrderItemDto } from "../repositories/OrderItem/dto/updateOrderItemDto.js";
-import type { ProductRepository } from "../repositories/ProductRepository/ProductRepository.js";
-import type { OrderRepository } from "../repositories/OrderRepository/OrderRepository.js";
+import { OrderItem } from '../models/Order/OrderItem.js';
+import type { OrderItemRepository } from '../repositories/OrderItem/OrderItemRepository.js';
+import type { AddOrderItemDto } from '../repositories/OrderItem/dto/addOrderItemDto.js';
+import type { UpdateOrderItemDto } from '../repositories/OrderItem/dto/updateOrderItemDto.js';
+import type { ProductRepository } from '../repositories/ProductRepository/ProductRepository.js';
+import type { OrderRepository } from '../repositories/OrderRepository/OrderRepository.js';
 export declare class OrderItemService {
     private readonly orderItemRepository;
     private readonly productRepository;

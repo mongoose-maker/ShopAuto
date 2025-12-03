@@ -1,40 +1,31 @@
-import { Manufacturer } from "../models/Manufacturer/Manufacturer.js";
-import type { AddManufacturerDto } from "../repositories/ManufacturerRepository/dto/addManufacturerDto.js";
-import type { UpdateInfoManufacturerDto } from "../repositories/ManufacturerRepository/dto/updateInfoManufRepo.js";
-import type { UpdateManufacturerDto } from "../repositories/ManufacturerRepository/dto/updateManufacturerDto.js";
-import type { ManufacturerRepository } from "../repositories/ManufacturerRepository/ManufacturerRepository.js";
+import { Manufacturer } from '../models/Manufacturer/Manufacturer.js';
+import type { AddManufacturerDto } from '../repositories/ManufacturerRepository/dto/addManufacturerDto.js';
+import type { UpdateInfoManufacturerDto } from '../repositories/ManufacturerRepository/dto/updateInfoManufRepo.js';
+import type { UpdateManufacturerDto } from '../repositories/ManufacturerRepository/dto/updateManufacturerDto.js';
+import type { ManufacturerRepository } from '../repositories/ManufacturerRepository/ManufacturerRepository.js';
 
 export class ManufacturerService {
-  constructor(
-    private readonly manufacturerRepository: ManufacturerRepository
-  ) {}
+  constructor(private readonly manufacturerRepository: ManufacturerRepository) {}
 
   async addManufacturer(dto: AddManufacturerDto): Promise<Manufacturer> {
-    // ✅ Исправил название
-    const manufacturerToAdd = new Manufacturer(
-      undefined,
-      dto.name,
-      dto.descriptionManufacturer
-    );
+    const manufacturerToAdd = new Manufacturer(undefined, dto.name, dto.descriptionManufacturer);
     return await this.manufacturerRepository.addManuf(manufacturerToAdd);
   }
 
   async getManufacturerById(id: string): Promise<Manufacturer | null> {
-    // ✅ Исправил название
     return await this.manufacturerRepository.getManufById(id);
   }
 
   async getAllManufacturers(): Promise<Manufacturer[]> {
-    // ✅ Исправил название
     return await this.manufacturerRepository.getAllManuf();
   }
 
   async updateManufacturerInfo(
     id: string,
-    dto: UpdateInfoManufacturerDto
+    dto: UpdateInfoManufacturerDto,
   ): Promise<Manufacturer | null> {
     if (!id) {
-      throw new Error("Manufacturer ID is required");
+      throw new Error('Manufacturer ID is required');
     }
 
     const updates: { name?: string; descriptionManufacturer?: string } = {};
@@ -48,27 +39,22 @@ export class ManufacturerService {
 
   async updateManufacturerProducts(
     id: string,
-    dto: UpdateManufacturerDto
+    dto: UpdateManufacturerDto,
   ): Promise<Manufacturer | null> {
     if (!id) {
-      throw new Error("Manufacturer ID is required");
+      throw new Error('Manufacturer ID is required');
     }
 
     const productIdsToUpdate = dto.productsIds || [];
 
-    // ✅ Бизнес-валидация
     if (productIdsToUpdate.length > 100) {
-      throw new Error("Manufacturer cannot have more than 100 products");
+      throw new Error('Manufacturer cannot have more than 100 products');
     }
 
-    return await this.manufacturerRepository.updateListProductByManuf(
-      id,
-      productIdsToUpdate
-    );
+    return await this.manufacturerRepository.updateListProductByManuf(id, productIdsToUpdate);
   }
 
   async deleteManufacturer(id: string): Promise<boolean> {
-    // ✅ Исправил название
     return await this.manufacturerRepository.deleteManuf(id);
   }
 }

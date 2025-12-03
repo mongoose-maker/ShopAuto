@@ -1,7 +1,7 @@
-import sequelize from "../../db.js";
-import { Model, DataTypes, type Optional } from "sequelize";
-import SeqOrder from "./SeqOrderModel.js";
-import SeqProduct from "./SeqProductModel.js";
+import sequelize from '../../db.js';
+import { Model, DataTypes, type Optional } from 'sequelize';
+import SeqOrder from './SeqOrderModel.js';
+import SeqProduct from './SeqProductModel.js';
 
 export interface SeqOrderItemAttributes {
   id: string | undefined;
@@ -12,13 +12,12 @@ export interface SeqOrderItemAttributes {
   totalPrice: number;
 }
 
-interface OrderItemCreationAttributes
-  extends Optional<SeqOrderItemAttributes, "id" | "orderId" | "productId"> {}
-
-class SeqOrderItem extends Model<
+interface OrderItemCreationAttributes extends Optional<
   SeqOrderItemAttributes,
-  OrderItemCreationAttributes
-> {
+  'id' | 'orderId' | 'productId'
+> {}
+
+class SeqOrderItem extends Model<SeqOrderItemAttributes, OrderItemCreationAttributes> {
   public id!: string | undefined;
   public orderId?: string;
   public productId?: string;
@@ -40,8 +39,8 @@ SeqOrderItem.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "orders",
-        key: "id",
+        model: 'orders',
+        key: 'id',
       },
     },
     productId: {
@@ -72,17 +71,17 @@ SeqOrderItem.init(
   },
   {
     sequelize,
-    tableName: "orderItems",
+    tableName: 'orderItems',
     timestamps: true,
     indexes: [
       {
-        fields: ["orderId"],
+        fields: ['orderId'],
       },
       {
-        fields: ["productId"],
+        fields: ['productId'],
       },
     ],
-  }
+  },
 );
 
 export default SeqOrderItem;

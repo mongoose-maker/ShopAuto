@@ -1,27 +1,27 @@
-import { Category } from "../../../../core/models/Category/Category.js";
-import { CategoryMapper, } from "../../Mapper/MapperCategory.js";
-import { SeqProduct, SeqCategory } from "../../Associations/associations.js";
+import { Category } from '../../../../core/models/Category/Category.js';
+import { CategoryMapper } from '../../Mapper/MapperCategory.js';
+import { SeqProduct, SeqCategory } from '../../Associations/associations.js';
 export class SeqCategoryRepository {
     async addCategory(category) {
         const dataToCreate = CategoryMapper.toPersistence(category);
         const createdCategory = await SeqCategory.create(dataToCreate);
         const categoryWithProducts = await SeqCategory.findByPk(createdCategory.id, {
-            include: ["products"],
+            include: ['products'],
         });
         if (!categoryWithProducts) {
-            throw new Error("category not found after create");
+            throw new Error('category not found after create');
         }
         return CategoryMapper.toDomain(categoryWithProducts.get({ plain: true }));
     }
     async getAllCategories() {
         const categories = await SeqCategory.findAll({
-            include: ["products"],
+            include: ['products'],
         });
-        return categories.map((cat) => CategoryMapper.toDomain(cat.get({ plain: true })));
+        return categories.map(cat => CategoryMapper.toDomain(cat.get({ plain: true })));
     }
     async getCategoryById(id) {
         const category = await SeqCategory.findByPk(id, {
-            include: ["products"],
+            include: ['products'],
         });
         if (!category) {
             return null;
@@ -37,13 +37,11 @@ export class SeqCategoryRepository {
             name: category.name,
         });
         const updatedCategory = await SeqCategory.findByPk(id);
-        return updatedCategory
-            ? CategoryMapper.toDomain(updatedCategory.get({ plain: true }))
-            : null;
+        return updatedCategory ? CategoryMapper.toDomain(updatedCategory.get({ plain: true })) : null;
     }
     async updateCategoryProducts(categoryId, productIds) {
         const foundCategory = await SeqCategory.findByPk(categoryId, {
-            include: ["products"],
+            include: ['products'],
         });
         if (!foundCategory) {
             throw new Error(`Category with id ${categoryId} not found`);
@@ -55,11 +53,9 @@ export class SeqCategoryRepository {
             await foundCategory.setProducts(products);
         }
         const updatedCategory = await SeqCategory.findByPk(categoryId, {
-            include: ["products"],
+            include: ['products'],
         });
-        return updatedCategory
-            ? CategoryMapper.toDomain(updatedCategory.get({ plain: true }))
-            : null;
+        return updatedCategory ? CategoryMapper.toDomain(updatedCategory.get({ plain: true })) : null;
     }
     async deleteCategory(id) {
         const category = await SeqCategory.destroy({ where: { id } });

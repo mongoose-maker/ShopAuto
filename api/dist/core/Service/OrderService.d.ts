@@ -1,9 +1,9 @@
-import { Order, ORDER_STATUSES } from "../models/Order/Order.js";
-import type { OrderRepository } from "../repositories/OrderRepository/OrderRepository.js";
-import type { AddOrderDto } from "../repositories/OrderRepository/dto/addOrderDto.js";
-import type { UpdateOrderDto } from "../repositories/OrderRepository/dto/updateOrderDto.js";
-import type { ProductRepository } from "../repositories/ProductRepository/ProductRepository.js";
-import type { CartRepository } from "../repositories/CartRepository/CartRepository.js";
+import { Order, ORDER_STATUSES } from '../models/Order/Order.js';
+import type { OrderRepository } from '../repositories/OrderRepository/OrderRepository.js';
+import type { AddOrderDto } from '../repositories/OrderRepository/dto/addOrderDto.js';
+import type { UpdateOrderDto } from '../repositories/OrderRepository/dto/updateOrderDto.js';
+import type { ProductRepository } from '../repositories/ProductRepository/ProductRepository.js';
+import type { CartRepository } from '../repositories/CartRepository/CartRepository.js';
 export declare class OrderService {
     private readonly orderRepository;
     private readonly productRepository;

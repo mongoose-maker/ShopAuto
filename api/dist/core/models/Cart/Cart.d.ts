@@ -1,4 +1,4 @@
-import { CartItem } from "./CartItem.js";
+import { CartItem } from './CartItem.js';
 export declare class Cart {
     readonly id: string;
     readonly userId: string;

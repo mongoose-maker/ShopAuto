@@ -7,12 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsUUID, IsNotEmpty } from "class-validator";
+import { IsUUID, IsNotEmpty } from 'class-validator';
 export class AddCartDto {
 }
 __decorate([
-    IsUUID("4", { message: "User ID must be a valid UUID" }),
-    IsNotEmpty({ message: "User ID is required" }),
+    IsUUID('4', { message: 'User ID must be a valid UUID' }),
+    IsNotEmpty({ message: 'User ID is required' }),
     __metadata("design:type", String)
 ], AddCartDto.prototype, "userId", void 0);
 //# sourceMappingURL=addCartDto.js.map

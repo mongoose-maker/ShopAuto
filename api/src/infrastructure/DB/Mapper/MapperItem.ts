@@ -1,7 +1,7 @@
-import { CartItem } from "../../../core/models/Cart/CartItem.js";
-import type { SeqItemAttributes } from "../ORM/SeqModel/SeqItemRepository.js";
-import { ProductMapper } from "./MapperProduct.js";
-import type { SeqProductWithRelations } from "./MapperProduct.js";
+import { CartItem } from '../../../core/models/Cart/CartItem.js';
+import type { SeqItemAttributes } from '../ORM/SeqModel/SeqItemRepository.js';
+import { ProductMapper } from './MapperProduct.js';
+import type { SeqProductWithRelations } from './MapperProduct.js';
 
 type SeqItemWithRelations = SeqItemAttributes & {
   product?: SeqProductWithRelations;
@@ -9,23 +9,13 @@ type SeqItemWithRelations = SeqItemAttributes & {
 
 export class ItemMapper {
   static toDomain(raw: SeqItemWithRelations): CartItem {
-    const product = raw.product
-      ? ProductMapper.toDomain(raw.product)
-      : undefined;
+    const product = raw.product ? ProductMapper.toDomain(raw.product) : undefined;
 
-    return new CartItem(
-      raw.id?.toString(),
-      raw.cartId,
-      raw.productId,
-      raw.quantity,
-      product
-    );
+    return new CartItem(raw.id?.toString(), raw.cartId, raw.productId, raw.quantity, product);
   }
-  static toPersistence(item: CartItem): Omit<SeqItemAttributes, "id"> {
+  static toPersistence(item: CartItem): Omit<SeqItemAttributes, 'id'> {
     if (!item.product)
-      throw new Error(
-        "Product association is required to persist cart item price"
-      );
+      throw new Error('Product association is required to persist cart item price');
 
     return {
       cartId: item.cartId,

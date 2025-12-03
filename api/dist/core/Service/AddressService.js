@@ -1,4 +1,4 @@
-import { Address } from "../models/Address/Address.js";
+import { Address } from '../models/Address/Address.js';
 export class AddressService {
     constructor(addressRepository) {
         this.addressRepository = addressRepository;

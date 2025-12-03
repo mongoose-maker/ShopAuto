@@ -1,7 +1,7 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model, type Optional } from "sequelize";
-import SeqManufacturer from "./SeqManufacturerModel.js";
-import SeqCategory from "./SeqCategoryModel.js";
+import sequelize from '../../db.js';
+import { DataTypes, Model, type Optional } from 'sequelize';
+import SeqManufacturer from './SeqManufacturerModel.js';
+import SeqCategory from './SeqCategoryModel.js';
 
 export interface SeqProductAttributes {
   id?: string;
@@ -15,8 +15,7 @@ export interface SeqProductAttributes {
   rating: number;
 }
 
-interface SeqProductCreationAttributes
-  extends Optional<SeqProductAttributes, "id"> {}
+interface SeqProductCreationAttributes extends Optional<SeqProductAttributes, 'id'> {}
 
 class SeqProduct
   extends Model<SeqProductAttributes, SeqProductCreationAttributes>
@@ -65,7 +64,7 @@ SeqProduct.init(
       allowNull: false,
     },
     price: {
-      type: DataTypes.DECIMAL(10, 2), //
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       validate: {
         min: 0.01,
@@ -77,7 +76,7 @@ SeqProduct.init(
       defaultValue: true,
     },
     rating: {
-      type: DataTypes.DECIMAL(2, 1), // ✅ DECIMAL(2,1) для рейтинга 0.0-5.0
+      type: DataTypes.DECIMAL(2, 1),
       allowNull: false,
       defaultValue: 0,
       validate: {
@@ -88,9 +87,9 @@ SeqProduct.init(
   },
   {
     sequelize,
-    tableName: "products",
+    tableName: 'products',
     timestamps: true,
-  }
+  },
 );
 
 export default SeqProduct;

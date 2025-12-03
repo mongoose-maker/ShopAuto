@@ -1,4 +1,4 @@
-import { Product } from "../Product/Product.js";
+import { Product } from '../Product/Product.js';
 export class CartItem {
     constructor(id, cartId, productId, quantity, product) {
         this.id = id;

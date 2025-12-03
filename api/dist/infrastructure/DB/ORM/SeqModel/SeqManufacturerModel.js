@@ -1,6 +1,6 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model, } from "sequelize";
-import SeqProduct from "./SeqProductModel.js";
+import sequelize from '../../db.js';
+import { DataTypes, Model, } from 'sequelize';
+import SeqProduct from './SeqProductModel.js';
 class SeqManufacturer extends Model {
 }
 SeqManufacturer.init({
@@ -20,7 +20,7 @@ SeqManufacturer.init({
     },
 }, {
     sequelize,
-    tableName: "manufacturers",
+    tableName: 'manufacturers',
     timestamps: true,
 });
 export default SeqManufacturer;

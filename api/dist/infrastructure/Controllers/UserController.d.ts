@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
-import { UserService } from "../../core/Service/UserService.js";
+import type { Request, Response } from 'express';
+import { UserService } from '../../core/Service/UserService.js';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);

@@ -1,6 +1,6 @@
-import { Cart } from "../models/Cart/Cart.js";
-import type { CartRepository } from "../repositories/CartRepository/CartRepository.js";
-import type { ProductRepository } from "../repositories/ProductRepository/ProductRepository.js";
+import { Cart } from '../models/Cart/Cart.js';
+import type { CartRepository } from '../repositories/CartRepository/CartRepository.js';
+import type { ProductRepository } from '../repositories/ProductRepository/ProductRepository.js';
 export declare class CartService {
     private readonly cartRepository;
     private readonly productRepository;

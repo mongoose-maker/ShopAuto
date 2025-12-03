@@ -1,7 +1,7 @@
-import type { Request, Response } from "express";
-import { UserService } from "../../core/Service/UserService.js";
-import { AddUserDto } from "../../core/repositories/UserRepository/dto/addUserDto.js";
-import { UpdateUserDto } from "../../core/repositories/UserRepository/dto/updateUserDto.js";
+import type { Request, Response } from 'express';
+import { UserService } from '../../core/Service/UserService.js';
+import { AddUserDto } from '../../core/repositories/UserRepository/dto/addUserDto.js';
+import { UpdateUserDto } from '../../core/repositories/UserRepository/dto/updateUserDto.js';
 
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -13,7 +13,7 @@ export class UserController {
   async getUserById(req: Request, res: Response): Promise<void> {
     const { id } = req.params; // ?
     if (!id) {
-      res.status(400).json({ message: "User not found" });
+      res.status(400).json({ message: 'User not found' });
       return;
     }
     const foundUser = await this.userService.getUserById(id);
@@ -22,7 +22,7 @@ export class UserController {
   async updateDataUser(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     if (!id) {
-      res.status(400).json({ message: "User ID is required" });
+      res.status(400).json({ message: 'User ID is required' });
       return;
     }
     const dto: UpdateUserDto = req.body;
@@ -33,7 +33,7 @@ export class UserController {
     const id: string = req.body;
     const success = await this.userService.deleteUser(id);
     if (!success) {
-      res.status(404).json({ message: "Пользователь не найден" });
+      res.status(404).json({ message: 'Пользователь не найден' });
       return;
     }
     res.status(204).send();

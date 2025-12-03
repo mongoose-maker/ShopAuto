@@ -1,44 +1,39 @@
-import { Order, } from "../../../../core/models/Order/Order.js";
-import { OrderItem } from "../../../../core/models/Order/OrderItem.js";
-import SeqOrder from "../SeqModel/SeqOrderModel.js";
-import SeqOrderItem from "../SeqModel/SeqOrderItemModel.js";
-import SeqCart from "../SeqModel/SeqCartModel.js";
-import SeqItem from "../SeqModel/SeqItemRepository.js";
-import SeqProduct from "../SeqModel/SeqProductModel.js";
-import { OrderMapper, } from "../../Mapper/MapperOrder.js";
-import { OrderItemMapper } from "../../Mapper/MapperOrderItem.js";
+import { Order } from '../../../../core/models/Order/Order.js';
+import { OrderItem } from '../../../../core/models/Order/OrderItem.js';
+import SeqOrder from '../SeqModel/SeqOrderModel.js';
+import SeqOrderItem from '../SeqModel/SeqOrderItemModel.js';
+import SeqCart from '../SeqModel/SeqCartModel.js';
+import SeqItem from '../SeqModel/SeqItemRepository.js';
+import SeqProduct from '../SeqModel/SeqProductModel.js';
+import { OrderMapper } from '../../Mapper/MapperOrder.js';
+import { OrderItemMapper } from '../../Mapper/MapperOrderItem.js';
 export class SeqOrderRepository {
     async save(order) {
-        // Сохранить заказ
         const orderData = OrderMapper.toPersistence(order);
         const createdOrder = await SeqOrder.create(orderData);
-        // Сохранить элементы заказа
         if (order.items && order.items.length > 0) {
-            const orderItemsData = order.items.map((item) => {
-                // Создать OrderItem с установленным orderId для сохранения
-                const itemWithOrderId = new OrderItem(item.id, createdOrder.id, // Установить orderId
-                item.productId, item.quantity, item.unitPrice, item.totalPrice);
+            const orderItemsData = order.items.map(item => {
+                const itemWithOrderId = new OrderItem(item.id, createdOrder.id, item.productId, item.quantity, item.unitPrice, item.totalPrice);
                 return OrderItemMapper.toPersistence(itemWithOrderId);
             });
             await SeqOrderItem.bulkCreate(orderItemsData);
         }
-        // Загрузить заказ с элементами
         const orderWithItems = await SeqOrder.findByPk(createdOrder.id, {
             include: [
                 {
                     model: SeqOrderItem,
-                    as: "orderItems",
+                    as: 'orderItems',
                     include: [
                         {
                             model: SeqProduct,
-                            as: "product",
+                            as: 'product',
                         },
                     ],
                 },
             ],
         });
         if (!orderWithItems) {
-            throw new Error("Order not found after creation");
+            throw new Error('Order not found after creation');
         }
         return OrderMapper.toDomain(orderWithItems.get({ plain: true }));
     }
@@ -47,25 +42,25 @@ export class SeqOrderRepository {
             include: [
                 {
                     model: SeqOrderItem,
-                    as: "orderItems",
+                    as: 'orderItems',
                     include: [
                         {
                             model: SeqProduct,
-                            as: "product",
+                            as: 'product',
                         },
                     ],
                 },
                 {
                     model: SeqCart,
-                    as: "cart",
+                    as: 'cart',
                     include: [
                         {
                             model: SeqItem,
-                            as: "items",
+                            as: 'items',
                             include: [
                                 {
                                     model: SeqProduct,
-                                    as: "product",
+                                    as: 'product',
                                 },
                             ],
                         },
@@ -84,58 +79,53 @@ export class SeqOrderRepository {
             include: [
                 {
                     model: SeqOrderItem,
-                    as: "orderItems",
+                    as: 'orderItems',
                     include: [
                         {
                             model: SeqProduct,
-                            as: "product",
+                            as: 'product',
                         },
                     ],
                 },
             ],
-            order: [["createdAt", "DESC"]],
+            order: [['createdAt', 'DESC']],
         });
-        return orders.map((order) => OrderMapper.toDomain(order.get({ plain: true })));
+        return orders.map(order => OrderMapper.toDomain(order.get({ plain: true })));
     }
     async update(order) {
         if (!order.id) {
-            throw new Error("Order ID is required for update");
+            throw new Error('Order ID is required for update');
         }
         const existingOrder = await SeqOrder.findByPk(order.id);
         if (!existingOrder) {
             throw new Error(`Order with id ${order.id} not found`);
         }
-        // Обновить заказ
         const orderData = OrderMapper.toPersistence(order);
         await existingOrder.update(orderData);
-        // Обновить элементы заказа (удалить старые и создать новые)
         await SeqOrderItem.destroy({ where: { orderId: order.id } });
         if (order.items && order.items.length > 0) {
-            const orderItemsData = order.items.map((item) => {
-                // Создать OrderItem с установленным orderId для сохранения
-                const itemWithOrderId = new OrderItem(item.id, order.id, // Установить orderId
-                item.productId, item.quantity, item.unitPrice, item.totalPrice);
+            const orderItemsData = order.items.map(item => {
+                const itemWithOrderId = new OrderItem(item.id, order.id, item.productId, item.quantity, item.unitPrice, item.totalPrice);
                 return OrderItemMapper.toPersistence(itemWithOrderId);
             });
             await SeqOrderItem.bulkCreate(orderItemsData);
         }
-        // Загрузить обновленный заказ с элементами
         const updatedOrder = await SeqOrder.findByPk(order.id, {
             include: [
                 {
                     model: SeqOrderItem,
-                    as: "orderItems",
+                    as: 'orderItems',
                     include: [
                         {
                             model: SeqProduct,
-                            as: "product",
+                            as: 'product',
                         },
                     ],
                 },
             ],
         });
         if (!updatedOrder) {
-            throw new Error("Order not found after update");
+            throw new Error('Order not found after update');
         }
         return OrderMapper.toDomain(updatedOrder.get({ plain: true }));
     }
@@ -145,30 +135,27 @@ export class SeqOrderRepository {
             throw new Error(`Order with id ${id} not found`);
         }
         await order.update({ status });
-        // Загрузить обновленный заказ с элементами
         const updatedOrder = await SeqOrder.findByPk(id, {
             include: [
                 {
                     model: SeqOrderItem,
-                    as: "orderItems",
+                    as: 'orderItems',
                     include: [
                         {
                             model: SeqProduct,
-                            as: "product",
+                            as: 'product',
                         },
                     ],
                 },
             ],
         });
         if (!updatedOrder) {
-            throw new Error("Order not found after status update");
+            throw new Error('Order not found after status update');
         }
         return OrderMapper.toDomain(updatedOrder.get({ plain: true }));
     }
     async delete(id) {
-        // Удалить элементы заказа
         await SeqOrderItem.destroy({ where: { orderId: id } });
-        // Удалить заказ
         await SeqOrder.destroy({ where: { id } });
     }
 }

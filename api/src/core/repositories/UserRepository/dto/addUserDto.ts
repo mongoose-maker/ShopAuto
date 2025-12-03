@@ -3,6 +3,6 @@ export class AddUserDto {
     readonly id: undefined,
     readonly name: string,
     readonly email: string,
-    readonly password: string
+    readonly password: string,
   ) {}
 }

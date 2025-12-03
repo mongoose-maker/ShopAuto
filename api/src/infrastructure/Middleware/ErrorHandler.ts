@@ -1,19 +1,18 @@
-import ApiError from "../Error/ApiError.js";
-import type { Request, Response, NextFunction } from "express";
+import ApiError from '../Error/ApiError.js';
+import type { Request, Response, NextFunction } from 'express';
 
 export function errorHandler(
   err: Error | ApiError,
   req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ): Response {
   const isApiError = err instanceof ApiError;
   const statusCode = isApiError ? err.statusCode : 500;
 
-  // Базовое тело ответа
   const body: Record<string, unknown> = {
-    status: "error",
-    message: isApiError ? err.message : "Unexpected server error",
+    status: 'error',
+    message: isApiError ? err.message : 'Unexpected server error',
   };
 
   if (isApiError) {
@@ -25,16 +24,14 @@ export function errorHandler(
     }
   }
 
-  // В не‑продакшене отдаем больше диагностической информации
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     body.path = req.path;
     body.method = req.method;
     body.timestamp = new Date().toISOString();
     body.stack = err.stack;
   }
 
-  // Логируем всегда чуть подробнее, чем отдаем наружу
-  console.error("ErrorHandler:", {
+  console.error('ErrorHandler:', {
     message: err.message,
     stack: err.stack,
     path: req.path,

@@ -1,5 +1,5 @@
-import { Category } from "../Category/Category.js";
-import { Manufacturer } from "../Manufacturer/Manufacturer.js";
+import { Category } from '../Category/Category.js';
+import { Manufacturer } from '../Manufacturer/Manufacturer.js';
 export declare class Product {
     readonly id: string | undefined;
     readonly idProduct: string;

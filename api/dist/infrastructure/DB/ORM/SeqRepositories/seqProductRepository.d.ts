@@ -1,5 +1,5 @@
-import type { ProductRepository } from "../../../../core/repositories/ProductRepository/ProductRepository.js";
-import { Product } from "../../../../core/models/Product/Product.js";
+import type { ProductRepository } from '../../../../core/repositories/ProductRepository/ProductRepository.js';
+import { Product } from '../../../../core/models/Product/Product.js';
 export declare class SeqProductRepository implements ProductRepository {
     addProduct(product: Product): Promise<Product>;
     getAllProducts(): Promise<Product[]>;

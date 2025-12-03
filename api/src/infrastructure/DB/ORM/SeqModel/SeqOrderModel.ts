@@ -1,11 +1,10 @@
-import { DataTypes, Model, type Optional } from "sequelize";
-import sequelize from "../../db.js";
-import SeqUser from "./SeqUserModel.js";
-import SeqCart from "./SeqCartModel.js";
-import SeqItem from "./SeqItemRepository.js";
-import SeqAddress from "./SeqAddressModel.js";
-import { ORDER_STATUSES } from "../../../../core/models/Order/Order.js";
-
+import { DataTypes, Model, type Optional } from 'sequelize';
+import sequelize from '../../db.js';
+import SeqUser from './SeqUserModel.js';
+import SeqCart from './SeqCartModel.js';
+import SeqItem from './SeqItemRepository.js';
+import SeqAddress from './SeqAddressModel.js';
+import { ORDER_STATUSES } from '../../../../core/models/Order/Order.js';
 
 export interface SeqOrderAttributes {
   id: string;
@@ -18,7 +17,7 @@ export interface SeqOrderAttributes {
 
 type SeqOrderCreationAttributes = Optional<
   SeqOrderAttributes,
-  "id" | "shippingAddressId" | "cartId"
+  'id' | 'shippingAddressId' | 'cartId'
 >;
 
 class SeqOrder
@@ -52,7 +51,7 @@ SeqOrder.init(
     status: {
       type: DataTypes.ENUM(...ORDER_STATUSES),
       allowNull: false,
-      defaultValue: "created",
+      defaultValue: 'created',
     },
     totalAmount: {
       type: DataTypes.DECIMAL(10, 2),
@@ -72,17 +71,17 @@ SeqOrder.init(
   },
   {
     sequelize,
-    tableName: "orders",
+    tableName: 'orders',
     timestamps: true,
     indexes: [
       {
-        fields: ["userId"],
+        fields: ['userId'],
       },
       {
-        fields: ["status"],
+        fields: ['status'],
       },
     ],
-  }
+  },
 );
 
 export default SeqOrder;

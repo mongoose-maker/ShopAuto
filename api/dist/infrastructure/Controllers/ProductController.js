@@ -1,6 +1,6 @@
-import { AddProductDto } from "../../core/repositories/ProductRepository/dto/addProductDto.js";
-import { UpdateProductDto } from "../../core/repositories/ProductRepository/dto/updateProductDto.js";
-import { ProductService } from "../../core/Service/ProductService.js";
+import { AddProductDto } from '../../core/repositories/ProductRepository/dto/addProductDto.js';
+import { UpdateProductDto } from '../../core/repositories/ProductRepository/dto/updateProductDto.js';
+import { ProductService } from '../../core/Service/ProductService.js';
 export class ProductController {
     constructor(productService) {
         this.productService = productService;
@@ -10,11 +10,10 @@ export class ProductController {
         const newProduct = await this.productService.addProduct(dto);
         res.status(201).json(newProduct);
     }
-    async getAllProduct(req, res) { } //// ????????????????????????????? !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     async getProductById(req, res) {
         const { id } = req.params; // ?
         if (!id) {
-            res.status(400).json({ message: "Product not found" });
+            res.status(400).json({ message: 'Product not found' });
             return;
         }
         const foundProduct = await this.productService.getProductById(id);
@@ -23,7 +22,7 @@ export class ProductController {
     async getProductByArticle(req, res) {
         const idProduct = req.body;
         if (idProduct) {
-            res.status(400).json({ message: "Product not found" });
+            res.status(400).json({ message: 'Product not found' });
             return;
         }
         const foundProduct = await this.productService.getProductByArticle(idProduct);
@@ -32,7 +31,7 @@ export class ProductController {
     async updateProduct(req, res) {
         const { id } = req.params;
         if (!id) {
-            res.status(400).json({ message: "Product not found" });
+            res.status(400).json({ message: 'Product not found' });
             return;
         }
         const dto = req.body;
@@ -43,7 +42,7 @@ export class ProductController {
         const id = req.body;
         const success = await this.productService.deleteProduct(id);
         if (!success) {
-            res.status(404).json({ message: "Product not found" });
+            res.status(404).json({ message: 'Product not found' });
         }
         res.status(204).json(success);
     }

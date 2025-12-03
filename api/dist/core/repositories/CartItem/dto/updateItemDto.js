@@ -7,12 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsNumber, Min } from "class-validator";
+import { IsNumber, Min } from 'class-validator';
 export class UpdateItemDto {
 }
 __decorate([
-    IsNumber({}, { message: "количество должно быть числом" }),
-    Min(1, { message: "Минимальное количество: 1" }),
+    IsNumber({}, { message: 'количество должно быть числом' }),
+    Min(1, { message: 'Минимальное количество: 1' }),
     __metadata("design:type", Number)
 ], UpdateItemDto.prototype, "quantity", void 0);
 //# sourceMappingURL=updateItemDto.js.map

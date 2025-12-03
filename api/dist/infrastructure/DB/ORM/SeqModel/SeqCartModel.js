@@ -1,5 +1,5 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model } from "sequelize";
+import sequelize from '../../db.js';
+import { DataTypes, Model } from 'sequelize';
 class SeqCart extends Model {
 }
 SeqCart.init({
@@ -14,7 +14,7 @@ SeqCart.init({
     },
 }, {
     sequelize,
-    tableName: "carts",
+    tableName: 'carts',
     timestamps: true,
 });
 export default SeqCart;

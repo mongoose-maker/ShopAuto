@@ -1,4 +1,4 @@
-import { Manufacturer } from "../../models/Manufacturer/Manufacturer.js";
+import { Manufacturer } from '../../models/Manufacturer/Manufacturer.js';
 export interface ManufacturerRepository {
     addManuf(manufacturer: Manufacturer): Promise<Manufacturer>;
     getManufById(id: string): Promise<Manufacturer | null>;
@@ -7,8 +7,7 @@ export interface ManufacturerRepository {
         name?: string;
         descriptionManufacturer?: string;
     }): Promise<Manufacturer | null>;
-    updateListProductByManuf(manufacturerId: string, // id: string
-    productIds: string[]): Promise<Manufacturer | null>;
+    updateListProductByManuf(manufacturerId: string, productIds: string[]): Promise<Manufacturer | null>;
     deleteManuf(id: string): Promise<boolean>;
 }
 //# sourceMappingURL=ManufacturerRepository.d.ts.map

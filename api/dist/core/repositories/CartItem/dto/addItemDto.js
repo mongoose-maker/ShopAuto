@@ -7,22 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsNotEmpty, IsNumber, IsUUID, Min } from "class-validator";
+import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator';
 export class AddItemDto {
 }
 __decorate([
-    IsUUID("4", { message: "ID корзины должен быть валидным UUID" }),
-    IsNotEmpty({ message: "ID корзины не может быть пустым" }),
+    IsUUID('4', { message: 'ID корзины должен быть валидным UUID' }),
+    IsNotEmpty({ message: 'ID корзины не может быть пустым' }),
     __metadata("design:type", String)
 ], AddItemDto.prototype, "cartId", void 0);
 __decorate([
-    IsUUID("4", { message: "ID товара должен быть валидным UUID" }),
-    IsNotEmpty({ message: "ID товара не может быть пустым" }),
+    IsUUID('4', { message: 'ID товара должен быть валидным UUID' }),
+    IsNotEmpty({ message: 'ID товара не может быть пустым' }),
     __metadata("design:type", String)
 ], AddItemDto.prototype, "productId", void 0);
 __decorate([
-    IsNumber({}, { message: "количество должно быть числом" }),
-    Min(1, { message: "Минимальное количество: 1" }),
+    IsNumber({}, { message: 'количество должно быть числом' }),
+    Min(1, { message: 'Минимальное количество: 1' }),
     __metadata("design:type", Number)
 ], AddItemDto.prototype, "quantity", void 0);
 //# sourceMappingURL=addItemDto.js.map

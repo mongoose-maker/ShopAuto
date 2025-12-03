@@ -1,6 +1,6 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model, } from "sequelize";
-import SeqProduct from "./SeqProductModel.js";
+import sequelize from '../../db.js';
+import { DataTypes, Model, } from 'sequelize';
+import SeqProduct from './SeqProductModel.js';
 class SeqCategory extends Model {
 }
 SeqCategory.init({
@@ -15,7 +15,7 @@ SeqCategory.init({
     },
 }, {
     sequelize,
-    tableName: "categories",
+    tableName: 'categories',
     timestamps: true,
 });
 export default SeqCategory;

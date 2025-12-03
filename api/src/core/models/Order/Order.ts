@@ -1,12 +1,6 @@
-import { OrderItem } from "./OrderItem.js";
+import { OrderItem } from './OrderItem.js';
 
-export const ORDER_STATUSES = [
-  "created",
-  "paid",
-  "processing",
-  "sent",
-  "delivered",
-] as const;
+export const ORDER_STATUSES = ['created', 'paid', 'processing', 'sent', 'delivered'] as const;
 
 export type OrderStatus = (typeof ORDER_STATUSES)[number]; // ?
 export class Order {
@@ -17,7 +11,7 @@ export class Order {
     readonly status: OrderStatus,
     readonly totalAmount: number,
     readonly shippingAddressId?: string,
-    readonly cartId?: string
+    readonly cartId?: string,
   ) {}
 } // ?
 

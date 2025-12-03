@@ -1,5 +1,5 @@
-import { User } from "../../models/User/User.js";
-import { UpdateUserDto } from "./dto/updateUserDto.js";
+import { User } from '../../models/User/User.js';
+import { UpdateUserDto } from './dto/updateUserDto.js';
 
 export interface UserRepository {
   createUser(user: User): Promise<User | null>;

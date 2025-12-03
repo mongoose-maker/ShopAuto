@@ -1,5 +1,5 @@
-import type { CartItemRepository } from "../../../../core/repositories/CartItem/CartItemRepository.js";
-import { CartItem } from "../../../../core/models/Cart/CartItem.js";
+import type { CartItemRepository } from '../../../../core/repositories/CartItem/CartItemRepository.js';
+import { CartItem } from '../../../../core/models/Cart/CartItem.js';
 export declare class SeqCartItemRepository implements CartItemRepository {
     addItem(item: CartItem): Promise<CartItem>;
     updateItem(cartId: string, productId: string, quantity: number): Promise<CartItem | null>;

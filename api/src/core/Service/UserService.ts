@@ -1,21 +1,16 @@
-import { User } from "../models/User/User.js";
+import { User } from '../models/User/User.js';
 
-import { AddUserDto } from "../repositories/UserRepository/dto/addUserDto.js";
-import { UpdateUserDto } from "../repositories/UserRepository/dto/updateUserDto.js";
-import type { UserRepository } from "../repositories/UserRepository/UserRepository.js";
-import bcrypt from "bcrypt";
+import { AddUserDto } from '../repositories/UserRepository/dto/addUserDto.js';
+import { UpdateUserDto } from '../repositories/UserRepository/dto/updateUserDto.js';
+import type { UserRepository } from '../repositories/UserRepository/UserRepository.js';
+import bcrypt from 'bcrypt';
 
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async createUser(dto: AddUserDto): Promise<User | null> {
     const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const userToCreate = new User(
-      undefined,
-      dto.name,
-      dto.email,
-      hashedPassword
-    ); // а как сделать так чтобы при создании аккаунта пользовать мог указывать либо name либо email?
+    const userToCreate = new User(undefined, dto.name, dto.email, hashedPassword);
     const createdUser = await this.userRepository.createUser(userToCreate);
     return createdUser;
   }

@@ -1,4 +1,4 @@
-import { Model, type Optional } from "sequelize";
+import { Model, type Optional } from 'sequelize';
 export interface SeqAddressAttributes {
     id: string | undefined;
     userId: string;
@@ -9,7 +9,7 @@ export interface SeqAddressAttributes {
     numberOfApartment: number;
     postcode: number;
 }
-interface SeqAddressCreationAttributes extends Optional<SeqAddressAttributes, "id"> {
+interface SeqAddressCreationAttributes extends Optional<SeqAddressAttributes, 'id'> {
 }
 declare class SeqAddress extends Model<SeqAddressAttributes, SeqAddressCreationAttributes> implements SeqAddressAttributes {
     id: string | undefined;

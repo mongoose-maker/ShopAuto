@@ -1,4 +1,4 @@
-import { Product } from "../Product/Product.js";
+import { Product } from '../Product/Product.js';
 
 export class CartItem {
   constructor(
@@ -6,6 +6,6 @@ export class CartItem {
     readonly cartId: string,
     readonly productId: string,
     readonly quantity: number,
-    readonly product?: Product
+    readonly product?: Product,
   ) {}
 }

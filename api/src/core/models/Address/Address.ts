@@ -7,7 +7,8 @@ export class Address {
     readonly street: string,
     readonly houseNumber: number,
     readonly numberOfApartment: number,
-    readonly postcode: number
-  ) //isDefault: boolean
-  {}
+    readonly postcode: number,
+  ) {
+    //isDefault: boolean
+  }
 }

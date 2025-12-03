@@ -1,7 +1,7 @@
-import sequelize from "../../db.js";
-import { Model, DataTypes } from "sequelize";
-import SeqOrder from "./SeqOrderModel.js";
-import SeqProduct from "./SeqProductModel.js";
+import sequelize from '../../db.js';
+import { Model, DataTypes } from 'sequelize';
+import SeqOrder from './SeqOrderModel.js';
+import SeqProduct from './SeqProductModel.js';
 class SeqOrderItem extends Model {
 }
 SeqOrderItem.init({
@@ -14,8 +14,8 @@ SeqOrderItem.init({
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: "orders",
-            key: "id",
+            model: 'orders',
+            key: 'id',
         },
     },
     productId: {
@@ -45,14 +45,14 @@ SeqOrderItem.init({
     },
 }, {
     sequelize,
-    tableName: "orderItems",
+    tableName: 'orderItems',
     timestamps: true,
     indexes: [
         {
-            fields: ["orderId"],
+            fields: ['orderId'],
         },
         {
-            fields: ["productId"],
+            fields: ['productId'],
         },
     ],
 });

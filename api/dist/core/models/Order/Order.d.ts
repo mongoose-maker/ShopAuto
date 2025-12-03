@@ -1,4 +1,4 @@
-import { OrderItem } from "./OrderItem.js";
+import { OrderItem } from './OrderItem.js';
 export declare const ORDER_STATUSES: readonly ["created", "paid", "processing", "sent", "delivered"];
 export type OrderStatus = (typeof ORDER_STATUSES)[number];
 export declare class Order {

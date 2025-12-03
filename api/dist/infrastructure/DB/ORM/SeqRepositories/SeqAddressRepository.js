@@ -1,11 +1,10 @@
-import SeqAddress from "../SeqModel/SeqAddressModel.js";
-import { AddressMapper } from "../../Mapper/MapperAddress.js";
-import { Address } from "../../../../core/models/Address/Address.js";
+import SeqAddress from '../SeqModel/SeqAddressModel.js';
+import { AddressMapper } from '../../Mapper/MapperAddress.js';
+import { Address } from '../../../../core/models/Address/Address.js';
 export class SeqAddressRepository {
     async addAddress(address) {
         const addressData = AddressMapper.toPersistence(address);
         const createdAddress = await SeqAddress.create(addressData);
-        // ✅ Возвращаем созданный адрес
         return AddressMapper.toDomain(createdAddress.get({ plain: true }));
     }
     async getAddressById(id) {
@@ -29,15 +28,11 @@ export class SeqAddressRepository {
         if (!existingAddress) {
             return null;
         }
-        // ✅ Фильтруем undefined значения
         const dataToUpdate = AddressMapper.toPersistence(address);
         const cleanData = Object.fromEntries(Object.entries(dataToUpdate).filter(([_, value]) => value !== undefined));
         await existingAddress.update(cleanData);
-        // ✅ Возвращаем обновлённый адрес
         const updatedAddress = await SeqAddress.findByPk(id);
-        return updatedAddress
-            ? AddressMapper.toDomain(updatedAddress.get({ plain: true }))
-            : null;
+        return updatedAddress ? AddressMapper.toDomain(updatedAddress.get({ plain: true })) : null;
     }
     async deleteAddress(id) {
         const result = await SeqAddress.destroy({ where: { id } });

@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import sequelize from "../../db.js";
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../../db.js';
 class SeqAddress extends Model {
 }
 SeqAddress.init({
@@ -12,15 +12,15 @@ SeqAddress.init({
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: "users", // ✅ Ссылка на таблицу users
-            key: "id",
+            model: 'users',
+            key: 'id',
         },
     },
     country: {
         type: DataTypes.STRING(50),
-        allowNull: false, // ✅ NOT NULL
+        allowNull: false,
         validate: {
-            len: [2, 50], // ✅ Валидация длины
+            len: [2, 50],
         },
     },
     city: {
@@ -47,7 +47,7 @@ SeqAddress.init({
     },
     numberOfApartment: {
         type: DataTypes.INTEGER,
-        allowNull: true, // ✅ Может быть null (для частных домов)
+        allowNull: true,
         validate: {
             min: 1,
             max: 9999,
@@ -63,12 +63,11 @@ SeqAddress.init({
     },
 }, {
     sequelize,
-    tableName: "addresses",
+    tableName: 'addresses',
     timestamps: true,
     indexes: [
-        // ✅ Индекс для быстрого поиска адресов пользователя
         {
-            fields: ["userId"],
+            fields: ['userId'],
         },
     ],
 });

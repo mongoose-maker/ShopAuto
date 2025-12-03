@@ -1,6 +1,6 @@
-import { plainToInstance, type ClassConstructor } from "class-transformer";
-import { validate } from "class-validator";
-import type { NextFunction, Request, Response } from "express";
+import { plainToInstance, type ClassConstructor } from 'class-transformer';
+import { validate } from 'class-validator';
+import type { NextFunction, Request, Response } from 'express';
 
 export function validateDto(dtoClass: ClassConstructor<any>) {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -9,8 +9,8 @@ export function validateDto(dtoClass: ClassConstructor<any>) {
 
     if (errors.length > 0) {
       return res.status(400).json({
-        message: "Validation failed",
-        errors: errors.map((err) => ({
+        message: 'Validation failed',
+        errors: errors.map(err => ({
           property: err.property,
           constraints: err.constraints,
         })),

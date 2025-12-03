@@ -10,19 +10,19 @@ export default class ApiError extends Error {
             Error.captureStackTrace(this, this.constructor);
         }
     }
-    static BadRequest(message = "BadRequest", options) {
+    static BadRequest(message = 'BadRequest', options) {
         return new ApiError(400, message, options);
     }
-    static Unauthorized(message = "Unauthorized", options) {
+    static Unauthorized(message = 'Unauthorized', options) {
         return new ApiError(401, message, options);
     }
-    static Forbidden(message = "Forbidden", options) {
+    static Forbidden(message = 'Forbidden', options) {
         return new ApiError(403, message, options);
     }
-    static NotFound(message = "Not Found", options) {
+    static NotFound(message = 'Not Found', options) {
         return new ApiError(404, message, options);
     }
-    static Internal(message = "Internal", options) {
+    static Internal(message = 'Internal', options) {
         return new ApiError(500, message, options);
     }
 }

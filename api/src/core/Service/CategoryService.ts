@@ -1,18 +1,12 @@
-import { Category } from "../models/Category/Category.js";
-import type { CategoryRepository } from "../repositories/CategoryRepository/CategoryRepository.js";
-import type { AddCategoryDto } from "../repositories/CategoryRepository/dto/addCategoryDto.js";
-import type { UpdateCategoryDto } from "../repositories/CategoryRepository/dto/updateCategoryDto.js";
+import { Category } from '../models/Category/Category.js';
+import type { CategoryRepository } from '../repositories/CategoryRepository/CategoryRepository.js';
+import type { AddCategoryDto } from '../repositories/CategoryRepository/dto/addCategoryDto.js';
+import type { UpdateCategoryDto } from '../repositories/CategoryRepository/dto/updateCategoryDto.js';
 
 export class CategoryService {
   constructor(private readonly categoryRepository: CategoryRepository) {}
-
   async addCategory(dto: AddCategoryDto): Promise<Category> {
-    // ✅ Исправил синтаксис
-    const category = new Category(
-      undefined,
-      dto.name
-      // ✅ products убрал - это будет через связи
-    );
+    const category = new Category(undefined, dto.name);
     const createdCategory = await this.categoryRepository.addCategory(category);
     return createdCategory;
   }
@@ -22,31 +16,21 @@ export class CategoryService {
   }
 
   async getAllCategories(): Promise<Category[]> {
-    // ✅ Исправил название
     return await this.categoryRepository.getAllCategories();
   }
 
-  async updateCategory(
-    id: string,
-    dto: UpdateCategoryDto
-  ): Promise<Category | null> {
+  async updateCategory(id: string, dto: UpdateCategoryDto): Promise<Category | null> {
     const existingCategory = await this.categoryRepository.getCategoryById(id);
     if (!existingCategory) {
       throw new Error(`Category with id ${id} not found`);
     }
 
-    const updatedCategory = new Category(
-      existingCategory.id,
-      dto.name ?? existingCategory.name
-    );
+    const updatedCategory = new Category(existingCategory.id, dto.name ?? existingCategory.name);
 
     return await this.categoryRepository.updateCategory(id, updatedCategory);
   }
 
-  async updateCategoryProducts(
-    id: string,
-    productIds: string[]
-  ): Promise<Category | null> {
+  async updateCategoryProducts(id: string, productIds: string[]): Promise<Category | null> {
     return await this.categoryRepository.updateCategoryProducts(id, productIds);
   }
 

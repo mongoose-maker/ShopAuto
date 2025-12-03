@@ -1,10 +1,10 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../../db.js";
-import SeqUser from "./SeqUserModel.js";
-import SeqCart from "./SeqCartModel.js";
-import SeqItem from "./SeqItemRepository.js";
-import SeqAddress from "./SeqAddressModel.js";
-import { ORDER_STATUSES } from "../../../../core/models/Order/Order.js";
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../../db.js';
+import SeqUser from './SeqUserModel.js';
+import SeqCart from './SeqCartModel.js';
+import SeqItem from './SeqItemRepository.js';
+import SeqAddress from './SeqAddressModel.js';
+import { ORDER_STATUSES } from '../../../../core/models/Order/Order.js';
 class SeqOrder extends Model {
 }
 SeqOrder.init({
@@ -20,7 +20,7 @@ SeqOrder.init({
     status: {
         type: DataTypes.ENUM(...ORDER_STATUSES),
         allowNull: false,
-        defaultValue: "created",
+        defaultValue: 'created',
     },
     totalAmount: {
         type: DataTypes.DECIMAL(10, 2),
@@ -39,14 +39,14 @@ SeqOrder.init({
     },
 }, {
     sequelize,
-    tableName: "orders",
+    tableName: 'orders',
     timestamps: true,
     indexes: [
         {
-            fields: ["userId"],
+            fields: ['userId'],
         },
         {
-            fields: ["status"],
+            fields: ['status'],
         },
     ],
 });

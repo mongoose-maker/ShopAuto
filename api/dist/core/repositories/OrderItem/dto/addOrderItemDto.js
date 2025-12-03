@@ -7,22 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsNotEmpty, IsNumber, IsUUID, Min } from "class-validator";
+import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator';
 export class AddOrderItemDto {
 }
 __decorate([
-    IsUUID("4", { message: "ID товара должен быть валидным UUID" }),
-    IsNotEmpty({ message: "ID товара не может быть пустым" }),
+    IsUUID('4', { message: 'ID товара должен быть валидным UUID' }),
+    IsNotEmpty({ message: 'ID товара не может быть пустым' }),
     __metadata("design:type", String)
 ], AddOrderItemDto.prototype, "productId", void 0);
 __decorate([
-    IsNumber({}, { message: "Количество должно быть числом" }),
-    Min(1, { message: "Минимальное количество товара: 1" }),
+    IsNumber({}, { message: 'Количество должно быть числом' }),
+    Min(1, { message: 'Минимальное количество товара: 1' }),
     __metadata("design:type", Number)
 ], AddOrderItemDto.prototype, "quantity", void 0);
 __decorate([
-    IsNumber({}, { message: "Цена должна быть числом" }),
-    Min(0, { message: "Цена не может быть отрицательной" }),
+    IsNumber({}, { message: 'Цена должна быть числом' }),
+    Min(0, { message: 'Цена не может быть отрицательной' }),
     __metadata("design:type", Number)
 ], AddOrderItemDto.prototype, "unitPrice", void 0);
 //# sourceMappingURL=addOrderItemDto.js.map

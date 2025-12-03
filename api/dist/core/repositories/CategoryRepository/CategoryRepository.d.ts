@@ -1,4 +1,4 @@
-import { Category } from "../../models/Category/Category.js";
+import { Category } from '../../models/Category/Category.js';
 export interface CategoryRepository {
     addCategory(category: Category): Promise<Category>;
     getCategoryById(id: string): Promise<Category | null>;

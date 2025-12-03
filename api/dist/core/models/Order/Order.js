@@ -1,11 +1,5 @@
-import { OrderItem } from "./OrderItem.js";
-export const ORDER_STATUSES = [
-    "created",
-    "paid",
-    "processing",
-    "sent",
-    "delivered",
-];
+import { OrderItem } from './OrderItem.js';
+export const ORDER_STATUSES = ['created', 'paid', 'processing', 'sent', 'delivered'];
 export class Order {
     constructor(id, userId, items, status, totalAmount, shippingAddressId, cartId) {
         this.id = id;

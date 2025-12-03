@@ -1,9 +1,9 @@
-import type { Request, Response } from "express";
+import type { Request, Response } from 'express';
 
-import { CategoryService } from "../../core/Service/CategoryService.js";
+import { CategoryService } from '../../core/Service/CategoryService.js';
 
-import { AddCategoryDto } from "../../core/repositories/CategoryRepository/dto/addCategoryDto.js";
-import { UpdateCategoryDto } from "../../core/repositories/CategoryRepository/dto/updateCategoryDto.js";
+import { AddCategoryDto } from '../../core/repositories/CategoryRepository/dto/addCategoryDto.js';
+import { UpdateCategoryDto } from '../../core/repositories/CategoryRepository/dto/updateCategoryDto.js';
 
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
@@ -13,7 +13,7 @@ export class CategoryController {
     res.status(201).json(newCat);
   }
 
-  async getAllCategory(req: Request, res: Response): Promise<void> {
+  async getAllCategory(_req: Request, res: Response): Promise<void> {
     const allCategories = await this.categoryService.getAllCategories();
     res.status(201).json(allCategories);
   }
@@ -21,7 +21,7 @@ export class CategoryController {
   async getCategoryById(req: Request, res: Response): Promise<void> {
     const { id } = req.params; // ?
     if (!id) {
-      res.status(400).json({ message: "Category not found" });
+      res.status(400).json({ message: 'Category not found' });
       return;
     }
     const foundCategory = await this.categoryService.getCategoryById(id);
@@ -31,7 +31,7 @@ export class CategoryController {
   async updateCategory(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     if (!id) {
-      res.status(400).json({ message: "Manufacturer not found" });
+      res.status(400).json({ message: 'Manufacturer not found' });
       return;
     }
     const dto: UpdateCategoryDto = req.body;
@@ -43,7 +43,7 @@ export class CategoryController {
     const id: string = req.body;
     const success = await this.categoryService.deleteCategory(id);
     if (!success) {
-      res.status(404).json({ message: "Category not found" });
+      res.status(404).json({ message: 'Category not found' });
     }
     res.status(204).json(success);
   }

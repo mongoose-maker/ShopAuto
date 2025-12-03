@@ -1,12 +1,12 @@
-import sequelize from "../../db.js";
+import sequelize from '../../db.js';
 import {
   DataTypes,
   Model,
   type HasManyAddAssociationMixin,
   type HasManyGetAssociationsMixin,
   type HasManySetAssociationsMixin,
-} from "sequelize";
-import SeqProduct from "./SeqProductModel.js";
+} from 'sequelize';
+import SeqProduct from './SeqProductModel.js';
 
 export interface SeqManufacturerAttributes {
   id: undefined | string;
@@ -47,9 +47,9 @@ SeqManufacturer.init(
   },
   {
     sequelize,
-    tableName: "manufacturers",
+    tableName: 'manufacturers',
     timestamps: true,
-  }
+  },
 );
 
 export default SeqManufacturer;

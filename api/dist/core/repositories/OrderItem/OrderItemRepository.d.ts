@@ -1,4 +1,4 @@
-import type { OrderItem } from "../../models/Order/OrderItem.js";
+import type { OrderItem } from '../../models/Order/OrderItem.js';
 export interface OrderItemRepository {
     createOrderItem(item: OrderItem): Promise<OrderItem>;
     findById(id: string): Promise<OrderItem | null>;

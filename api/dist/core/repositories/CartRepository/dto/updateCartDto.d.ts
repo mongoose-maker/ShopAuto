@@ -1,4 +1,4 @@
-import { UpdateItemDto } from "../../CartItem/dto/updateItemDto.js";
+import { UpdateItemDto } from '../../CartItem/dto/updateItemDto.js';
 export declare class UpdateCartDto {
     readonly items?: UpdateItemDto[];
 }

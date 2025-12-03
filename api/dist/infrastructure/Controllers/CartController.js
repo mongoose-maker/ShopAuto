@@ -1,4 +1,4 @@
-import { CartService } from "../../core/Service/CartService.js";
+import { CartService } from '../../core/Service/CartService.js';
 export class CartController {
     constructor(cartService) {
         this.cartService = cartService;
@@ -7,12 +7,12 @@ export class CartController {
         try {
             const { userId } = req.params;
             if (!userId) {
-                res.status(400).json({ message: "User ID is required" });
+                res.status(400).json({ message: 'User ID is required' });
                 return;
             }
             const cart = await this.cartService.getCartByUserId(userId);
             if (!cart) {
-                res.status(404).json({ message: "Cart not found" });
+                res.status(404).json({ message: 'Cart not found' });
                 return;
             }
             res.status(200).json(cart);
@@ -25,13 +25,13 @@ export class CartController {
         try {
             const { userId } = req.params;
             if (!userId) {
-                res.status(400).json({ message: "User ID is required" });
+                res.status(400).json({ message: 'User ID is required' });
                 return;
             }
             const { productId, quantity } = req.body;
             if (!productId || !quantity) {
                 res.status(400).json({
-                    message: "Product ID and quantity are required",
+                    message: 'Product ID and quantity are required',
                 });
                 return;
             }
@@ -47,13 +47,13 @@ export class CartController {
             const { userId, itemId } = req.params;
             if (!userId || !itemId) {
                 res.status(400).json({
-                    message: "User ID and Item ID are required",
+                    message: 'User ID and Item ID are required',
                 });
                 return;
             }
             const { quantity } = req.body;
             if (!quantity) {
-                res.status(400).json({ message: "Quantity is required" });
+                res.status(400).json({ message: 'Quantity is required' });
                 return;
             }
             const cart = await this.cartService.updateItemInCart(userId, itemId, quantity);
@@ -68,7 +68,7 @@ export class CartController {
             const { userId, itemId } = req.params;
             if (!userId || !itemId) {
                 res.status(400).json({
-                    message: "User ID and Item ID are required",
+                    message: 'User ID and Item ID are required',
                 });
                 return;
             }
@@ -83,7 +83,7 @@ export class CartController {
         try {
             const { userId } = req.params;
             if (!userId) {
-                res.status(400).json({ message: "User ID is required" });
+                res.status(400).json({ message: 'User ID is required' });
                 return;
             }
             await this.cartService.clearCart(userId);

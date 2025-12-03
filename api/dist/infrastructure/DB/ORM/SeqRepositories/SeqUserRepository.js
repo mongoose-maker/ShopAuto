@@ -1,7 +1,7 @@
-import SeqUser from "../SeqModel/SeqUserModel.js";
-import { UserMapper } from "../../Mapper/MapperUser.js";
-import { User } from "../../../../core/models/User/User.js";
-import { UpdateUserDto } from "../../../../core/repositories/UserRepository/dto/updateUserDto.js"; //
+import SeqUser from '../SeqModel/SeqUserModel.js';
+import { UserMapper } from '../../Mapper/MapperUser.js';
+import { User } from '../../../../core/models/User/User.js';
+import { UpdateUserDto } from '../../../../core/repositories/UserRepository/dto/updateUserDto.js'; //
 export class SeqUserRepository {
     async createUser(user) {
         const userData = UserMapper.toPersistence(user);
@@ -10,15 +10,15 @@ export class SeqUserRepository {
     }
     async getUserById(id) {
         const foundUser = await SeqUser.findByPk(id, {
-            attributes: { exclude: ["password"] },
+            attributes: { exclude: ['password'] },
             raw: true,
         });
         if (!foundUser) {
             return null;
         }
-        // При raw: true результат уже plain object, не нужно вызывать .get()
         return UserMapper.toDomain(foundUser);
     }
+    //?
     async updateDataUser(id, dto) {
         const userToUpdate = await SeqUser.findByPk(id);
         if (!userToUpdate) {

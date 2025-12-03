@@ -7,19 +7,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
 export class UpdateInfoManufacturerDto {
 }
 __decorate([
     IsOptional(),
-    IsString({ message: "name must be a string" }),
-    IsNotEmpty({ message: "The name it shouldn`t be is empty" }),
-    MinLength(2, { message: " Min length must be more 2 symbols" }),
+    IsString({ message: 'name must be a string' }),
+    IsNotEmpty({ message: 'The name it shouldn`t be is empty' }),
+    MinLength(2, { message: ' Min length must be more 2 symbols' }),
     __metadata("design:type", Object)
 ], UpdateInfoManufacturerDto.prototype, "name", void 0);
 __decorate([
     IsOptional(),
-    IsString({ message: "description must be a string" }),
+    IsString({ message: 'description must be a string' }),
     __metadata("design:type", Object)
 ], UpdateInfoManufacturerDto.prototype, "descriptionManufacturer", void 0);
 //# sourceMappingURL=updateInfoManufRepo.js.map

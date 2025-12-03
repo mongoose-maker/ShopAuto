@@ -1,4 +1,4 @@
-import { Cart } from "../../models/Cart/Cart.js";
+import { Cart } from '../../models/Cart/Cart.js';
 
 export interface CartRepository {
   getByUserId(userId: string): Promise<Cart | null>;

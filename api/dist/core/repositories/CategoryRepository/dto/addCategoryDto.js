@@ -7,13 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsNotEmpty, IsString, MinLength } from "class-validator";
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 export class AddCategoryDto {
 }
 __decorate([
-    IsString({ message: "название должно быть строкой" }),
-    IsNotEmpty({ message: "название не должно быть пустой строкой" }),
-    MinLength(2, { message: "Минимальное кол-во символов: 2 " }),
+    IsString({ message: 'название должно быть строкой' }),
+    IsNotEmpty({ message: 'название не должно быть пустой строкой' }),
+    MinLength(2, { message: 'Минимальное кол-во символов: 2 ' }),
     __metadata("design:type", String)
 ], AddCategoryDto.prototype, "name", void 0);
 //# sourceMappingURL=addCategoryDto.js.map

@@ -1,35 +1,26 @@
-import { CartItem } from "../models/Cart/CartItem.js";
-import type { CartItemRepository } from "../repositories/CartItem/CartItemRepository.js";
-import type { AddItemDto } from "../repositories/CartItem/dto/addItemDto.js";
-import type { UpdateItemDto } from "../repositories/CartItem/dto/updateItemDto.js";
-import type { ProductRepository } from "../repositories/ProductRepository/ProductRepository.js";
+import { CartItem } from '../models/Cart/CartItem.js';
+import type { CartItemRepository } from '../repositories/CartItem/CartItemRepository.js';
+import type { AddItemDto } from '../repositories/CartItem/dto/addItemDto.js';
+import type { UpdateItemDto } from '../repositories/CartItem/dto/updateItemDto.js';
+import type { ProductRepository } from '../repositories/ProductRepository/ProductRepository.js';
 
 export class CartItemService {
   constructor(
     private readonly cartItemRepository: CartItemRepository,
-    private readonly productRepository: ProductRepository
+    private readonly productRepository: ProductRepository,
   ) {}
 
   async addItem(dto: AddItemDto): Promise<CartItem> {
-    // Проверить существование продукта
     const product = await this.productRepository.getProductById(dto.productId);
     if (!product) {
       throw new Error(`Product with id ${dto.productId} not found`);
     }
 
-    // Проверить доступность продукта
     if (!product.availability) {
       throw new Error(`Product with id ${dto.productId} is not available`);
     }
 
-    // Создать элемент корзины
-    const cartItem = new CartItem(
-      undefined,
-      dto.cartId,
-      dto.productId,
-      dto.quantity,
-      product
-    );
+    const cartItem = new CartItem(undefined, dto.cartId, dto.productId, dto.quantity, product);
 
     return await this.cartItemRepository.addItem(cartItem);
   }
@@ -37,18 +28,14 @@ export class CartItemService {
   async updateItem(
     cartId: string,
     productId: string,
-    dto: UpdateItemDto
+    dto: UpdateItemDto,
   ): Promise<CartItem | null> {
     if (dto.quantity !== undefined && dto.quantity <= 0) {
-      throw new Error("Quantity must be greater than 0");
+      throw new Error('Quantity must be greater than 0');
     }
 
     const quantity = dto.quantity ?? 1;
-    return await this.cartItemRepository.updateItem(
-      cartId,
-      productId,
-      quantity
-    );
+    return await this.cartItemRepository.updateItem(cartId, productId, quantity);
   }
 
   async getItemList(cartId: string): Promise<CartItem[] | null> {

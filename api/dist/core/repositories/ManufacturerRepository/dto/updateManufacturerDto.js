@@ -7,12 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsString, IsArray } from "class-validator";
+import { IsString, IsArray } from 'class-validator';
 export class UpdateManufacturerDto {
 }
 __decorate([
     IsArray(),
-    IsString({ each: true, message: "Каждый ID продукта должен быть строкой" }),
+    IsString({ each: true, message: 'Каждый ID продукта должен быть строкой' }),
     __metadata("design:type", Object)
 ], UpdateManufacturerDto.prototype, "productsIds", void 0);
 //# sourceMappingURL=updateManufacturerDto.js.map

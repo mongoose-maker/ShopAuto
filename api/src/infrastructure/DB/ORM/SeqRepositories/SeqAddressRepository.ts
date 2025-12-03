@@ -1,14 +1,13 @@
-import type { AddressRepository } from "../../../../core/repositories/AddressRepository/AddressRepository.js";
-import SeqAddress from "../SeqModel/SeqAddressModel.js";
-import { AddressMapper } from "../../Mapper/MapperAddress.js";
-import { Address } from "../../../../core/models/Address/Address.js";
+import type { AddressRepository } from '../../../../core/repositories/AddressRepository/AddressRepository.js';
+import SeqAddress from '../SeqModel/SeqAddressModel.js';
+import { AddressMapper } from '../../Mapper/MapperAddress.js';
+import { Address } from '../../../../core/models/Address/Address.js';
 
 export class SeqAddressRepository implements AddressRepository {
   async addAddress(address: Address): Promise<Address> {
     const addressData = AddressMapper.toPersistence(address);
     const createdAddress = await SeqAddress.create(addressData);
 
-    // ✅ Возвращаем созданный адрес
     return AddressMapper.toDomain(createdAddress.get({ plain: true }));
   }
 
@@ -41,19 +40,15 @@ export class SeqAddressRepository implements AddressRepository {
       return null;
     }
 
-    // ✅ Фильтруем undefined значения
     const dataToUpdate = AddressMapper.toPersistence(address);
     const cleanData = Object.fromEntries(
-      Object.entries(dataToUpdate).filter(([_, value]) => value !== undefined)
+      Object.entries(dataToUpdate).filter(([_, value]) => value !== undefined),
     );
 
     await existingAddress.update(cleanData);
 
-    // ✅ Возвращаем обновлённый адрес
     const updatedAddress = await SeqAddress.findByPk(id);
-    return updatedAddress
-      ? AddressMapper.toDomain(updatedAddress.get({ plain: true }))
-      : null;
+    return updatedAddress ? AddressMapper.toDomain(updatedAddress.get({ plain: true })) : null;
   }
 
   async deleteAddress(id: string): Promise<boolean> {

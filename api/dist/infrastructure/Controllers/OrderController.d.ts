@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
-import { OrderService } from "../../core/Service/OrderService.js";
+import type { Request, Response } from 'express';
+import { OrderService } from '../../core/Service/OrderService.js';
 export declare class OrderController {
     private readonly orderService;
     constructor(orderService: OrderService);

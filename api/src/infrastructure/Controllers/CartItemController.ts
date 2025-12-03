@@ -1,7 +1,7 @@
-import type { Request, Response } from "express";
-import { CartItemService } from "../../core/Service/CartItemService.js";
-import { AddItemDto } from "../../core/repositories/CartItem/dto/addItemDto.js";
-import { UpdateItemDto } from "../../core/repositories/CartItem/dto/updateItemDto.js";
+import type { Request, Response } from 'express';
+import { CartItemService } from '../../core/Service/CartItemService.js';
+import { AddItemDto } from '../../core/repositories/CartItem/dto/addItemDto.js';
+import { UpdateItemDto } from '../../core/repositories/CartItem/dto/updateItemDto.js';
 
 export class CartItemController {
   constructor(private readonly cartItemService: CartItemService) {}
@@ -21,18 +21,14 @@ export class CartItemController {
       const { cartId, productId } = req.params;
       if (!cartId || !productId) {
         res.status(400).json({
-          message: "Cart ID and Product ID are required",
+          message: 'Cart ID and Product ID are required',
         });
         return;
       }
       const dto: UpdateItemDto = req.body;
-      const updatedItem = await this.cartItemService.updateItem(
-        cartId,
-        productId,
-        dto
-      );
+      const updatedItem = await this.cartItemService.updateItem(cartId, productId, dto);
       if (!updatedItem) {
-        res.status(404).json({ message: "Cart item not found" });
+        res.status(404).json({ message: 'Cart item not found' });
         return;
       }
       res.status(200).json(updatedItem);
@@ -45,12 +41,12 @@ export class CartItemController {
     try {
       const { cartId } = req.params;
       if (!cartId) {
-        res.status(400).json({ message: "Cart ID is required" });
+        res.status(400).json({ message: 'Cart ID is required' });
         return;
       }
       const items = await this.cartItemService.getItemList(cartId);
       if (!items) {
-        res.status(404).json({ message: "Cart not found" });
+        res.status(404).json({ message: 'Cart not found' });
         return;
       }
       res.status(200).json(items);
@@ -64,13 +60,13 @@ export class CartItemController {
       const { cartId, productId } = req.params;
       if (!cartId || !productId) {
         res.status(400).json({
-          message: "Cart ID and Product ID are required",
+          message: 'Cart ID and Product ID are required',
         });
         return;
       }
       const success = await this.cartItemService.removeItem(cartId, productId);
       if (!success) {
-        res.status(404).json({ message: "Cart item not found" });
+        res.status(404).json({ message: 'Cart item not found' });
         return;
       }
       res.status(204).send();
@@ -83,12 +79,12 @@ export class CartItemController {
     try {
       const { cartId } = req.params;
       if (!cartId) {
-        res.status(400).json({ message: "Cart ID is required" });
+        res.status(400).json({ message: 'Cart ID is required' });
         return;
       }
       const success = await this.cartItemService.clearCart(cartId);
       if (!success) {
-        res.status(404).json({ message: "Cart not found" });
+        res.status(404).json({ message: 'Cart not found' });
         return;
       }
       res.status(204).send();

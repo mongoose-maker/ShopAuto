@@ -1,4 +1,4 @@
-import { Product } from "../Product/Product.js";
+import { Product } from '../Product/Product.js';
 export declare class CartItem {
     readonly id: string | undefined;
     readonly cartId: string;

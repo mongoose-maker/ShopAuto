@@ -5,6 +5,6 @@ export class OrderItem {
     readonly productId: string,
     readonly quantity: number,
     readonly unitPrice: number,
-    readonly totalPrice: number
+    readonly totalPrice: number,
   ) {}
 }

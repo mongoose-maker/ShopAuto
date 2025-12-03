@@ -1,16 +1,15 @@
-import { Manufacturer } from "../../../../core/models/Manufacturer/Manufacturer.js";
-import { sanitizeDto } from "../../../Middleware/sanitizeDto.js";
-import { ManufacturerMapper, } from "../../Mapper/MapperManufacturer.js";
-import { SeqProduct, SeqManufacturer, } from "../../Associations/associations.js";
+import { Manufacturer } from '../../../../core/models/Manufacturer/Manufacturer.js';
+import { ManufacturerMapper, } from '../../Mapper/MapperManufacturer.js';
+import { SeqProduct, SeqManufacturer } from '../../Associations/associations.js';
 export class SeqManufacturerRepository {
     async addManuf(manufacturer) {
         const dataToCreate = ManufacturerMapper.toPersistence(manufacturer);
         const createdManuf = await SeqManufacturer.create(dataToCreate);
         const manufacturerWithProducts = await SeqManufacturer.findByPk(createdManuf.id, {
-            include: ["products"],
+            include: ['products'],
         });
         if (!manufacturerWithProducts) {
-            throw new Error("manufacturer not found after create");
+            throw new Error('manufacturer not found after create');
         }
         return ManufacturerMapper.toDomain(manufacturerWithProducts.get({
             plain: true,
@@ -25,9 +24,9 @@ export class SeqManufacturerRepository {
     }
     async getAllManuf() {
         const manufacturers = await SeqManufacturer.findAll({
-            include: ["products"],
+            include: ['products'],
         });
-        return manufacturers.map((manuf) => ManufacturerMapper.toDomain(manuf.get({ plain: true })));
+        return manufacturers.map(manuf => ManufacturerMapper.toDomain(manuf.get({ plain: true })));
     }
     async updateManufInfo(id, updates) {
         const manufacturer = await SeqManufacturer.findByPk(id);
@@ -47,7 +46,7 @@ export class SeqManufacturerRepository {
     }
     async updateListProductByManuf(manufacturerId, productIds) {
         const foundManufacturer = await SeqManufacturer.findByPk(manufacturerId, {
-            include: ["products"],
+            include: ['products'],
         });
         if (!foundManufacturer) {
             throw new Error(`Manufacturer with id ${manufacturerId} not found`);
@@ -59,7 +58,7 @@ export class SeqManufacturerRepository {
             await foundManufacturer.setProducts(products);
         }
         const updatedManufacturer = await SeqManufacturer.findByPk(manufacturerId, {
-            include: ["products"],
+            include: ['products'],
         });
         return updatedManufacturer
             ? ManufacturerMapper.toDomain(updatedManufacturer.get({ plain: true }))

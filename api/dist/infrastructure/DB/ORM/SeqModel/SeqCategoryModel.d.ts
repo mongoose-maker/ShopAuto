@@ -1,5 +1,5 @@
-import { Model, type HasManyAddAssociationMixin, type HasManyGetAssociationsMixin, type HasManySetAssociationsMixin } from "sequelize";
-import SeqProduct from "./SeqProductModel.js";
+import { Model, type HasManyAddAssociationMixin, type HasManyGetAssociationsMixin, type HasManySetAssociationsMixin } from 'sequelize';
+import SeqProduct from './SeqProductModel.js';
 export interface SeqCategoryAttributes {
     id?: string | undefined;
     name: string;

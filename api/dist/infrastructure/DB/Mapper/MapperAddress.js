@@ -1,4 +1,4 @@
-import { Address } from "../../../core/models/Address/Address.js";
+import { Address } from '../../../core/models/Address/Address.js';
 export class AddressMapper {
     static toDomain(raw) {
         return new Address(raw.id?.toString(), raw.userId, raw.country, raw.city, raw.street, raw.houseNumber, raw.numberOfApartment, raw.postcode);

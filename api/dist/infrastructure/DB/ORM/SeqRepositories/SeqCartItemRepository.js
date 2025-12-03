@@ -1,30 +1,27 @@
-import { CartItem } from "../../../../core/models/Cart/CartItem.js";
-import SeqItem from "../SeqModel/SeqItemRepository.js";
-import SeqProduct from "../SeqModel/SeqProductModel.js";
-import { ItemMapper } from "../../Mapper/MapperItem.js";
-import { ProductMapper, } from "../../Mapper/MapperProduct.js";
+import { CartItem } from '../../../../core/models/Cart/CartItem.js';
+import SeqItem from '../SeqModel/SeqItemRepository.js';
+import SeqProduct from '../SeqModel/SeqProductModel.js';
+import { ItemMapper } from '../../Mapper/MapperItem.js';
+import { ProductMapper } from '../../Mapper/MapperProduct.js';
 export class SeqCartItemRepository {
     async addItem(item) {
-        // Проверить существование продукта
         const product = await SeqProduct.findByPk(item.productId, {
-            include: ["manufacturer", "category"],
+            include: ['manufacturer', 'category'],
         });
         if (!product) {
             throw new Error(`Product with id ${item.productId} not found`);
         }
         const productDomain = ProductMapper.toDomain(product.get({ plain: true }));
-        // Проверить, есть ли уже такой товар в корзине
         const existingItem = await SeqItem.findOne({
             where: { cartId: item.cartId, productId: item.productId },
             include: [
                 {
                     model: SeqProduct,
-                    as: "product",
+                    as: 'product',
                 },
             ],
         });
         if (existingItem) {
-            // Обновить количество существующего товара
             await existingItem.update({
                 quantity: existingItem.quantity + item.quantity,
             });
@@ -32,57 +29,52 @@ export class SeqCartItemRepository {
                 include: [
                     {
                         model: SeqProduct,
-                        as: "product",
+                        as: 'product',
                     },
                 ],
             });
             if (!updatedItem) {
-                throw new Error("Item not found after update");
+                throw new Error('Item not found after update');
             }
             return ItemMapper.toDomain(updatedItem.get({ plain: true }));
         }
         else {
-            // Создать новый элемент корзины с продуктом
             const cartItemWithProduct = new CartItem(undefined, item.cartId, item.productId, item.quantity, productDomain);
             const itemData = ItemMapper.toPersistence(cartItemWithProduct);
             const createdItem = await SeqItem.create(itemData);
-            // Загрузить созданный элемент с продуктом
             const itemWithProduct = await SeqItem.findByPk(createdItem.id, {
                 include: [
                     {
                         model: SeqProduct,
-                        as: "product",
+                        as: 'product',
                     },
                 ],
             });
             if (!itemWithProduct) {
-                throw new Error("Item not found after creation");
+                throw new Error('Item not found after creation');
             }
             return ItemMapper.toDomain(itemWithProduct.get({ plain: true }));
         }
     }
     async updateItem(cartId, productId, quantity) {
-        // Найти элемент корзины
         const item = await SeqItem.findOne({
             where: { cartId, productId },
             include: [
                 {
                     model: SeqProduct,
-                    as: "product",
+                    as: 'product',
                 },
             ],
         });
         if (!item) {
             return null;
         }
-        // Обновить количество
         await item.update({ quantity });
-        // Загрузить обновленный элемент с продуктом
         const updatedItem = await SeqItem.findByPk(item.id, {
             include: [
                 {
                     model: SeqProduct,
-                    as: "product",
+                    as: 'product',
                 },
             ],
         });
@@ -97,11 +89,11 @@ export class SeqCartItemRepository {
             include: [
                 {
                     model: SeqProduct,
-                    as: "product",
+                    as: 'product',
                 },
             ],
         });
-        return items.map((item) => ItemMapper.toDomain(item.get({ plain: true })));
+        return items.map(item => ItemMapper.toDomain(item.get({ plain: true })));
     }
     async removeItem(cartId, productId) {
         const deleted = await SeqItem.destroy({

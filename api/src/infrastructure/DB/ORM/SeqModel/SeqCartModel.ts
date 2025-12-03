@@ -1,12 +1,12 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model, type Optional } from "sequelize";
+import sequelize from '../../db.js';
+import { DataTypes, Model, type Optional } from 'sequelize';
 
 export interface SeqCartAttributes {
   id: string;
   userId: string;
 }
 
-type SeqCartCreationAttributes = Optional<SeqCartAttributes, "id">;
+type SeqCartCreationAttributes = Optional<SeqCartAttributes, 'id'>;
 
 class SeqCart
   extends Model<SeqCartAttributes, SeqCartCreationAttributes>
@@ -30,9 +30,9 @@ SeqCart.init(
   },
   {
     sequelize,
-    tableName: "carts",
+    tableName: 'carts',
     timestamps: true,
-  }
+  },
 );
 
 export default SeqCart;

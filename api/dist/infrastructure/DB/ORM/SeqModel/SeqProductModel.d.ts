@@ -1,6 +1,6 @@
-import { Model, type Optional } from "sequelize";
-import SeqManufacturer from "./SeqManufacturerModel.js";
-import SeqCategory from "./SeqCategoryModel.js";
+import { Model, type Optional } from 'sequelize';
+import SeqManufacturer from './SeqManufacturerModel.js';
+import SeqCategory from './SeqCategoryModel.js';
 export interface SeqProductAttributes {
     id?: string;
     idProduct: string;
@@ -12,7 +12,7 @@ export interface SeqProductAttributes {
     availability: boolean;
     rating: number;
 }
-interface SeqProductCreationAttributes extends Optional<SeqProductAttributes, "id"> {
+interface SeqProductCreationAttributes extends Optional<SeqProductAttributes, 'id'> {
 }
 declare class SeqProduct extends Model<SeqProductAttributes, SeqProductCreationAttributes> implements SeqProductAttributes {
     id: string;

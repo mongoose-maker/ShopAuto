@@ -1,9 +1,9 @@
-import { Product } from "../models/Product/Product.js";
-import { AddProductDto } from "../repositories/ProductRepository/dto/addProductDto.js";
-import type { UpdateProductDto } from "../repositories/ProductRepository/dto/updateProductDto.js";
-import type { ProductRepository } from "../repositories/ProductRepository/ProductRepository.js";
-import type { ManufacturerRepository } from "../repositories/ManufacturerRepository/ManufacturerRepository.js";
-import type { CategoryRepository } from "../repositories/CategoryRepository/CategoryRepository.js";
+import { Product } from '../models/Product/Product.js';
+import { AddProductDto } from '../repositories/ProductRepository/dto/addProductDto.js';
+import type { UpdateProductDto } from '../repositories/ProductRepository/dto/updateProductDto.js';
+import type { ProductRepository } from '../repositories/ProductRepository/ProductRepository.js';
+import type { ManufacturerRepository } from '../repositories/ManufacturerRepository/ManufacturerRepository.js';
+import type { CategoryRepository } from '../repositories/CategoryRepository/CategoryRepository.js';
 export declare class ProductService {
     private readonly productRepository;
     private readonly manufacturerRepository;

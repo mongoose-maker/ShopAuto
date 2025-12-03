@@ -1,9 +1,9 @@
-import type { UserRepository } from "../../../../core/repositories/UserRepository/UserRepository.js";
-import SeqUser from "../SeqModel/SeqUserModel.js";
-import type { SeqUserAttributes } from "../SeqModel/SeqUserModel.js";
-import { UserMapper } from "../../Mapper/MapperUser.js";
-import { User } from "../../../../core/models/User/User.js";
-import { UpdateUserDto } from "../../../../core/repositories/UserRepository/dto/updateUserDto.js"; //
+import type { UserRepository } from '../../../../core/repositories/UserRepository/UserRepository.js';
+import SeqUser from '../SeqModel/SeqUserModel.js';
+import type { SeqUserAttributes } from '../SeqModel/SeqUserModel.js';
+import { UserMapper } from '../../Mapper/MapperUser.js';
+import { User } from '../../../../core/models/User/User.js';
+import { UpdateUserDto } from '../../../../core/repositories/UserRepository/dto/updateUserDto.js'; //
 
 export class SeqUserRepository implements UserRepository {
   async createUser(user: User): Promise<User | null> {
@@ -13,15 +13,16 @@ export class SeqUserRepository implements UserRepository {
   }
   async getUserById(id: string): Promise<User | null> {
     const foundUser = await SeqUser.findByPk(id, {
-      attributes: { exclude: ["password"] },
+      attributes: { exclude: ['password'] },
       raw: true,
     });
     if (!foundUser) {
       return null;
     }
-    // При raw: true результат уже plain object, не нужно вызывать .get()
+
     return UserMapper.toDomain(foundUser as SeqUserAttributes);
   }
+  //?
   async updateDataUser(id: string, dto: UpdateUserDto): Promise<User | null> {
     const userToUpdate = await SeqUser.findByPk(id);
     if (!userToUpdate) {

@@ -1,13 +1,10 @@
-import { Category } from "../models/Category/Category.js";
+import { Category } from '../models/Category/Category.js';
 export class CategoryService {
     constructor(categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
     async addCategory(dto) {
-        // ✅ Исправил синтаксис
-        const category = new Category(undefined, dto.name
-        // ✅ products убрал - это будет через связи
-        );
+        const category = new Category(undefined, dto.name);
         const createdCategory = await this.categoryRepository.addCategory(category);
         return createdCategory;
     }
@@ -15,7 +12,6 @@ export class CategoryService {
         return await this.categoryRepository.getCategoryById(id);
     }
     async getAllCategories() {
-        // ✅ Исправил название
         return await this.categoryRepository.getAllCategories();
     }
     async updateCategory(id, dto) {

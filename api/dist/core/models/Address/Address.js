@@ -8,6 +8,7 @@ export class Address {
         this.houseNumber = houseNumber;
         this.numberOfApartment = numberOfApartment;
         this.postcode = postcode;
+        //isDefault: boolean
     }
 }
 //# sourceMappingURL=Address.js.map

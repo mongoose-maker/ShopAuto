@@ -1,7 +1,7 @@
-import { Address } from "../models/Address/Address.js";
-import type { AddressRepository } from "../repositories/AddressRepository/AddressRepository.js";
-import type { AddAddressDto } from "../repositories/AddressRepository/dto/addAddressDto.js";
-import type { UpdateAddressDto } from "../repositories/AddressRepository/dto/updateAddressDto.js";
+import { Address } from '../models/Address/Address.js';
+import type { AddressRepository } from '../repositories/AddressRepository/AddressRepository.js';
+import type { AddAddressDto } from '../repositories/AddressRepository/dto/addAddressDto.js';
+import type { UpdateAddressDto } from '../repositories/AddressRepository/dto/updateAddressDto.js';
 
 export class AddressService {
   constructor(private readonly addressRepository: AddressRepository) {}
@@ -15,7 +15,7 @@ export class AddressService {
       dto.street,
       dto.houseNumber,
       dto.numberOfApartment ?? 0,
-      dto.postcode
+      dto.postcode,
     );
 
     return await this.addressRepository.addAddress(address);
@@ -29,10 +29,7 @@ export class AddressService {
     return await this.addressRepository.getUserAddress(userId);
   }
 
-  async updateAddress(
-    id: string,
-    dto: UpdateAddressDto
-  ): Promise<Address | null> {
+  async updateAddress(id: string, dto: UpdateAddressDto): Promise<Address | null> {
     const existingAddress = await this.addressRepository.getAddressById(id);
     if (!existingAddress) {
       throw new Error(`Address with id ${id} not found`);
@@ -46,7 +43,7 @@ export class AddressService {
       dto.street ?? existingAddress.street,
       dto.houseNumber ?? existingAddress.houseNumber,
       dto.numberOfApartment ?? existingAddress.numberOfApartment,
-      dto.postcode ?? existingAddress.postcode
+      dto.postcode ?? existingAddress.postcode,
     );
 
     return await this.addressRepository.updateAddress(id, updatedAddress);

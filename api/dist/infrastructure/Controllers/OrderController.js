@@ -1,6 +1,6 @@
-import { OrderService } from "../../core/Service/OrderService.js";
-import { AddOrderDto } from "../../core/repositories/OrderRepository/dto/addOrderDto.js";
-import { UpdateOrderDto } from "../../core/repositories/OrderRepository/dto/updateOrderDto.js";
+import { OrderService } from '../../core/Service/OrderService.js';
+import { AddOrderDto } from '../../core/repositories/OrderRepository/dto/addOrderDto.js';
+import { UpdateOrderDto } from '../../core/repositories/OrderRepository/dto/updateOrderDto.js';
 export class OrderController {
     constructor(orderService) {
         this.orderService = orderService;
@@ -19,12 +19,12 @@ export class OrderController {
         try {
             const { id } = req.params;
             if (!id) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             const order = await this.orderService.getOrderById(id);
             if (!order) {
-                res.status(404).json({ message: "Order not found" });
+                res.status(404).json({ message: 'Order not found' });
                 return;
             }
             res.status(200).json(order);
@@ -37,7 +37,7 @@ export class OrderController {
         try {
             const { userId } = req.params;
             if (!userId) {
-                res.status(400).json({ message: "User ID is required" });
+                res.status(400).json({ message: 'User ID is required' });
                 return;
             }
             const orders = await this.orderService.getOrdersByUserId(userId);
@@ -51,12 +51,12 @@ export class OrderController {
         try {
             const { id } = req.params;
             if (!id) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             const { status } = req.body;
             if (!status) {
-                res.status(400).json({ message: "Status is required" });
+                res.status(400).json({ message: 'Status is required' });
                 return;
             }
             const order = await this.orderService.updateOrderStatus(id, status);
@@ -70,13 +70,13 @@ export class OrderController {
         try {
             const { id } = req.params;
             if (!id) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             const dto = { ...req.body, orderId: id };
             const updatedOrder = await this.orderService.updateOrder(dto);
             if (!updatedOrder) {
-                res.status(404).json({ message: "Order not found" });
+                res.status(404).json({ message: 'Order not found' });
                 return;
             }
             res.status(200).json(updatedOrder);
@@ -89,7 +89,7 @@ export class OrderController {
         try {
             const { id } = req.params;
             if (!id) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             await this.orderService.deleteOrder(id);

@@ -1,5 +1,5 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model } from "sequelize";
+import sequelize from '../../db.js';
+import { DataTypes, Model } from 'sequelize';
 class SeqItem extends Model {
 }
 SeqItem.init({
@@ -26,7 +26,7 @@ SeqItem.init({
     },
 }, {
     sequelize,
-    tableName: "items",
+    tableName: 'items',
     timestamps: true,
 });
 export default SeqItem;

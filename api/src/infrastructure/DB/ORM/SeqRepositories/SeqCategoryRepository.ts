@@ -1,46 +1,38 @@
-import { Category } from "../../../../core/models/Category/Category.js";
+import { Category } from '../../../../core/models/Category/Category.js';
 
-import type { CategoryRepository } from "../../../../core/repositories/CategoryRepository/CategoryRepository.js";
+import type { CategoryRepository } from '../../../../core/repositories/CategoryRepository/CategoryRepository.js';
 
-import {
-  CategoryMapper,
-  type SeqCategoryWithProducts,
-} from "../../Mapper/MapperCategory.js";
+import { CategoryMapper, type SeqCategoryWithProducts } from '../../Mapper/MapperCategory.js';
 
-import { SeqProduct, SeqCategory } from "../../Associations/associations.js";
+import { SeqProduct, SeqCategory } from '../../Associations/associations.js';
 
 export class SeqCategoryRepository implements CategoryRepository {
   async addCategory(category: Category): Promise<Category> {
     const dataToCreate = CategoryMapper.toPersistence(category);
     const createdCategory = await SeqCategory.create(dataToCreate);
-    const categoryWithProducts = await SeqCategory.findByPk(
-      createdCategory.id,
-      {
-        include: ["products"],
-      }
-    );
+    const categoryWithProducts = await SeqCategory.findByPk(createdCategory.id, {
+      include: ['products'],
+    });
     if (!categoryWithProducts) {
-      throw new Error("category not found after create");
+      throw new Error('category not found after create');
     }
     return CategoryMapper.toDomain(
-      categoryWithProducts.get({ plain: true }) as SeqCategoryWithProducts
+      categoryWithProducts.get({ plain: true }) as SeqCategoryWithProducts,
     );
   }
 
   async getAllCategories(): Promise<Category[]> {
     const categories = await SeqCategory.findAll({
-      include: ["products"],
+      include: ['products'],
     });
-    return categories.map((cat) =>
-      CategoryMapper.toDomain(
-        cat.get({ plain: true }) as SeqCategoryWithProducts
-      )
+    return categories.map(cat =>
+      CategoryMapper.toDomain(cat.get({ plain: true }) as SeqCategoryWithProducts),
     );
   }
 
   async getCategoryById(id: string): Promise<Category | null> {
     const category = await SeqCategory.findByPk(id, {
-      include: ["products"],
+      include: ['products'],
     });
     if (!category) {
       return null;
@@ -48,10 +40,7 @@ export class SeqCategoryRepository implements CategoryRepository {
     return CategoryMapper.toDomain(category.get({ plain: true }));
   }
 
-  async updateCategory(
-    id: string,
-    category: Category
-  ): Promise<Category | null> {
+  async updateCategory(id: string, category: Category): Promise<Category | null> {
     const foundCategory = await SeqCategory.findByPk(id);
     if (!foundCategory) {
       return null;
@@ -62,17 +51,12 @@ export class SeqCategoryRepository implements CategoryRepository {
     });
 
     const updatedCategory = await SeqCategory.findByPk(id);
-    return updatedCategory
-      ? CategoryMapper.toDomain(updatedCategory.get({ plain: true }))
-      : null;
+    return updatedCategory ? CategoryMapper.toDomain(updatedCategory.get({ plain: true })) : null;
   }
 
-  async updateCategoryProducts(
-    categoryId: string,
-    productIds: string[]
-  ): Promise<Category | null> {
+  async updateCategoryProducts(categoryId: string, productIds: string[]): Promise<Category | null> {
     const foundCategory = await SeqCategory.findByPk(categoryId, {
-      include: ["products"],
+      include: ['products'],
     });
 
     if (!foundCategory) {
@@ -87,12 +71,10 @@ export class SeqCategoryRepository implements CategoryRepository {
     }
 
     const updatedCategory = await SeqCategory.findByPk(categoryId, {
-      include: ["products"],
+      include: ['products'],
     });
 
-    return updatedCategory
-      ? CategoryMapper.toDomain(updatedCategory.get({ plain: true }))
-      : null;
+    return updatedCategory ? CategoryMapper.toDomain(updatedCategory.get({ plain: true })) : null;
   }
   async deleteCategory(id: string): Promise<boolean> {
     const category = await SeqCategory.destroy({ where: { id } });

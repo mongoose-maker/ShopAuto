@@ -1,4 +1,4 @@
-import type { OrderItem } from "../../models/Order/OrderItem.js";
+import type { OrderItem } from '../../models/Order/OrderItem.js';
 
 export interface OrderItemRepository {
   createOrderItem(item: OrderItem): Promise<OrderItem>;
@@ -7,8 +7,7 @@ export interface OrderItemRepository {
   updateOrderItemQuantity(
     orderId: string,
     productId: string,
-    newQuantity: number
-    // unitPrice: number
+    newQuantity: number,
   ): Promise<OrderItem | null>;
   deleteOrderItem(orderId: string): Promise<boolean>;
 }

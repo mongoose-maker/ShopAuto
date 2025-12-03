@@ -1,4 +1,4 @@
-import { Order, type OrderStatus } from "../../models/Order/Order.js";
+import { Order, type OrderStatus } from '../../models/Order/Order.js';
 
 export interface OrderRepository {
   save(order: Order): Promise<Order>;

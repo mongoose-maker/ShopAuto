@@ -1,6 +1,6 @@
-import { Model, type Optional } from "sequelize";
-import SeqOrder from "./SeqOrderModel.js";
-import SeqProduct from "./SeqProductModel.js";
+import { Model, type Optional } from 'sequelize';
+import SeqOrder from './SeqOrderModel.js';
+import SeqProduct from './SeqProductModel.js';
 export interface SeqOrderItemAttributes {
     id: string | undefined;
     orderId?: string;
@@ -9,7 +9,7 @@ export interface SeqOrderItemAttributes {
     unitPrice: number;
     totalPrice: number;
 }
-interface OrderItemCreationAttributes extends Optional<SeqOrderItemAttributes, "id" | "orderId" | "productId"> {
+interface OrderItemCreationAttributes extends Optional<SeqOrderItemAttributes, 'id' | 'orderId' | 'productId'> {
 }
 declare class SeqOrderItem extends Model<SeqOrderItemAttributes, OrderItemCreationAttributes> {
     id: string | undefined;

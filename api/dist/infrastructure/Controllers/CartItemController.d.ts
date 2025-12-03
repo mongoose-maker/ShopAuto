@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
-import { CartItemService } from "../../core/Service/CartItemService.js";
+import type { Request, Response } from 'express';
+import { CartItemService } from '../../core/Service/CartItemService.js';
 export declare class CartItemController {
     private readonly cartItemService;
     constructor(cartItemService: CartItemService);

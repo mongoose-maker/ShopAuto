@@ -1,4 +1,4 @@
-import { Address } from "../../models/Address/Address.js";
+import { Address } from '../../models/Address/Address.js';
 
 export interface AddressRepository {
   addAddress(address: Address): Promise<Address>;

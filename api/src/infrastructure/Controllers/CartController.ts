@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
-import { CartService } from "../../core/Service/CartService.js";
+import type { Request, Response } from 'express';
+import { CartService } from '../../core/Service/CartService.js';
 
 export class CartController {
   constructor(private readonly cartService: CartService) {}
@@ -8,12 +8,12 @@ export class CartController {
     try {
       const { userId } = req.params;
       if (!userId) {
-        res.status(400).json({ message: "User ID is required" });
+        res.status(400).json({ message: 'User ID is required' });
         return;
       }
       const cart = await this.cartService.getCartByUserId(userId);
       if (!cart) {
-        res.status(404).json({ message: "Cart not found" });
+        res.status(404).json({ message: 'Cart not found' });
         return;
       }
       res.status(200).json(cart);
@@ -26,21 +26,17 @@ export class CartController {
     try {
       const { userId } = req.params;
       if (!userId) {
-        res.status(400).json({ message: "User ID is required" });
+        res.status(400).json({ message: 'User ID is required' });
         return;
       }
       const { productId, quantity } = req.body;
       if (!productId || !quantity) {
         res.status(400).json({
-          message: "Product ID and quantity are required",
+          message: 'Product ID and quantity are required',
         });
         return;
       }
-      const cart = await this.cartService.addItemToCart(
-        userId,
-        productId,
-        quantity
-      );
+      const cart = await this.cartService.addItemToCart(userId, productId, quantity);
       res.status(200).json(cart);
     } catch (error) {
       res.status(400).json({ message: (error as Error).message });
@@ -52,20 +48,16 @@ export class CartController {
       const { userId, itemId } = req.params;
       if (!userId || !itemId) {
         res.status(400).json({
-          message: "User ID and Item ID are required",
+          message: 'User ID and Item ID are required',
         });
         return;
       }
       const { quantity } = req.body;
       if (!quantity) {
-        res.status(400).json({ message: "Quantity is required" });
+        res.status(400).json({ message: 'Quantity is required' });
         return;
       }
-      const cart = await this.cartService.updateItemInCart(
-        userId,
-        itemId,
-        quantity
-      );
+      const cart = await this.cartService.updateItemInCart(userId, itemId, quantity);
       res.status(200).json(cart);
     } catch (error) {
       res.status(400).json({ message: (error as Error).message });
@@ -77,7 +69,7 @@ export class CartController {
       const { userId, itemId } = req.params;
       if (!userId || !itemId) {
         res.status(400).json({
-          message: "User ID and Item ID are required",
+          message: 'User ID and Item ID are required',
         });
         return;
       }
@@ -92,7 +84,7 @@ export class CartController {
     try {
       const { userId } = req.params;
       if (!userId) {
-        res.status(400).json({ message: "User ID is required" });
+        res.status(400).json({ message: 'User ID is required' });
         return;
       }
       await this.cartService.clearCart(userId);

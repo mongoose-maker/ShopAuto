@@ -1,6 +1,6 @@
-import { OrderItemService } from "../../core/Service/OrderItemService.js";
-import { AddOrderItemDto } from "../../core/repositories/OrderItem/dto/addOrderItemDto.js";
-import { UpdateOrderItemDto } from "../../core/repositories/OrderItem/dto/updateOrderItemDto.js";
+import { OrderItemService } from '../../core/Service/OrderItemService.js';
+import { AddOrderItemDto } from '../../core/repositories/OrderItem/dto/addOrderItemDto.js';
+import { UpdateOrderItemDto } from '../../core/repositories/OrderItem/dto/updateOrderItemDto.js';
 export class OrderItemController {
     constructor(orderItemService) {
         this.orderItemService = orderItemService;
@@ -9,7 +9,7 @@ export class OrderItemController {
         try {
             const { orderId } = req.params;
             if (!orderId) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             const dto = req.body;
@@ -24,12 +24,12 @@ export class OrderItemController {
         try {
             const { id } = req.params;
             if (!id) {
-                res.status(400).json({ message: "Order Item ID is required" });
+                res.status(400).json({ message: 'Order Item ID is required' });
                 return;
             }
             const item = await this.orderItemService.getOrderItemById(id);
             if (!item) {
-                res.status(404).json({ message: "Order item not found" });
+                res.status(404).json({ message: 'Order item not found' });
                 return;
             }
             res.status(200).json(item);
@@ -42,12 +42,12 @@ export class OrderItemController {
         try {
             const { orderId } = req.params;
             if (!orderId) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             const item = await this.orderItemService.getOrderItemByOrderId(orderId);
             if (!item) {
-                res.status(404).json({ message: "Order item not found" });
+                res.status(404).json({ message: 'Order item not found' });
                 return;
             }
             res.status(200).json(item);
@@ -61,18 +61,18 @@ export class OrderItemController {
             const { orderId, productId } = req.params;
             if (!orderId || !productId) {
                 res.status(400).json({
-                    message: "Order ID and Product ID are required",
+                    message: 'Order ID and Product ID are required',
                 });
                 return;
             }
             const { quantity } = req.body;
             if (!quantity) {
-                res.status(400).json({ message: "Quantity is required" });
+                res.status(400).json({ message: 'Quantity is required' });
                 return;
             }
             const updatedItem = await this.orderItemService.updateOrderItemQuantity(orderId, productId, quantity);
             if (!updatedItem) {
-                res.status(404).json({ message: "Order item not found" });
+                res.status(404).json({ message: 'Order item not found' });
                 return;
             }
             res.status(200).json(updatedItem);
@@ -86,14 +86,14 @@ export class OrderItemController {
             const { orderId, productId } = req.params;
             if (!orderId || !productId) {
                 res.status(400).json({
-                    message: "Order ID and Product ID are required",
+                    message: 'Order ID and Product ID are required',
                 });
                 return;
             }
             const dto = req.body;
             const updatedItem = await this.orderItemService.updateOrderItem(orderId, productId, dto);
             if (!updatedItem) {
-                res.status(404).json({ message: "Order item not found" });
+                res.status(404).json({ message: 'Order item not found' });
                 return;
             }
             res.status(200).json(updatedItem);
@@ -106,12 +106,12 @@ export class OrderItemController {
         try {
             const { orderId } = req.params;
             if (!orderId) {
-                res.status(400).json({ message: "Order ID is required" });
+                res.status(400).json({ message: 'Order ID is required' });
                 return;
             }
             const success = await this.orderItemService.deleteOrderItem(orderId);
             if (!success) {
-                res.status(404).json({ message: "Order item not found" });
+                res.status(404).json({ message: 'Order item not found' });
                 return;
             }
             res.status(204).send();

@@ -1,5 +1,5 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model } from "sequelize";
+import sequelize from '../../db.js';
+import { DataTypes, Model } from 'sequelize';
 class SeqUser extends Model {
 }
 SeqUser.init({
@@ -21,12 +21,12 @@ SeqUser.init({
         },
     },
     password: {
-        type: DataTypes.STRING, // char ?
+        type: DataTypes.STRING,
         allowNull: false,
     },
 }, {
     sequelize,
-    tableName: "users",
+    tableName: 'users',
     timestamps: true,
     paranoid: true,
 });

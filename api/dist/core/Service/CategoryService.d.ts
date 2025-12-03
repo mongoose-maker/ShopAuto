@@ -1,7 +1,7 @@
-import { Category } from "../models/Category/Category.js";
-import type { CategoryRepository } from "../repositories/CategoryRepository/CategoryRepository.js";
-import type { AddCategoryDto } from "../repositories/CategoryRepository/dto/addCategoryDto.js";
-import type { UpdateCategoryDto } from "../repositories/CategoryRepository/dto/updateCategoryDto.js";
+import { Category } from '../models/Category/Category.js';
+import type { CategoryRepository } from '../repositories/CategoryRepository/CategoryRepository.js';
+import type { AddCategoryDto } from '../repositories/CategoryRepository/dto/addCategoryDto.js';
+import type { UpdateCategoryDto } from '../repositories/CategoryRepository/dto/updateCategoryDto.js';
 export declare class CategoryService {
     private readonly categoryRepository;
     constructor(categoryRepository: CategoryRepository);

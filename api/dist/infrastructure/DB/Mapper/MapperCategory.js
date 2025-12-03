@@ -1,10 +1,10 @@
-import { Category } from "../../../core/models/Category/Category.js";
-import { ProductMapper, } from "./MapperProduct.js";
+import { Category } from '../../../core/models/Category/Category.js';
+import {} from './MapperProduct.js';
 export class CategoryMapper {
     static toDomain(raw) {
-        const products = raw.products
-            ? raw.products.map(ProductMapper.toDomain)
-            : [];
+        // const products = raw.products
+        //   ? raw.products.map(ProductMapper.toDomain)
+        //   : [];
         return new Category(raw.id?.toString(), raw.name);
     }
     static toPersistence(category) {

@@ -1,5 +1,5 @@
-import { Address } from "../../../core/models/Address/Address.js";
-import type { SeqAddressAttributes } from "../ORM/SeqModel/SeqAddressModel.js";
+import { Address } from '../../../core/models/Address/Address.js';
+import type { SeqAddressAttributes } from '../ORM/SeqModel/SeqAddressModel.js';
 
 export class AddressMapper {
   static toDomain(raw: SeqAddressAttributes): Address {
@@ -11,10 +11,10 @@ export class AddressMapper {
       raw.street,
       raw.houseNumber,
       raw.numberOfApartment,
-      raw.postcode
+      raw.postcode,
     );
   }
-  static toPersistence(address: Address): Omit<SeqAddressAttributes, "id"> {
+  static toPersistence(address: Address): Omit<SeqAddressAttributes, 'id'> {
     return {
       userId: address.userId,
       country: address.country,

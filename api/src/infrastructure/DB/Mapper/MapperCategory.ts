@@ -1,9 +1,9 @@
-import { Category } from "../../../core/models/Category/Category.js";
-import type { SeqCategoryAttributes } from "../ORM/SeqModel/SeqCategoryModel.js";
+import { Category } from '../../../core/models/Category/Category.js';
+import type { SeqCategoryAttributes } from '../ORM/SeqModel/SeqCategoryModel.js';
 import {
-  ProductMapper,
+  //ProductMapper,
   type SeqProductWithRelations,
-} from "./MapperProduct.js";
+} from './MapperProduct.js';
 
 export type SeqCategoryWithProducts = SeqCategoryAttributes & {
   products?: SeqProductWithRelations[];
@@ -11,9 +11,9 @@ export type SeqCategoryWithProducts = SeqCategoryAttributes & {
 
 export class CategoryMapper {
   static toDomain(raw: SeqCategoryWithProducts): Category {
-    const products = raw.products
-      ? raw.products.map(ProductMapper.toDomain)
-      : [];
+    // const products = raw.products
+    //   ? raw.products.map(ProductMapper.toDomain)
+    //   : [];
     return new Category(raw.id?.toString(), raw.name);
   }
   static toPersistence(category: Category): any {

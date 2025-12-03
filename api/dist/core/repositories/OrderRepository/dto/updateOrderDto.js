@@ -7,23 +7,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsIn, IsNotEmpty, IsOptional, IsUUID } from "class-validator";
-import { ORDER_STATUSES } from "../../../models/Order/Order.js";
+import { IsIn, IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
+import { ORDER_STATUSES } from '../../../models/Order/Order.js';
 export class UpdateOrderDto {
 }
 __decorate([
-    IsUUID("4", { message: "ID заказа должен быть валидным UUID" }),
-    IsNotEmpty({ message: "ID заказа обязателен" }),
+    IsUUID('4', { message: 'ID заказа должен быть валидным UUID' }),
+    IsNotEmpty({ message: 'ID заказа обязателен' }),
     __metadata("design:type", String)
 ], UpdateOrderDto.prototype, "orderId", void 0);
 __decorate([
     IsIn(ORDER_STATUSES, {
-        message: `Недопустимый статус заказа. Возможные значения: ${ORDER_STATUSES.join(", ")}`,
+        message: `Недопустимый статус заказа. Возможные значения: ${ORDER_STATUSES.join(', ')}`,
     }),
     __metadata("design:type", Object)
 ], UpdateOrderDto.prototype, "status", void 0);
 __decorate([
-    IsUUID("4", { message: "ID адреса должен быть валидным UUID" }),
+    IsUUID('4', { message: 'ID адреса должен быть валидным UUID' }),
     IsOptional(),
     __metadata("design:type", String)
 ], UpdateOrderDto.prototype, "addressId", void 0);

@@ -1,5 +1,5 @@
-import type { OrderItemRepository } from "../../../../core/repositories/OrderItem/OrderItemRepository.js";
-import { OrderItem } from "../../../../core/models/Order/OrderItem.js";
+import type { OrderItemRepository } from '../../../../core/repositories/OrderItem/OrderItemRepository.js';
+import { OrderItem } from '../../../../core/models/Order/OrderItem.js';
 export declare class SeqOrderItemRepository implements OrderItemRepository {
     createOrderItem(item: OrderItem): Promise<OrderItem>;
     findById(id: string): Promise<OrderItem | null>;

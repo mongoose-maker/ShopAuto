@@ -1,5 +1,5 @@
-import sequelize from "../../db.js";
-import { DataTypes, Model } from "sequelize";
+import sequelize from '../../db.js';
+import { DataTypes, Model } from 'sequelize';
 
 export interface SeqItemAttributes {
   id: string | undefined;
@@ -43,9 +43,9 @@ SeqItem.init(
   },
   {
     sequelize,
-    tableName: "items",
+    tableName: 'items',
     timestamps: true,
-  }
+  },
 );
 
 export default SeqItem;

@@ -1,19 +1,15 @@
-import type { CartItemRepository } from "../../../../core/repositories/CartItem/CartItemRepository.js";
-import { CartItem } from "../../../../core/models/Cart/CartItem.js";
-import SeqItem from "../SeqModel/SeqItemRepository.js";
-import SeqProduct from "../SeqModel/SeqProductModel.js";
-import { ItemMapper } from "../../Mapper/MapperItem.js";
-import {
-  ProductMapper,
-  type SeqProductWithRelations,
-} from "../../Mapper/MapperProduct.js";
-import type { SeqItemAttributes } from "../SeqModel/SeqItemRepository.js";
+import type { CartItemRepository } from '../../../../core/repositories/CartItem/CartItemRepository.js';
+import { CartItem } from '../../../../core/models/Cart/CartItem.js';
+import SeqItem from '../SeqModel/SeqItemRepository.js';
+import SeqProduct from '../SeqModel/SeqProductModel.js';
+import { ItemMapper } from '../../Mapper/MapperItem.js';
+import { ProductMapper, type SeqProductWithRelations } from '../../Mapper/MapperProduct.js';
+import type { SeqItemAttributes } from '../SeqModel/SeqItemRepository.js';
 
 export class SeqCartItemRepository implements CartItemRepository {
   async addItem(item: CartItem): Promise<CartItem> {
-    // Проверить существование продукта
     const product = await SeqProduct.findByPk(item.productId, {
-      include: ["manufacturer", "category"],
+      include: ['manufacturer', 'category'],
     });
 
     if (!product) {
@@ -21,22 +17,20 @@ export class SeqCartItemRepository implements CartItemRepository {
     }
 
     const productDomain = ProductMapper.toDomain(
-      product.get({ plain: true }) as SeqProductWithRelations
+      product.get({ plain: true }) as SeqProductWithRelations,
     );
 
-    // Проверить, есть ли уже такой товар в корзине
     const existingItem = await SeqItem.findOne({
       where: { cartId: item.cartId, productId: item.productId },
       include: [
         {
           model: SeqProduct,
-          as: "product",
+          as: 'product',
         },
       ],
     });
 
     if (existingItem) {
-      // Обновить количество существующего товара
       await existingItem.update({
         quantity: existingItem.quantity + item.quantity,
       });
@@ -45,67 +39,60 @@ export class SeqCartItemRepository implements CartItemRepository {
         include: [
           {
             model: SeqProduct,
-            as: "product",
+            as: 'product',
           },
         ],
       });
 
       if (!updatedItem) {
-        throw new Error("Item not found after update");
+        throw new Error('Item not found after update');
       }
 
       return ItemMapper.toDomain(
         updatedItem.get({ plain: true }) as SeqItemAttributes & {
           product?: SeqProductWithRelations;
-        }
+        },
       );
     } else {
-      // Создать новый элемент корзины с продуктом
       const cartItemWithProduct = new CartItem(
         undefined,
         item.cartId,
         item.productId,
         item.quantity,
-        productDomain
+        productDomain,
       );
 
       const itemData = ItemMapper.toPersistence(cartItemWithProduct);
       const createdItem = await SeqItem.create(itemData);
 
-      // Загрузить созданный элемент с продуктом
       const itemWithProduct = await SeqItem.findByPk(createdItem.id, {
         include: [
           {
             model: SeqProduct,
-            as: "product",
+            as: 'product',
           },
         ],
       });
 
       if (!itemWithProduct) {
-        throw new Error("Item not found after creation");
+        throw new Error('Item not found after creation');
       }
 
       return ItemMapper.toDomain(
         itemWithProduct.get({ plain: true }) as SeqItemAttributes & {
           product?: SeqProductWithRelations;
-        }
+        },
       );
     }
   }
 
-  async updateItem(
-    cartId: string,
-    productId: string,
-    quantity: number
-  ): Promise<CartItem | null> {
-    // Найти элемент корзины
+  async updateItem(cartId: string, productId: string, quantity: number): Promise<CartItem | null> {
     const item = await SeqItem.findOne({
       where: { cartId, productId },
       include: [
         {
           model: SeqProduct,
-          as: "product",
+          as: 'product',
         },
       ],
     });
@@ -114,15 +101,13 @@ export class SeqCartItemRepository implements CartItemRepository {
       return null;
     }
 
-    // Обновить количество
     await item.update({ quantity });
 
-    // Загрузить обновленный элемент с продуктом
     const updatedItem = await SeqItem.findByPk(item.id, {
       include: [
         {
           model: SeqProduct,
-          as: "product",
+          as: 'product',
         },
       ],
     });
@@ -134,7 +119,7 @@ export class SeqCartItemRepository implements CartItemRepository {
     return ItemMapper.toDomain(
       updatedItem.get({ plain: true }) as SeqItemAttributes & {
         product?: SeqProductWithRelations;
-      }
+      },
     );
   }
 
@@ -144,17 +129,17 @@ export class SeqCartItemRepository implements CartItemRepository {
       include: [
         {
           model: SeqProduct,
-          as: "product",
+          as: 'product',
         },
       ],
     });
 
-    return items.map((item) =>
+    return items.map(item =>
       ItemMapper.toDomain(
         item.get({ plain: true }) as SeqItemAttributes & {
           product?: SeqProductWithRelations;
-        }
-      )
+        },
+      ),
     );
   }
 

@@ -1,8 +1,8 @@
-import { Manufacturer } from "../models/Manufacturer/Manufacturer.js";
-import type { AddManufacturerDto } from "../repositories/ManufacturerRepository/dto/addManufacturerDto.js";
-import type { UpdateInfoManufacturerDto } from "../repositories/ManufacturerRepository/dto/updateInfoManufRepo.js";
-import type { UpdateManufacturerDto } from "../repositories/ManufacturerRepository/dto/updateManufacturerDto.js";
-import type { ManufacturerRepository } from "../repositories/ManufacturerRepository/ManufacturerRepository.js";
+import { Manufacturer } from '../models/Manufacturer/Manufacturer.js';
+import type { AddManufacturerDto } from '../repositories/ManufacturerRepository/dto/addManufacturerDto.js';
+import type { UpdateInfoManufacturerDto } from '../repositories/ManufacturerRepository/dto/updateInfoManufRepo.js';
+import type { UpdateManufacturerDto } from '../repositories/ManufacturerRepository/dto/updateManufacturerDto.js';
+import type { ManufacturerRepository } from '../repositories/ManufacturerRepository/ManufacturerRepository.js';
 export declare class ManufacturerService {
     private readonly manufacturerRepository;
     constructor(manufacturerRepository: ManufacturerRepository);

@@ -1,11 +1,11 @@
-import { Order } from "../../../core/models/Order/Order.js";
-import { OrderItem } from "../../../core/models/Order/OrderItem.js";
-import type { SeqOrderAttributes } from "../ORM/SeqModel/SeqOrderModel.js";
-import type { SeqItemAttributes } from "../ORM/SeqModel/SeqItemRepository.js";
-import type { SeqProductWithRelations } from "./MapperProduct.js";
-import type { SeqCartWithRelations } from "./MapperCart.js";
-import type { SeqOrderItemWithRelations } from "./MapperOrderItem.js";
-import { OrderItemMapper } from "./MapperOrderItem.js";
+import { Order } from '../../../core/models/Order/Order.js';
+import { OrderItem } from '../../../core/models/Order/OrderItem.js';
+import type { SeqOrderAttributes } from '../ORM/SeqModel/SeqOrderModel.js';
+import type { SeqItemAttributes } from '../ORM/SeqModel/SeqItemRepository.js';
+import type { SeqProductWithRelations } from './MapperProduct.js';
+import type { SeqCartWithRelations } from './MapperCart.js';
+import type { SeqOrderItemWithRelations } from './MapperOrderItem.js';
+import { OrderItemMapper } from './MapperOrderItem.js';
 
 export type SeqOrderWithRelations = SeqOrderAttributes & {
   cart?: SeqCartWithRelations;
@@ -15,11 +15,8 @@ export type SeqOrderWithRelations = SeqOrderAttributes & {
 
 export class OrderMapper {
   static toDomain(raw: SeqOrderWithRelations): Order {
-    // Если есть orderItems (уже сохраненные элементы заказа), используем их
     if (raw.orderItems && raw.orderItems.length > 0) {
-      const items: OrderItem[] = raw.orderItems.map((item) =>
-        OrderItemMapper.toDomain(item)
-      );
+      const items: OrderItem[] = raw.orderItems.map(item => OrderItemMapper.toDomain(item));
 
       return new Order(
         raw.id,
@@ -28,26 +25,18 @@ export class OrderMapper {
         raw.status,
         Number(raw.totalAmount),
         raw.shippingAddressId ?? undefined,
-        raw.cartId ?? undefined
+        raw.cartId ?? undefined,
       );
     }
 
-    // Иначе создаем OrderItem из cartItems (при создании заказа из корзины)
     const relatedItems = raw.cartItems ?? raw.cart?.items ?? [];
 
-    const items: OrderItem[] = relatedItems.map((item) => {
+    const items: OrderItem[] = relatedItems.map(item => {
       const unitPrice = Number(item.price);
       const quantity = item.quantity;
       const totalPrice = unitPrice * quantity;
 
-      return new OrderItem(
-        undefined, // id будет создан при сохранении
-        raw.id, // orderId
-        item.productId,
-        quantity,
-        unitPrice,
-        totalPrice
-      );
+      return new OrderItem(undefined, raw.id, item.productId, quantity, unitPrice, totalPrice);
     });
 
     return new Order(
@@ -57,11 +46,11 @@ export class OrderMapper {
       raw.status,
       Number(raw.totalAmount),
       raw.shippingAddressId ?? undefined,
-      raw.cartId ?? undefined
+      raw.cartId ?? undefined,
     );
   }
 
-  static toPersistence(order: Order): Omit<SeqOrderAttributes, "id"> {
+  static toPersistence(order: Order): Omit<SeqOrderAttributes, 'id'> {
     return {
       userId: order.userId,
       status: order.status,

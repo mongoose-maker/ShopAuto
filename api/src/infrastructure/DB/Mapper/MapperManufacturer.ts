@@ -1,9 +1,9 @@
-import { Manufacturer } from "../../../core/models/Manufacturer/Manufacturer.js";
-import type { SeqManufacturerAttributes } from "../ORM/SeqModel/SeqManufacturerModel.js";
+import { Manufacturer } from '../../../core/models/Manufacturer/Manufacturer.js';
+import type { SeqManufacturerAttributes } from '../ORM/SeqModel/SeqManufacturerModel.js';
 import {
-  ProductMapper,
+  //ProductMapper,
   type SeqProductWithRelations,
-} from "./MapperProduct.js";
+} from './MapperProduct.js';
 
 export type SeqManufacturerWithProducts = SeqManufacturerAttributes & {
   products?: SeqProductWithRelations[];
@@ -11,14 +11,10 @@ export type SeqManufacturerWithProducts = SeqManufacturerAttributes & {
 
 export class ManufacturerMapper {
   static toDomain(raw: SeqManufacturerWithProducts): Manufacturer {
-    const products = raw.products
-      ? raw.products.map(ProductMapper.toDomain)
-      : [];
-    return new Manufacturer(
-      raw.id?.toString(),
-      raw.name,
-      raw.descriptionManufacturer
-    );
+    // const products = raw.products
+    //   ? raw.products.map(ProductMapper.toDomain)
+    //   : [];
+    return new Manufacturer(raw.id?.toString(), raw.name, raw.descriptionManufacturer);
   }
   static toPersistence(manufacturer: Manufacturer): any {
     return {

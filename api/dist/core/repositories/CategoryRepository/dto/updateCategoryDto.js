@@ -7,20 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { IsArray, IsNotEmpty, IsOptional, IsString, MinLength, } from "class-validator";
+import { IsArray, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
 export class UpdateCategoryDto {
 }
 __decorate([
     IsOptional(),
-    IsString({ message: "Название должно быть строкой" }),
-    IsNotEmpty({ message: "строка не должна быть псутой" }),
-    MinLength(2, { message: "Минимальное кол-во смволов в строке: 2" }),
+    IsString({ message: 'Название должно быть строкой' }),
+    IsNotEmpty({ message: 'строка не должна быть псутой' }),
+    MinLength(2, { message: 'Минимальное кол-во смволов в строке: 2' }),
     __metadata("design:type", Object)
 ], UpdateCategoryDto.prototype, "name", void 0);
 __decorate([
     IsOptional(),
     IsArray(),
-    IsString({ each: true, message: "Каждый ID продукта должен быть строкой" }),
+    IsString({ each: true, message: 'Каждый ID продукта должен быть строкой' }),
     __metadata("design:type", Object)
 ], UpdateCategoryDto.prototype, "productsIds", void 0);
 //# sourceMappingURL=updateCategoryDto.js.map

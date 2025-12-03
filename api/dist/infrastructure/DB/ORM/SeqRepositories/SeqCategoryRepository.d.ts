@@ -1,5 +1,5 @@
-import { Category } from "../../../../core/models/Category/Category.js";
-import type { CategoryRepository } from "../../../../core/repositories/CategoryRepository/CategoryRepository.js";
+import { Category } from '../../../../core/models/Category/Category.js';
+import type { CategoryRepository } from '../../../../core/repositories/CategoryRepository/CategoryRepository.js';
 export declare class SeqCategoryRepository implements CategoryRepository {
     addCategory(category: Category): Promise<Category>;
     getAllCategories(): Promise<Category[]>;

@@ -1,7 +1,7 @@
-import { User } from "../models/User/User.js";
-import { AddUserDto } from "../repositories/UserRepository/dto/addUserDto.js";
-import { UpdateUserDto } from "../repositories/UserRepository/dto/updateUserDto.js";
-import type { UserRepository } from "../repositories/UserRepository/UserRepository.js";
+import { User } from '../models/User/User.js';
+import { AddUserDto } from '../repositories/UserRepository/dto/addUserDto.js';
+import { UpdateUserDto } from '../repositories/UserRepository/dto/updateUserDto.js';
+import type { UserRepository } from '../repositories/UserRepository/UserRepository.js';
 export declare class UserService {
     private readonly userRepository;
     constructor(userRepository: UserRepository);

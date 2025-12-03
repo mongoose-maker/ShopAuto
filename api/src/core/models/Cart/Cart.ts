@@ -1,9 +1,9 @@
-import { CartItem } from "./CartItem.js";
+import { CartItem } from './CartItem.js';
 
 export class Cart {
   constructor(
     readonly id: string,
     readonly userId: string,
-    readonly items: CartItem[] = []
+    readonly items: CartItem[] = [],
   ) {}
 }

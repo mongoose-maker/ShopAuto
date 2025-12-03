@@ -1,14 +1,7 @@
-// каюсь эту функцию от и до написало ии
-
 export function sanitizeDto<T extends Record<string, any>>(
-  dto: T
+  dto: T,
 ): {
-  [K in keyof T as T[K] extends undefined ? never : K]: Exclude<
-    T[K],
-    undefined
-  >;
+  [K in keyof T as T[K] extends undefined ? never : K]: Exclude<T[K], undefined>;
 } {
-  return Object.fromEntries(
-    Object.entries(dto).filter(([_, v]) => v !== undefined)
-  ) as any; // тут TS всё равно не сможет вывести идеально, но возвращаемый тип будет точный
+  return Object.fromEntries(Object.entries(dto).filter(([_, v]) => v !== undefined)) as any; // тут TS всё равно не сможет вывести идеально, но возвращаемый тип будет точный
 }
