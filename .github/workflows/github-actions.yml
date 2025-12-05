@@ -7,56 +7,12 @@ on:
     branches: [app-0.8, master]
 
 jobs:
-  check-files:
-    name: Check if project files exist
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
-      - name: Debug - Show context
-        run: |
-          echo "Event: ${{ github.event_name }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "SHA: ${{ github.sha }}"
-          echo "PR SHA: ${{ github.event.pull_request.head.sha }}"
-          echo "Current directory:"
-          pwd
-          echo "Files in root:"
-          ls -la || echo "No files in root"
-          echo "Checking for api/package.json:"
-          if [ -f "api/package.json" ]; then
-            echo "✓ Found api/package.json"
-          else
-            echo "✗ api/package.json NOT found"
-            echo "Checking alternative locations:"
-            find . -name "package.json" -type f 2>/dev/null | head -5 || echo "No package.json found anywhere"
-          fi
-
-      - name: Check if api/package.json exists
-        id: check_files
-        run: |
-          if [ -f "api/package.json" ]; then
-            echo "files_exist=true" >> $GITHUB_OUTPUT
-            echo "✓ Found api/package.json - CI checks will run"
-          else
-            echo "files_exist=false" >> $GITHUB_OUTPUT
-            echo "✗ No api/package.json found. Skipping CI checks."
-          fi
-
   lint:
     name: Lint Check
     runs-on: ubuntu-latest
-    needs: check-files
-    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -76,13 +32,9 @@ jobs:
   type-check:
     name: TypeScript Type Check
     runs-on: ubuntu-latest
-    needs: check-files
-    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -102,13 +54,9 @@ jobs:
   build:
     name: Build Check
     runs-on: ubuntu-latest
-    needs: check-files
-    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -137,16 +85,12 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
-    needs: check-files
-    if: needs.check-files.outputs.files_exist == 'true'
     strategy:
       matrix:
         node-version: ["18", "20", "22"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -174,13 +118,9 @@ jobs:
   test-coverage:
     name: Test Coverage
     runs-on: ubuntu-latest
-    needs: check-files
-    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -207,22 +147,16 @@ jobs:
   all-checks:
     name: All Checks Summary
     runs-on: ubuntu-latest
-    needs: [check-files, lint, type-check, build, test, test-coverage]
+    needs: [lint, type-check, build, test, test-coverage]
     if: always()
     steps:
       - name: Check all jobs status
         run: |
-          echo "Files Check: ${{ needs.check-files.outputs.files_exist }}"
           echo "Lint: ${{ needs.lint.result }}"
           echo "Type Check: ${{ needs.type-check.result }}"
           echo "Build: ${{ needs.build.result }}"
           echo "Test: ${{ needs.test.result }}"
           echo "Coverage: ${{ needs.test-coverage.result }}"
-
-          if [ "${{ needs.check-files.outputs.files_exist }}" != "true" ]; then
-            echo "No project files found. Skipping checks."
-            exit 0
-          fi
 
           if [ "${{ needs.lint.result }}" != "success" ] || \
              [ "${{ needs.type-check.result }}" != "success" ] || \
