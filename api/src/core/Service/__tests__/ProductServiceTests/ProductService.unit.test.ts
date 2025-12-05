@@ -1,12 +1,12 @@
-import { ProductService } from '../ProductService.js';
-import type { ProductRepository } from '../../repositories/ProductRepository/ProductRepository.js';
-import type { ManufacturerRepository } from '../../repositories/ManufacturerRepository/ManufacturerRepository.js';
-import type { CategoryRepository } from '../../repositories/CategoryRepository/CategoryRepository.js';
-import { Product } from '../../models/Product/Product.js';
-import { Manufacturer } from '../../models/Manufacturer/Manufacturer.js';
-import { Category } from '../../models/Category/Category.js';
-import { AddProductDto } from '../../repositories/ProductRepository/dto/addProductDto.js';
-import { UpdateProductDto } from '../../repositories/ProductRepository/dto/updateProductDto.js';
+import { ProductService } from '../../ProductService.js';
+import type { ProductRepository } from '../../../repositories/ProductRepository/ProductRepository.js';
+import type { ManufacturerRepository } from '../../../repositories/ManufacturerRepository/ManufacturerRepository.js';
+import type { CategoryRepository } from '../../../repositories/CategoryRepository/CategoryRepository.js';
+import { Product } from '../../../models/Product/Product.js';
+import { Manufacturer } from '../../../models/Manufacturer/Manufacturer.js';
+import { Category } from '../../../models/Category/Category.js';
+import { AddProductDto } from '../../../repositories/ProductRepository/dto/addProductDto.js';
+import { UpdateProductDto } from '../../../repositories/ProductRepository/dto/updateProductDto.js';
 
 describe('ProductService - Unit Tests', () => {
   let productService: ProductService;
@@ -45,11 +45,11 @@ describe('ProductService - Unit Tests', () => {
 
     mockManufacturerRepository = {
       getManufById: jest.fn(),
-    } as jest.Mocked<ManufacturerRepository>;
+    } as unknown as jest.Mocked<ManufacturerRepository>;
 
     mockCategoryRepository = {
       getCategoryById: jest.fn(),
-    } as jest.Mocked<CategoryRepository>;
+    } as unknown as jest.Mocked<CategoryRepository>;
 
     productService = new ProductService(
       mockProductRepository,

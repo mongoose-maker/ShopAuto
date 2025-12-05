@@ -1,13 +1,13 @@
-import { ProductService } from '../ProductService.js';
-import { SeqProductRepository } from '../../../infrastructure/DB/ORM/SeqRepositories/seqProductRepository.js';
-import { SeqManufacturerRepository } from '../../../infrastructure/DB/ORM/SeqRepositories/SeqManufacturerRepository.js';
-import { SeqCategoryRepository } from '../../../infrastructure/DB/ORM/SeqRepositories/SeqCategoryRepository.js';
-import { setupTestDb, teardownTestDb, clearTestDb } from '../../../__tests__/helpers/testDb.js';
-import { AddProductDto } from '../../repositories/ProductRepository/dto/addProductDto.js';
-import { UpdateProductDto } from '../../repositories/ProductRepository/dto/updateProductDto.js';
-import { Product } from '../../models/Product/Product.js';
-import { Manufacturer } from '../../models/Manufacturer/Manufacturer.js';
-import { Category } from '../../models/Category/Category.js';
+import { ProductService } from '../../ProductService.js';
+import { SeqProductRepository } from '../../../../infrastructure/DB/ORM/SeqRepositories/seqProductRepository.js';
+import { SeqManufacturerRepository } from '../../../../infrastructure/DB/ORM/SeqRepositories/SeqManufacturerRepository.js';
+import { SeqCategoryRepository } from '../../../../infrastructure/DB/ORM/SeqRepositories/SeqCategoryRepository.js';
+import { setupTestDb, teardownTestDb, clearTestDb } from '../../../../__tests__/helpers/testDb.js';
+import { AddProductDto } from '../../../repositories/ProductRepository/dto/addProductDto.js';
+import { UpdateProductDto } from '../../../repositories/ProductRepository/dto/updateProductDto.js';
+import { Product } from '../../../models/Product/Product.js';
+import { Manufacturer } from '../../../models/Manufacturer/Manufacturer.js';
+import { Category } from '../../../models/Category/Category.js';
 
 describe('ProductService - Integration Tests', () => {
   let productService: ProductService;

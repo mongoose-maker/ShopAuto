@@ -15,7 +15,6 @@ describe('ProductController - E2E Tests', () => {
   beforeAll(async () => {
     app = (await createTestApp()) as unknown as Express;
 
-    // Создаем тестовые данные для зависимостей
     const manufacturerRepository = new SeqManufacturerRepository();
     const categoryRepository = new SeqCategoryRepository();
 
@@ -31,7 +30,6 @@ describe('ProductController - E2E Tests', () => {
   afterEach(async () => {
     await clearTestDb();
 
-    // Восстанавливаем тестовые данные
     const manufacturerRepository = new SeqManufacturerRepository();
     const categoryRepository = new SeqCategoryRepository();
 
@@ -75,11 +73,11 @@ describe('ProductController - E2E Tests', () => {
 
     it('должен вернуть ошибку валидации при невалидных данных', async () => {
       const invalidProductData = {
-        name: 'A', // Слишком короткое имя
+        name: 'A',
         manufacturerId: testManufacturer.id!,
         categoryId: testCategory.id!,
-        description: 'Short', // Слишком короткое описание
-        price: -10, // Отрицательная цена
+        description: 'Short',
+        price: -10,
         availability: true,
       };
 
@@ -94,7 +92,6 @@ describe('ProductController - E2E Tests', () => {
     it('должен вернуть ошибку при отсутствии обязательных полей', async () => {
       const incompleteProductData = {
         name: 'Incomplete Product',
-        // Отсутствуют manufacturerId, categoryId, description, price
       };
 
       const response = await request(app)
@@ -123,7 +120,6 @@ describe('ProductController - E2E Tests', () => {
 
   describe('GET /api/products/:id', () => {
     it('должен получить продукт по ID', async () => {
-      // Сначала создаем продукт
       const productData = {
         name: 'Product to Get',
         manufacturerId: testManufacturer.id!,
@@ -137,7 +133,6 @@ describe('ProductController - E2E Tests', () => {
 
       const productId = createResponse.body.id;
 
-      // Затем получаем его
       const getResponse = await request(app).get(`/api/products/${productId}`).expect(201);
 
       expect(getResponse.body).toBeDefined();
@@ -149,15 +144,12 @@ describe('ProductController - E2E Tests', () => {
     it('должен вернуть ошибку для несуществующего ID', async () => {
       const response = await request(app).get('/api/products/non-existent-id').expect(201);
 
-      // В текущей реализации контроллер возвращает null, но статус 201
-      // Это может быть проблемой в реальном приложении
       expect(response.body).toBeDefined();
     });
   });
 
   describe('PUT /api/products/:id', () => {
     it('должен обновить продукт', async () => {
-      // Создаем продукт
       const productData = {
         name: 'Product to Update',
         manufacturerId: testManufacturer.id!,
@@ -171,7 +163,6 @@ describe('ProductController - E2E Tests', () => {
 
       const productId = createResponse.body.id;
 
-      // Обновляем продукт
       const updateData = {
         name: 'Updated Product Name',
         price: 200.0,
@@ -236,7 +227,6 @@ describe('ProductController - E2E Tests', () => {
 
   describe('DELETE /api/products/:id', () => {
     it('должен удалить продукт', async () => {
-      // Создаем продукт
       const productData = {
         name: 'Product to Delete',
         manufacturerId: testManufacturer.id!,
@@ -250,13 +240,9 @@ describe('ProductController - E2E Tests', () => {
 
       const productId = createResponse.body.id;
 
-      // Удаляем продукт
       const deleteResponse = await request(app).delete(`/api/products/${productId}`).expect(204);
-
-      // Проверяем, что продукт удален
       const getResponse = await request(app).get(`/api/products/${productId}`).expect(201);
 
-      // В текущей реализации контроллер возвращает null, но статус 201
       expect(getResponse.body).toBeDefined();
     });
   });
@@ -276,8 +262,6 @@ describe('ProductController - E2E Tests', () => {
 
       const articleId = createResponse.body.idProduct;
 
-      // Примечание: текущий роут использует :articleId в пути, но контроллер ожидает body
-      // Это может быть проблемой в реальном приложении
       const response = await request(app).get(`/api/categories/${articleId}/products`).expect(200);
 
       expect(response.body).toBeDefined();

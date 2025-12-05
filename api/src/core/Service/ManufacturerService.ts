@@ -16,7 +16,7 @@ export class ManufacturerService {
     return await this.manufacturerRepository.getManufById(id);
   }
 
-  async getAllManufacturers(): Promise<Manufacturer[]> {
+  async getAllManufacturers(p0: never[]): Promise<Manufacturer[]> {
     return await this.manufacturerRepository.getAllManuf();
   }
 
