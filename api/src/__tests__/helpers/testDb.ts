@@ -1,8 +1,7 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
-// Импортируем модели и ассоциации для инициализации
-import '../../infrastructure/DB/Associations/Associations.js';
+import '../../infrastructure/DB/Associations/associations.js';
 
 dotenv.config();
 

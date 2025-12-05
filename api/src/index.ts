@@ -6,6 +6,7 @@ import sequelize from './infrastructure/DB/db.js';
 
 import { errorHandler } from './infrastructure/Middleware/ErrorHandler.js';
 import { registerAllRoutes } from './infrastructure/Routes/AllRoutes/AllRoutes.js';
+import { setupSwagger } from './infrastructure/Swagger/swagger.setup.js';
 
 import { ProductController } from './infrastructure/Controllers/ProductController.js';
 import { UserController } from './infrastructure/Controllers/UserController.js';
@@ -109,6 +110,8 @@ app.use(
 app.get('/', (_req, res) => {
   res.send('server work');
 });
+
+setupSwagger(app);
 
 app.use(errorHandler);
 

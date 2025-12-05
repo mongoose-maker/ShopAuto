@@ -5,7 +5,6 @@ export default class ApiError extends Error {
         this.code = options?.code;
         this.details = options?.details;
         Object.setPrototypeOf(this, ApiError.prototype);
-        // Чтобы стек корректно формировался в Node.js
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, this.constructor);
         }

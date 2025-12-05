@@ -3,8 +3,7 @@ import { setupTestDb, teardownTestDb } from './testDb.js';
 import { registerAllRoutes } from '../../infrastructure/Routes/AllRoutes/AllRoutes.js';
 import { errorHandler } from '../../infrastructure/Middleware/ErrorHandler.js';
 
-// Импортируем ассоциации для правильной инициализации моделей
-import '../../infrastructure/DB/Associations/Associations.js';
+import '../../infrastructure/DB/Associations/associations.js';
 
 import { ProductController } from '../../infrastructure/Controllers/ProductController.js';
 import { UserController } from '../../infrastructure/Controllers/UserController.js';

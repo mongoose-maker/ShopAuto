@@ -19,7 +19,7 @@ export class ManufacturerController {
         res.status(201).json(foundManufacturer);
     }
     async getAllManufacturer(_req, res) {
-        const manufacturers = await this.manufacturerService.getAllManufacturers();
+        const manufacturers = await this.manufacturerService.getAllManufacturers([]);
         res.status(200).json(manufacturers);
     }
     async updateManufInfo(req, res) {

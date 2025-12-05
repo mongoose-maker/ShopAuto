@@ -10,7 +10,7 @@ export class ManufacturerService {
     async getManufacturerById(id) {
         return await this.manufacturerRepository.getManufById(id);
     }
-    async getAllManufacturers() {
+    async getAllManufacturers(p0) {
         return await this.manufacturerRepository.getAllManuf();
     }
     async updateManufacturerInfo(id, dto) {

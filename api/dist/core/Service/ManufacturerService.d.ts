@@ -8,7 +8,7 @@ export declare class ManufacturerService {
     constructor(manufacturerRepository: ManufacturerRepository);
     addManufacturer(dto: AddManufacturerDto): Promise<Manufacturer>;
     getManufacturerById(id: string): Promise<Manufacturer | null>;
-    getAllManufacturers(): Promise<Manufacturer[]>;
+    getAllManufacturers(p0: never[]): Promise<Manufacturer[]>;
     updateManufacturerInfo(id: string, dto: UpdateInfoManufacturerDto): Promise<Manufacturer | null>;
     updateManufacturerProducts(id: string, dto: UpdateManufacturerDto): Promise<Manufacturer | null>;
     deleteManufacturer(id: string): Promise<boolean>;
