@@ -15,15 +15,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+
+      - name: Debug - List files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Files in root:"
+          ls -la || echo "No files in root"
+          echo "Files in api directory:"
+          ls -la api/ 2>/dev/null || echo "No api directory found"
 
       - name: Check if api/package.json exists
         id: check_files
         run: |
           if [ -f "api/package.json" ]; then
             echo "files_exist=true" >> $GITHUB_OUTPUT
+            echo "✓ Found api/package.json"
           else
             echo "files_exist=false" >> $GITHUB_OUTPUT
-            echo "No project files found. Skipping CI checks."
+            echo "✗ No api/package.json found. Skipping CI checks."
           fi
 
   lint:
@@ -34,6 +45,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -58,6 +71,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -82,6 +97,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -118,6 +135,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -150,6 +169,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
