@@ -7,9 +7,30 @@ on:
     branches: [app-0.8, master]
 
 jobs:
+  check-files:
+    name: Check if project files exist
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if api/package.json exists
+        id: check_files
+        run: |
+          if [ -f "api/package.json" ]; then
+            echo "files_exist=true" >> $GITHUB_OUTPUT
+          else
+            echo "files_exist=false" >> $GITHUB_OUTPUT
+            echo "No project files found. Skipping CI checks."
+          fi
+
   lint:
     name: Lint Check
     runs-on: ubuntu-latest
+    needs: check-files
+    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,16 +40,21 @@ jobs:
         with:
           node-version: "20"
           cache: "yarn"
+          cache-dependency-path: api/yarn.lock
 
       - name: Install dependencies
+        working-directory: ./api
         run: yarn install --frozen-lockfile
 
       - name: Run ESLint
+        working-directory: ./api
         run: yarn lint
 
   type-check:
     name: TypeScript Type Check
     runs-on: ubuntu-latest
+    needs: check-files
+    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,16 +64,21 @@ jobs:
         with:
           node-version: "20"
           cache: "yarn"
+          cache-dependency-path: api/yarn.lock
 
       - name: Install dependencies
+        working-directory: ./api
         run: yarn install --frozen-lockfile
 
       - name: Type check
+        working-directory: ./api
         run: npx tsc --noEmit
 
   build:
     name: Build Check
     runs-on: ubuntu-latest
+    needs: check-files
+    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -57,14 +88,18 @@ jobs:
         with:
           node-version: "20"
           cache: "yarn"
+          cache-dependency-path: api/yarn.lock
 
       - name: Install dependencies
+        working-directory: ./api
         run: yarn install --frozen-lockfile
 
       - name: Build project
+        working-directory: ./api
         run: yarn build
 
       - name: Check build artifacts
+        working-directory: ./api
         run: |
           if [ ! -d "dist" ]; then
             echo "Build failed: dist directory not found"
@@ -75,6 +110,8 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
+    needs: check-files
+    if: needs.check-files.outputs.files_exist == 'true'
     strategy:
       matrix:
         node-version: ["18", "20", "22"]
@@ -87,22 +124,29 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
+          cache-dependency-path: api/yarn.lock
 
       - name: Install dependencies
+        working-directory: ./api
         run: yarn install --frozen-lockfile
 
       - name: Run unit tests
+        working-directory: ./api
         run: yarn test:unit
 
       - name: Run integration tests
+        working-directory: ./api
         run: yarn test:integration
 
       - name: Run e2e tests
+        working-directory: ./api
         run: yarn test:e2e
 
   test-coverage:
     name: Test Coverage
     runs-on: ubuntu-latest
+    needs: check-files
+    if: needs.check-files.outputs.files_exist == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -112,33 +156,42 @@ jobs:
         with:
           node-version: "20"
           cache: "yarn"
+          cache-dependency-path: api/yarn.lock
 
       - name: Install dependencies
+        working-directory: ./api
         run: yarn install --frozen-lockfile
 
       - name: Run tests with coverage
+        working-directory: ./api
         run: yarn test:coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/coverage-final.json
+          files: ./api/coverage/coverage-final.json
           fail_ci_if_error: false
 
   all-checks:
     name: All Checks Summary
     runs-on: ubuntu-latest
-    needs: [lint, type-check, build, test, test-coverage]
+    needs: [check-files, lint, type-check, build, test, test-coverage]
     if: always()
     steps:
       - name: Check all jobs status
         run: |
+          echo "Files Check: ${{ needs.check-files.outputs.files_exist }}"
           echo "Lint: ${{ needs.lint.result }}"
           echo "Type Check: ${{ needs.type-check.result }}"
           echo "Build: ${{ needs.build.result }}"
           echo "Test: ${{ needs.test.result }}"
           echo "Coverage: ${{ needs.test-coverage.result }}"
+
+          if [ "${{ needs.check-files.outputs.files_exist }}" != "true" ]; then
+            echo "No project files found. Skipping checks."
+            exit 0
+          fi
 
           if [ "${{ needs.lint.result }}" != "success" ] || \
              [ "${{ needs.type-check.result }}" != "success" ] || \
